@@ -38,16 +38,25 @@ int main(int argc, char **argv)
     {
         ArLog::log(ArLog::Terse, "Can't connect to robot");
     }
+    // check command line arguments for -printTable
+  bool printTable = parser.checkArgument("printTable");
+
+  // On the Seekur, power to the GPS receiver is switched on by this command.
+  // (A third argument of 0 would turn it off). On other robots this command is
+  // ignored.
+  robot.com2Bytes(116, 6, 1);
 
     ArGPS *pgps = gpsConnector.createGPS(&robot);
 
     if (!pgps || !pgps->connect())
     {
-        ArLog::log(ArLog::Terse, "gpsExample: Error connecting to GPS device.  Try -gpsType, -gpsPort, and/or -gpsBaud command-line arguments. Use -help for help.");
+        ArLog::log(ArLog::Terse, "Can't connect to GPS");
         return -1;
     }
 
     ArTime lastReadTime;
+    if(printTable)
+    gps->printDataLabelsHeader();
     for(;;)
     {
         int r = pgps->read();
