@@ -1,6 +1,9 @@
 #include "Aria.h"
 #include "ArGPS.h"
 #include "ArGPSConnector.h"
+#include "ArTrimbleGPS.h"
+#include "ArTCMCompassDirect.h"
+#include <iostream>
 
 
 struct GpsPosition
@@ -24,21 +27,32 @@ void PrintPose(ArPose* ppose)
 
 int main(int argc, char **argv)
 {
-    Aria::init();
+Aria::init();
+  ArArgumentParser parser(&argc, argv);
+  parser.loadDefaultArguments();
+  ArRobot robot;
+  ArRobotConnector robotConnector(&parser, &robot);
+  ArGPSConnector gpsConnector(&parser);
 
-    ArRobot robot;
+  // Connect to the robot, get some initial data from it such as type and name,
+  // and then load parameter files for this robot.
+  if(!robotConnector.connectRobot())
+  {
+    ArLog::log(ArLog::Terse, "gpsExample: Warning: Could not connect to robot.  Will not be able to switch GPS power on, or load GPS options from this robot's parameter file.");
+  }
 
-    ArArgumentParser parser(&argc, argv);
-    parser.loadDefaultArguments();
+  if (!Aria::parseArgs() || !parser.checkHelpAndWarnUnparsed())
+  {
+    Aria::logOptions();
+    ArLog::log(ArLog::Terse, "gpsExample options:\n  -printTable   Print data to standard output in regular columns rather than a refreshing terminal display, and print more digits of precision");
+    Aria::exit(1);
+  }
 
-    ArRobotConnector robotConnector(&parser, &robot);
-    ArGPSConnector gpsConnector(&parser);
+  ArLog::log(ArLog::Normal, "gpsExample: Connected to robot.");
 
-    if (!robotConnector.connectRobot())
-    {
-        ArLog::log(ArLog::Terse, "Can't connect to robot");
-    }
-    // check command line arguments for -printTable
+  robot.runAsync(true);
+
+  // check command line arguments for -printTable
   bool printTable = parser.checkArgument("printTable");
 
   // On the Seekur, power to the GPS receiver is switched on by this command.
@@ -46,17 +60,37 @@ int main(int argc, char **argv)
   // ignored.
   robot.com2Bytes(116, 6, 1);
 
-    ArGPS *pgps = gpsConnector.createGPS(&robot);
+  // Try connecting to a GPS. We pass the robot pointetr to the connector so it
+  // can check the robot parameters for this robot type for default values for
+  // GPS device connection information (receiver type, serial port, etc.)
+  ArLog::log(ArLog::Normal, "gpsExample: Connecting to GPS, it may take a few seconds...");
+  ArGPS *pgps = gpsConnector.createGPS(&robot);
+  if(!pgps || !pgps->connect())
+  {
+    ArLog::log(ArLog::Terse, "gpsExample: Error connecting to GPS device.  Try -gpsType, -gpsPort, and/or -gpsBaud command-line arguments. Use -help for help.");
+    return -1;
+  }
 
-    if (!pgps || !pgps->connect())
-    {
-        ArLog::log(ArLog::Terse, "Can't connect to GPS");
-        return -1;
-    }
+  if(gpsConnector.getGPSType() == ArGPSConnector::Simulator)
+  {
+    ArLog::log(ArLog::Normal, "gpsExample: GPS data is from simulator.");
+    /*
+      If connected to MobileSim, and aa map is loaded into MobileSim that contains an OriginLatLonAlt line,
+      then MobileSim will provides simulated GPS data based on the robot's 
+      true position in the simulator.  But you can also manually set "dummy"
+      positions like this instead, or to simulate GPS without connecting
+      to MobileSim:
+    */
+    //ArLog::log(ArLog::Normal, "gpsExample: GPS is a simulator. Setting dummy position.");
+    //(dynamic_cast<ArSimulatedGPS*>(gps))->setDummyPosition(42.80709, -71.579047, 100);
+  }
+  
 
+
+  ArLog::log(ArLog::Normal, "gpsExample: Reading data...");
     ArTime lastReadTime;
     if(printTable)
-    gps->printDataLabelsHeader();
+    pgps->printDataLabelsHeader();
     for(;;)
     {
         int r = pgps->read();
