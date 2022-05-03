@@ -7,7 +7,7 @@ uint8_t i = 0;
 
 void GpsCallBack(const sensor_msgs::NavSatFixConstPtr& msg)
 {
-    ROS_INFO("Latitude %d: %.9f",i,msg->altitude);
+    ROS_INFO("Latitude %d: %.9f",i,msg->latitude);
     ROS_INFO("Longitude %d: %.9f",i++,msg->longitude);
 }
 
