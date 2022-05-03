@@ -28,6 +28,7 @@ int main(int argc, char **argv)
 
     ArRobot robot;
 
+
     ArArgumentParser parser(&argc, argv);
     parser.loadDefaultArguments();
 
