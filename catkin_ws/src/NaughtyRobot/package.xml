@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package>
-  <name>custom_package</name>
+  <name>NaughtyRobot</name>
   <version>1.0.0</version>
   <description>ROS Package for Project</description>
   <maintainer email="kieran.reilly1804@gmail.com">Kieran Reilly</maintainer>
