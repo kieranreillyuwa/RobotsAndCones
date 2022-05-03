@@ -10,7 +10,7 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 catkin_package(
-  CATKIN_DEPENDS roscpp rospy sensor_msgs geometry_msgs tf mavros
+  CATKIN_DEPENDS roscpp rospy sensor_msgs geometry_msgs tf
 )
 
 

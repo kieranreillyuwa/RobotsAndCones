@@ -15,9 +15,9 @@ int main(int argc, char** argv)
 {
      ros::init(argc, argv, "Main_Node");
     ros::NodeHandle nh;
-    ros::Rate rate(20);
+//    ros::Rate rate(20);
 
-    ros::Publisher cmdVelPub = nh.advertise<geometry_msgs::Twist>("RosAria/cmd_vel",10);
+   ros::Publisher cmdVelPub = nh.advertise<geometry_msgs::Twist>("RosAria/cmd_vel",10);
     ros::Subscriber gpsSub = nh.subscribe<sensor_msgs::NavSatFix>("fix",10,GpsCallBack);
 
     geometry_msgs::Twist vel;
