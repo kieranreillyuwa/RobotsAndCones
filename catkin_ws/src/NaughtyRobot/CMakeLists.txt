@@ -16,3 +16,14 @@ catkin_package(
 
 include_directories(include ${catkin_INCLUDE_DIRS})
 
+
+add_executable(main_node src/main_node.cpp)
+target_link_libraries(main_node ${catkin_LIBRARIES})
+add_dependencies(main_node ${catkin_EXPORTED_TARGETS})
+
+install(TARGETS
+  main_node
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+ )
