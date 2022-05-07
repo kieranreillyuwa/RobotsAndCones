@@ -1,0 +1,8 @@
+prefix=/home/netipc/RobotsAndCones/catkin_ws/install
+
+Name: phidgets_analog_outputs
+Description: Description of phidgets_analog_outputs
+Version: 1.0.5
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib -lphidgets_analog_outputs
+Requires: nodelet phidgets_api phidgets_msgs roscpp std_msgs

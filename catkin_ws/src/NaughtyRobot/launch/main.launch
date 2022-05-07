@@ -1,0 +1,4 @@
+<!-- Main Launch File, will launch everything needed -->
+<launch>
+	 <include file = "$(find phidgets_magnetometer)/launch/magnetometer.launch"/>
+</launch>

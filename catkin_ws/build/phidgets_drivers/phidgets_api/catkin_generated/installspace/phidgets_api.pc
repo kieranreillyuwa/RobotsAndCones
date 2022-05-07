@@ -1,0 +1,8 @@
+prefix=/home/netipc/RobotsAndCones/catkin_ws/install
+
+Name: phidgets_api
+Description: Description of phidgets_api
+Version: 1.0.5
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib -lphidgets_api
+Requires: libphidget22

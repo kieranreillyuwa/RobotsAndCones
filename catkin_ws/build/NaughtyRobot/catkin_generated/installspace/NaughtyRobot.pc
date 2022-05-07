@@ -1,0 +1,8 @@
+prefix=/home/netipc/RobotsAndCones/catkin_ws/install
+
+Name: NaughtyRobot
+Description: Description of NaughtyRobot
+Version: 1.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: roscpp rospy sensor_msgs geometry_msgs tf
