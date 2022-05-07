@@ -29,16 +29,22 @@ void ImuCallBack(const sensor_msgs::MagneticFieldConstPtr& msg)
  * 
  * @param angle the angle in radians
  * @param speed speed in rads^-1
+ * @param pcmdVelPub pointer to the publisher to the cmd_vel topic
+ * @param prate pointer to the rate object
  */
-void Rotate(float angle, ros::Publisher *pcmdVelPub, float speed = 0.5)
+void Rotate(float angle, ros::Publisher *pcmdVelPub, ros::Rate *prate ,float speed = 0.5)
 {
-
-    ros::Rate rate(speed/angle);
+    double timeToWait = double(speed/angle);
     geometry_msgs::Twist vel;
     vel.linear.x = 0;
     vel.angular.z = speed;
+    ros::Time startTime = ros::Time::now();
     pcmdVelPub->publish(vel);
-    rate.sleep();
+    while(ros::Time::now()-startTime<ros::Duration(timeToWait))
+    {
+        ros::spinOnce();
+        prate->sleep();
+    }
     vel.angular.z = 0;
     pcmdVelPub->publish(vel);
 }
@@ -120,7 +126,7 @@ ros::Publisher cmdVelPub = nh.advertise<geometry_msgs::Twist>("RosAria/cmd_vel",
         //         }
         //         break;
                 
-        Rotate(M_PI,&cmdVelPub);
+        Rotate(M_PI,&cmdVelPub,&rate);
 
         ros::spinOnce();
         rate.sleep();
