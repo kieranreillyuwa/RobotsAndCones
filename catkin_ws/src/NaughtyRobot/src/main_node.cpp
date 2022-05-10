@@ -145,7 +145,7 @@ ros::Publisher cmdVelPub = nh.advertise<geometry_msgs::Twist>("RosAria/cmd_vel",
             cmdVelPub.publish(vel);
         ros::spinOnce();
         rate.sleep();
-    }
+}    }
 	
 	// ROS_INFO("HERE");
 	
