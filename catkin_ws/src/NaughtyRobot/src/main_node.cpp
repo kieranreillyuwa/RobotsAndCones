@@ -133,13 +133,16 @@ ros::Publisher cmdVelPub = nh.advertise<geometry_msgs::Twist>("RosAria/cmd_vel",
         vel.angular.z = 0.1;
         ros::Time startTime = ros::Time::now();
         cmdVelPub.publish(vel);
-        while(ros::Time::now()-startTime<ros::Duration(timeToWait))
+        while(ros::Time::now()-startTime>ros::Duration(timeToWait))
         {
+            cmdVelPub.publish(vel);
             ros::spinOnce();
             rate.sleep();
+            
         }
         vel.angular.z = 0;
         cmdVelPub.publish(vel);
+        
 
 	
 	// ROS_INFO("HERE");
