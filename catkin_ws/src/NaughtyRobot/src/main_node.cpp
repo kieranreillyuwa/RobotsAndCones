@@ -127,7 +127,9 @@ ros::Publisher cmdVelPub = nh.advertise<geometry_msgs::Twist>("RosAria/cmd_vel",
         //         break;
                 
         Rotate(M_PI,&cmdVelPub,&rate);
-
+	
+	ROS_INFO("HERE");
+	
         ros::spinOnce();
         rate.sleep();
 
