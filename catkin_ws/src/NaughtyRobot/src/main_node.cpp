@@ -62,7 +62,7 @@ ros::Publisher cmdVelPub = nh.advertise<geometry_msgs::Twist>("RosAria/cmd_vel",
     geometry_msgs::Twist vel;
     vel.linear.x = 1.0;
 
-    ros::Time startTime = ros::Time::now();
+//    ros::Time startTime = ros::Time::now();
 
     uint8_t state = 0;
 
