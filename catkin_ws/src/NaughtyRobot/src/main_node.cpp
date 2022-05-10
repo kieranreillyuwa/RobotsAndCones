@@ -34,7 +34,7 @@ void ImuCallBack(const sensor_msgs::MagneticFieldConstPtr& msg)
  */
 void Rotate(float angle, ros::Publisher *pcmdVelPub, ros::Rate *prate ,float speed = 0.5)
 {
-    double timeToWait = double(speed/angle);
+    double timeToWait = double(angle/speed);
     geometry_msgs::Twist vel;
     vel.linear.x = 0;
     vel.angular.z = speed;
@@ -127,8 +127,10 @@ ros::Publisher cmdVelPub = nh.advertise<geometry_msgs::Twist>("RosAria/cmd_vel",
         //         break;
                 
         Rotate(M_PI,&cmdVelPub,&rate);
+
+        // double timeToWait = M_PI
 	
-	ROS_INFO("HERE");
+	// ROS_INFO("HERE");
 	
         ros::spinOnce();
         rate.sleep();
