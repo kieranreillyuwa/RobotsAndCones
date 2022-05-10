@@ -126,9 +126,21 @@ ros::Publisher cmdVelPub = nh.advertise<geometry_msgs::Twist>("RosAria/cmd_vel",
         //         }
         //         break;
                 
-        Rotate(M_PI,&cmdVelPub,&rate);
+        // Rotate(M_PI,&cmdVelPub,&rate);
 
-        // double timeToWait = M_PI
+        double timeToWait = M_PI/0.1;
+        vel.linear.x = 0;
+        vel.angular.z = 0.1;
+        ros::Time startTime = ros::Time::now();
+        cmdVelPub.publish(vel);
+        while(ros::Time::now()-startTime<ros::Duration(timeToWait))
+        {
+            ros::spinOnce();
+            rate.sleep();
+        }
+        vel.angular.z = 0;
+        cmdVelPub.publish(vel);
+
 	
 	// ROS_INFO("HERE");
 	
