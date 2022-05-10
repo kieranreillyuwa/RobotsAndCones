@@ -70,9 +70,13 @@ ros::Publisher cmdVelPub = nh.advertise<geometry_msgs::Twist>("RosAria/cmd_vel",
 
 	prevPos.latitude = 0;
 	prevPos.longitude = 0;
+    double timeToWait = M_PI/0.1;
+        vel.linear.x = 0;
+        vel.angular.z = 0.1;
+        ros::Time startTime = ros::Time::now();
 
-    // while(ros::ok())
-    // {
+    while(ros::ok())
+    {
 
         // switch(state)
         // {
@@ -128,27 +132,24 @@ ros::Publisher cmdVelPub = nh.advertise<geometry_msgs::Twist>("RosAria/cmd_vel",
                 
         // Rotate(M_PI,&cmdVelPub,&rate);
 
-        double timeToWait = M_PI/0.1;
-        vel.linear.x = 0;
-        vel.angular.z = 0.1;
-        ros::Time startTime = ros::Time::now();
-        cmdVelPub.publish(vel);
-        while(ros::Time::now()-startTime>ros::Duration(timeToWait))
-        {
-            cmdVelPub.publish(vel);
-            ros::spinOnce();
-            rate.sleep();
-            
-        }
-        vel.angular.z = 0;
-        cmdVelPub.publish(vel);
         
-
+        cmdVelPub.publish(vel);
+        if(ros::Time::now()-startTime<ros::Duration(timeToWait))
+        {
+            vel.angular.z = 0.1;
+            cmdVelPub.publish(vel);
+        }
+        else
+        {
+            vel.angular.z = 0;
+            cmdVelPub.publish(vel);
+        ros::spinOnce();
+        rate.sleep();
+    }
 	
 	// ROS_INFO("HERE");
 	
-        ros::spinOnce();
-        rate.sleep();
+        
 
     
 
