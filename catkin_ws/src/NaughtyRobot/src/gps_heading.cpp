@@ -170,6 +170,7 @@ int main(int argc, char **argv)
                     rate.sleep();
                 }
                 startPos = GetMedianValue(collectionArr);
+                ROS_INFO("GPS Latitude: %.9f, Longitude: %.9f", startPos.latitude,startPos.longitude);
                 state = GET_POS2;
                 Drive(5.0,&cmdVelPub,&rate);
 
@@ -186,6 +187,8 @@ int main(int argc, char **argv)
                     rate.sleep();
                 }
                 currentPos = GetMedianValue(collectionArr);
+                ROS_INFO("GPS Latitude: %.9f, Longitude: %.9f", currentPos.latitude,currentPos.longitude);
+
                 state = GET_HEADING;
                 // Drive(5.0,&cmdVelPub,&rate);
 
