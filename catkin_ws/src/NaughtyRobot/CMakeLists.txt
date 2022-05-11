@@ -27,3 +27,25 @@ install(TARGETS
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
+
+ add_executable(gps_heading src/gps_heading.cpp)
+target_link_libraries(gps_heading ${catkin_LIBRARIES})
+add_dependencies(gps_heading ${catkin_EXPORTED_TARGETS})
+
+install(TARGETS
+  gps_heading
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+ )
+
+ add_executable(gps_testing src/gps_testing.cpp)
+target_link_libraries(gps_testing ${catkin_LIBRARIES})
+add_dependencies(gps_testing ${catkin_EXPORTED_TARGETS})
+
+install(TARGETS
+  gps_testing
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+ )
