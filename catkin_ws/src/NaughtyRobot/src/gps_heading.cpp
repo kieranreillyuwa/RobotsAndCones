@@ -42,10 +42,12 @@ sensor_msgs::NavSatFix GetMedianValue(sensor_msgs::NavSatFix *arr)
             {
                 _tempArray[i]. latitude = arr[j].latitude;
                 lowestVal = abs(arr[j].latitude);
+                ROS_INFO("DBG Latitude: %.9f, Longitude: %.9f", arr[j].latitude,arr[j].longitude);
+
                 
             }
-            ROS_INFO("DBG Latitude: %.9f, Longitude: %.9f", _tempArray[i].latitude,_tempArray[i].longitude);
         }
+
     }
 
 
@@ -58,11 +60,12 @@ sensor_msgs::NavSatFix GetMedianValue(sensor_msgs::NavSatFix *arr)
         {
             if(abs(arr[j].longitude) < lowestVal && abs(arr[j].longitude) > lastValue)
             {
-                _tempArray[i]. latitude = arr[j].longitude;
+                _tempArray[i]. longitude = arr[j].longitude;
                 lowestVal = abs(arr[j].longitude);
+                ROS_INFO("DBG Latitude: %.9f, Longitude: %.9f", arr[j].latitude,arr[j].longitude);
+
             }
         }
-        ROS_INFO("DBG Latitude: %.9f, Longitude: %.9f", _tempArray[i].latitude,_tempArray[i].longitude);
 
     }
 
