@@ -1,4 +1,15 @@
 <!-- Main Launch File, will launch everything needed -->
 <launch>
-	 <include file = "$(find phidgets_magnetometer)/launch/magnetometer.launch"/>
+	 <!-- <include file = "$(find phidgets_magnetometer)/launch/magnetometer.launch"/> -->
+		 
+	 <!-- <node name="rosaria" pkg="rosaria" type="RosAria">
+	 	<param name="port" value="/dev/ttyS1"/>
+		<param name="DriftFactor" value="0"/>
+		<param name = "TicksMM" value ="0"/>
+		<param name="RevCount" value="0"/>
+		</node> -->
+
+
+		<arg name="gps_port" value="/dev/ttyACM0"/>
+		<node name="gps_node" pkg="nmea_navsat_driver" type="nmea_serial_driver" args="_port:=$(arg gps_port) _baud:=9600"/>
 </launch>

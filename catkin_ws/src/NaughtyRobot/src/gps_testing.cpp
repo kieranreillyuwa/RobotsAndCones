@@ -5,7 +5,7 @@
 #include <sensor_msgs/MagneticField.h>
 
 
-#define GPS_RES 5
+#define GPS_RES 20
 
 sensor_msgs::NavSatFix livePos;
 sensor_msgs::NavSatFix currentPos;
@@ -38,15 +38,20 @@ sensor_msgs::NavSatFix GetMedianValue(sensor_msgs::NavSatFix *arr)
     {
         for(int j = 0; j < GPS_RES; j++)
         {
-            if(abs(arr[j].latitude) < lowestVal && abs(arr[j].latitude) > lastValue)
+            // ROS_INFO("DBG Latitude: %.9f, Longitude: %.9f", arr[j].latitude,arr[j].longitude);
+
+            if((abs(arr[j].latitude) < lowestVal) && (abs(arr[j].latitude) > lastValue))
             {
                 _tempArray[i]. latitude = arr[j].latitude;
                 lowestVal = abs(arr[j].latitude);
-                ROS_INFO("DBG Latitude: %.9f, Longitude: %.9f", arr[j].latitude,arr[j].longitude);
+                // ROS_INFO("DBG Latitude: %.9f, Longitude: %.9f", arr[j].latitude,arr[j].longitude);
 
                 
             }
+            
         }
+        lowestVal = DBL_MAX;
+        lastValue = abs(_tempArray[i].latitude);
 
     }
 
@@ -58,20 +63,25 @@ sensor_msgs::NavSatFix GetMedianValue(sensor_msgs::NavSatFix *arr)
     {
         for(int j = 0; j < GPS_RES; j++)
         {
+                // ROS_INFO("DBG Latitude: %.9f, Longitude: %.9f", arr[j].latitude,arr[j].longitude);
+
             if(abs(arr[j].longitude) < lowestVal && abs(arr[j].longitude) > lastValue)
             {
                 _tempArray[i]. longitude = arr[j].longitude;
                 lowestVal = abs(arr[j].longitude);
-                ROS_INFO("DBG Latitude: %.9f, Longitude: %.9f", arr[j].latitude,arr[j].longitude);
 
             }
         }
+        lowestVal = DBL_MAX;
+        lastValue = abs(_tempArray[i].longitude);
 
     }
 
     sensor_msgs::NavSatFix returnVal;
     returnVal.latitude = _tempArray[GPS_RES/2].latitude;
     returnVal.longitude = _tempArray[GPS_RES/2].longitude;
+
+    ROS_INFO("MFFF Latitude: %.9f, Longitude: %.9f", returnVal.latitude,returnVal.longitude);
 
     return returnVal;
 
@@ -170,10 +180,14 @@ int main(int argc, char **argv)
     State_t state = GET_POS1;
 
     sensor_msgs::NavSatFix arr[GPS_RES];
+    sensor_msgs::NavSatFix arr2[GPS_RES];
+
     for(int i = 0; i < GPS_RES; i++)
     {
-        arr[i].latitude = -10* i;
+        arr[i].latitude = -10* (i + 1);
         arr[i].longitude = 100 + 5*i;
+        arr2[i].latitude = -10* (i + 1) - 10;
+        arr2[i].longitude = 100 + 5*i + 100;
     }
 
     while(ros::ok())
@@ -188,10 +202,10 @@ int main(int argc, char **argv)
                     ros::spinOnce();
                     rate.sleep();
                 }
-                startPos = GetMedianValue(arr);
+                startPos = GetMedianValue(collectionArr);
                 ROS_INFO("GPS Latitude: %.9f, Longitude: %.9f", startPos.latitude,startPos.longitude);
                 state = GET_POS2;
-                // Drive(5.0,&cmdVelPub,&rate);
+                Drive(20.0,&cmdVelPub,&rate);
 
                 
                 break;
@@ -205,7 +219,7 @@ int main(int argc, char **argv)
                     ros::spinOnce();
                     rate.sleep();
                 }
-                currentPos = GetMedianValue(arr);
+                currentPos = GetMedianValue(collectionArr);
                 ROS_INFO("GPS Latitude: %.9f, Longitude: %.9f", currentPos.latitude,currentPos.longitude);
 
                 state = GET_HEADING;
@@ -217,7 +231,7 @@ int main(int argc, char **argv)
                     cmdVelPub.publish(vel);
 
                 double heading = GetHeading(startPos,currentPos);
-                ROS_INFO("The heading is: %.9f", heading);
+                ROS_INFO("The heading is: %.9f", heading*180/M_PI);
                 state = DONE;
                 break;
         }
