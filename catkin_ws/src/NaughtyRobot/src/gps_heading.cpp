@@ -98,6 +98,8 @@ void GpsCallBack(const sensor_msgs::NavSatFixConstPtr &msg)
         if(--glbGpsCounter > 0)
         {
             collectionArr[glbGpsCounter] = *msg;
+            
+            ROS_INFO("CA Latitude: %.9f, Longitude: %.9f", collectionArr[glbGpsCounter].latitude,collectionArr[glbGpsCounter].longitude);
         }
         else
         {
