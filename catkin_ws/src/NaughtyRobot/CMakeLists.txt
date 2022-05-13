@@ -49,3 +49,14 @@ install(TARGETS
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
+
+  add_executable(obstacle_avoidance src/obstacle_avoidance.cpp)
+target_link_libraries(obstacle_avoidance ${catkin_LIBRARIES})
+add_dependencies(obstacle_avoidance ${catkin_EXPORTED_TARGETS})
+
+install(TARGETS
+  obstacle_avoidance
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+ )
