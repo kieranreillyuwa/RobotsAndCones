@@ -3,20 +3,26 @@
 #include <geometry_msgs/PoseStamped.h>
 #include <geometry_msgs/Twist.h>
 #include <sensor_msgs/MagneticField.h>
+#include <sensor_msgs/Joy.h>
 
 #define GPS_RES 20
 
+#define BUT_X 0
+#define BUT_SQ 3
+#define PD_L 2
+#define PD_R 5
+#define PD_LAXES_F 1
+#define PD_LAXES_S 0
 
 enum MainState_t
 {
-    START,
+    MANUAL,
     LOCALISE,
     DRIVE_TOW,
     DRIVE_CONE,
     IMAGE_CONE,
     SEARCH_BUCKET,
     IMAGE_BUCKET,
-    STOP
 };
 enum LocaliseState_t
 {
@@ -26,16 +32,23 @@ enum LocaliseState_t
     INACTIVE
 };
 
+sensor_msgs::Joy joyState;
+bool deadmanOff = false;
+
 MainState_t mainState;
+MainState_t prevState;
 LocaliseState_t localiseState;
 
 bool getGpsCoords = false;
-sensor_msgs::NavSatFix tempPos; // Used for localisation.
+sensor_msgs::NavSatFix tempPos;    // Used for localisation.
 sensor_msgs::NavSatFix currentPos; // current position.
 sensor_msgs::NavSatFix livePos;
-double heading; // Current heading.
+double heading;                                // Current heading.
 sensor_msgs::NavSatFix collectionArr[GPS_RES]; // Used for localisation.
 uint8_t glbGpsCounter = GPS_RES;
+
+geometry_msgs::Twist vel;     // This is dynamic, change this.
+geometry_msgs::Twist stopVel; // Use for stopping.
 
 sensor_msgs::NavSatFix GetMedianValue(sensor_msgs::NavSatFix *arr)
 {
@@ -45,85 +58,76 @@ sensor_msgs::NavSatFix GetMedianValue(sensor_msgs::NavSatFix *arr)
 
     // First reorder latitude.
 
-    for(int i = 0; i < GPS_RES; i++)
+    for (int i = 0; i < GPS_RES; i++)
     {
-        for(int j = 0; j < GPS_RES; j++)
+        for (int j = 0; j < GPS_RES; j++)
         {
             // ROS_INFO("DBG Latitude: %.9f, Longitude: %.9f", arr[j].latitude,arr[j].longitude);
 
-            if((abs(arr[j].latitude) < lowestVal) && (abs(arr[j].latitude) > lastValue))
+            if ((abs(arr[j].latitude) < lowestVal) && (abs(arr[j].latitude) > lastValue))
             {
-                _tempArray[i]. latitude = arr[j].latitude;
+                _tempArray[i].latitude = arr[j].latitude;
                 lowestVal = abs(arr[j].latitude);
                 // ROS_INFO("DBG Latitude: %.9f, Longitude: %.9f", arr[j].latitude,arr[j].longitude);
-
-                
             }
-            
         }
         lowestVal = DBL_MAX;
         lastValue = abs(_tempArray[i].latitude);
-
     }
-
 
     lowestVal = DBL_MAX;
     lastValue = 0.0;
 
-    for(int i = 0; i < GPS_RES; i++)
+    for (int i = 0; i < GPS_RES; i++)
     {
-        for(int j = 0; j < GPS_RES; j++)
+        for (int j = 0; j < GPS_RES; j++)
         {
-                // ROS_INFO("DBG Latitude: %.9f, Longitude: %.9f", arr[j].latitude,arr[j].longitude);
+            // ROS_INFO("DBG Latitude: %.9f, Longitude: %.9f", arr[j].latitude,arr[j].longitude);
 
-            if(abs(arr[j].longitude) < lowestVal && abs(arr[j].longitude) > lastValue)
+            if (abs(arr[j].longitude) < lowestVal && abs(arr[j].longitude) > lastValue)
             {
-                _tempArray[i]. longitude = arr[j].longitude;
+                _tempArray[i].longitude = arr[j].longitude;
                 lowestVal = abs(arr[j].longitude);
-
             }
         }
         lowestVal = DBL_MAX;
         lastValue = abs(_tempArray[i].longitude);
-
     }
 
     sensor_msgs::NavSatFix returnVal;
-    returnVal.latitude = _tempArray[GPS_RES/2].latitude;
-    returnVal.longitude = _tempArray[GPS_RES/2].longitude;
+    returnVal.latitude = _tempArray[GPS_RES / 2].latitude;
+    returnVal.longitude = _tempArray[GPS_RES / 2].longitude;
 
-    ROS_INFO("MFFF Latitude: %.9f, Longitude: %.9f", returnVal.latitude,returnVal.longitude);
+    ROS_INFO("MFFF Latitude: %.9f, Longitude: %.9f", returnVal.latitude, returnVal.longitude);
 
     return returnVal;
-
 }
 
 /**
- * @brief Get the current heading after a driving of a certain distance. Used filtered GPS only. 
- * 
+ * @brief Get the current heading after a driving of a certain distance. Used filtered GPS only.
+ *
  * @param startPos The starting position.
- * @param currentPos The current position. 
- * @return The current heading in radians. 
+ * @param currentPos The current position.
+ * @return The current heading in radians.
  */
 double GetHeading(sensor_msgs::NavSatFix startPos, sensor_msgs::NavSatFix currentPos)
 {
-    return atan2(currentPos.latitude - startPos.latitude,currentPos.longitude-startPos.longitude);
+    return atan2(currentPos.latitude - startPos.latitude, currentPos.longitude - startPos.longitude);
 }
-
 
 void GpsCallBack(const sensor_msgs::NavSatFixConstPtr &msg)
 {
     livePos = *msg;
 
-    if(getGpsCoords)
+    if (getGpsCoords)
     {
         // ROS_INFO("GPS Latitude: %.9f, Longitude: %.9f", msg->latitude,msg->longitude);
 
-        if(--glbGpsCounter > 0)
+        if (--glbGpsCounter > 0)
         {
             collectionArr[glbGpsCounter] = *msg;
-            
-            ROS_INFO("CA Latitude: %.9f, Longitude: %.9f", collectionArr[glbGpsCounter].latitude,collectionArr[glbGpsCounter].longitude);
+
+            ROS_INFO("CA Latitude: %.9f, Longitude: %.9f", collectionArr[glbGpsCounter].latitude, collectionArr[glbGpsCounter].longitude);
         }
         else
         {
@@ -131,11 +135,12 @@ void GpsCallBack(const sensor_msgs::NavSatFixConstPtr &msg)
             glbGpsCounter = GPS_RES;
             getGpsCoords = false;
         }
-        
-    } 
+    }
 }
 
-template <typename T> int sgn(T val) {
+template <typename T>
+int sgn(T val)
+{
     return (T(0) < val) - (val < T(0));
 }
 
@@ -150,7 +155,7 @@ void Rotate(double angle, ros::Publisher *pcmdVelPub, ros::Rate *prate, double s
     double timeToWait = double(abs(angle / speed));
     geometry_msgs::Twist vel;
     vel.linear.x = 0;
-    vel.angular.z = sgn(angle)*speed;
+    vel.angular.z = sgn(angle) * speed;
     ros::Time startTime = ros::Time::now();
     pcmdVelPub->publish(vel);
     while (ros::ok() && ros::Time::now() - startTime < ros::Duration(timeToWait))
@@ -181,8 +186,42 @@ void Drive(double dist, ros::Publisher *pcmdVelPub, ros::Rate *prate, double spe
     pcmdVelPub->publish(vel);
 }
 
-
-
+/**
+ * @brief Button xl
+ *
+ * @param msg
+ */
+void JoyCallBack(sensor_msgs::JoyConstPtr &msg)
+{
+    if (mainState != MANUAL)
+    {
+        if (msg->axes[PD_L] > 0 && msg->axes[PD_R] > 0)
+        {
+            // deadmans switch
+            vel.linear.x = 0;
+            vel.angular.z = 0;
+            deadmanOff = true;
+            return;
+        }
+        if (msg->buttons[BUT_SQ] == 1)
+        {
+            mainState = MANUAL;
+            ROS_INFO("Moving to manual mode");
+            return;
+        }
+    }
+    else
+    {
+        if (msg->buttons[BUT_X] == 1)
+        {
+            mainState = LOCALISE;
+            localiseState = GET_POS1;
+            ROS_INFO("Moving to autonomous program");
+            return;
+        }
+        joyState = *msg;
+    }
+}
 
 int main(int argc, char **argv)
 {
@@ -191,26 +230,32 @@ int main(int argc, char **argv)
     ros::Publisher cmdVelPub = nh.advertise<geometry_msgs::Twist>("RosAria/cmd_vel", 10);
     ros::Subscriber gpsSub = nh.subscribe<sensor_msgs::NavSatFix>("fix", 10, GpsCallBack);
     ros::Subscriber imuMagSub = nh.subscribe<sensor_msgs::MagneticField>("imu/mag", 10, ImuCallBack);
+    ros::Subscriber joySub = nh.subscribe<sensor_msgs::Joy>("joy", 5, JoyCallBack);
 
-    geometry_msgs::Twist vel;     // This is dynamic, change this.
-    geometry_msgs::Twist stopVel; // Use for stopping.
     stopVel.linear.x = 0;
     stopVel.angular.z = 0;
+
     cmdVelPub.publish(stopVel);
 
     ros::Rate rate(20);
 
-    mainState = START;
+    mainState = MANUAL;
     localiseState = INACTIVE;
 
     while (ros::ok())
     {
+        if (deadmanOff)
+        {
+            cmdVelPub.publish(stopVel);
+            return 0;
+        }
         switch (mainState)
         {
-        case START:
-            ROS_INFO("Program starting....");
-            mainState = LOCALISE;
-            localiseState = GET_POS1;
+        case MANUAL:
+            vel.linear.x = joyState.axes[PD_LAXES_F];
+            vel.angular.z = 0.5 * joyState.axes[PD_LAXES_S];
+            cmdVelPub.publish(vel);
+
             break;
         case LOCALISE:
             switch (localiseState)
