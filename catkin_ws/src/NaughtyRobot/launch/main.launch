@@ -12,4 +12,6 @@
 
 		<arg name="gps_port" value="/dev/ttyACM0"/>
 		<node name="gps_node" pkg="nmea_navsat_driver" type="nmea_serial_driver" args="_port:=$(arg gps_port) _baud:=9600"/>
+
+		<node name="joy_node" pkg="joy" type="joy_node"/>
 </launch>

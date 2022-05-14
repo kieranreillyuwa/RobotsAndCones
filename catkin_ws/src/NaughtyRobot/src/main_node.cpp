@@ -34,6 +34,8 @@ enum LocaliseState_t
 
 sensor_msgs::Joy joyState;
 bool deadmanOff = false;
+float joyForward = 0.0;
+float joySide = 0.0; 
 
 MainState_t mainState;
 MainState_t prevState;
@@ -161,6 +163,11 @@ void Rotate(double angle, ros::Publisher *pcmdVelPub, ros::Rate *prate, double s
     while (ros::ok() && ros::Time::now() - startTime < ros::Duration(timeToWait))
     {
         pcmdVelPub->publish(vel);
+        if(mainState==MANUAL)
+        {
+            pcmdVelPub->publish(stopVel);
+            return;
+        }
         ros::spinOnce();
         prate->sleep();
     }
@@ -179,6 +186,12 @@ void Drive(double dist, ros::Publisher *pcmdVelPub, ros::Rate *prate, double spe
     while (ros::ok() && ros::Time::now() - startTime < ros::Duration(timeToWait))
     {
         pcmdVelPub->publish(vel);
+        pcmdVelPub->publish(vel);
+        if(mainState==MANUAL)
+        {
+            pcmdVelPub->publish(stopVel);
+            return;
+        }
         ros::spinOnce();
         prate->sleep();
     }
@@ -191,7 +204,7 @@ void Drive(double dist, ros::Publisher *pcmdVelPub, ros::Rate *prate, double spe
  *
  * @param msg
  */
-void JoyCallBack(sensor_msgs::JoyConstPtr &msg)
+void JoyCallBack(const sensor_msgs::JoyConstPtr &msg)
 {
     if (mainState != MANUAL)
     {
@@ -201,6 +214,8 @@ void JoyCallBack(sensor_msgs::JoyConstPtr &msg)
             vel.linear.x = 0;
             vel.angular.z = 0;
             deadmanOff = true;
+            
+            throw std::runtime_error("Deadman switch triggered... Ending program.");
             return;
         }
         if (msg->buttons[BUT_SQ] == 1)
@@ -219,7 +234,9 @@ void JoyCallBack(sensor_msgs::JoyConstPtr &msg)
             ROS_INFO("Moving to autonomous program");
             return;
         }
-        joyState = *msg;
+        joyForward = msg->axes[PD_LAXES_F];
+        joySide = msg->axes[PD_LAXES_S];
+
     }
 }
 
@@ -232,10 +249,16 @@ int main(int argc, char **argv)
     ros::Subscriber imuMagSub = nh.subscribe<sensor_msgs::MagneticField>("imu/mag", 10, ImuCallBack);
     ros::Subscriber joySub = nh.subscribe<sensor_msgs::Joy>("joy", 5, JoyCallBack);
 
+    ROS_INFO("here 1");
+
     stopVel.linear.x = 0;
     stopVel.angular.z = 0;
 
     cmdVelPub.publish(stopVel);
+
+    ROS_INFO("here 2");
+
+
 
     ros::Rate rate(20);
 
@@ -252,8 +275,12 @@ int main(int argc, char **argv)
         switch (mainState)
         {
         case MANUAL:
-            vel.linear.x = joyState.axes[PD_LAXES_F];
-            vel.angular.z = 0.5 * joyState.axes[PD_LAXES_S];
+            ROS_INFO("here 3");
+
+            vel.linear.x = joyForward;
+            vel.angular.z = 0.5 * joySide;
+            ROS_INFO("here 4");
+
             cmdVelPub.publish(vel);
 
             break;
