@@ -1,2 +1,2 @@
-NaughtyRobot:joystick_drivers/joy:joystick_drivers/joystick_drivers:joystick_drivers/spacenav_node
--DCATKIN_DEVEL_PREFIX=/home/netipc/RobotsAndCones/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/netipc/RobotsAndCones/catkin_ws/install -G Unix Makefiles
+NaughtyRobot
+-DCATKIN_DEVEL_PREFIX=/home/kieran/RobotsAndCones/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/kieran/RobotsAndCones/catkin_ws/install -DCATKIN_WHITELIST_PACKAGES=NaughtyRobot -G Unix Makefiles
