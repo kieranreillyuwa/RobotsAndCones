@@ -5,12 +5,13 @@ import sys
 import cv2
 import numpy as np
 from cv_bridge import CvBridge
+from cv_bridge import CvBridgeError
 from std_msgs.msg import UInt16MultiArray,Bool
 from sensor_msgs.msg import Image
 
 # THE MESSAGE TO MAIN WILL BE THE FOLLOWING: uint16_t arr[] = {identifier, xPosition, yPosition, width, height}
 
-imageInTopic  = "**INSERT**"
+imageInTopic  = "rgb_stereo_publisher/color/image"
 imageOutTopic = "vision"
 imageStatusTopic = "image_status"
 mainStatusTopic = "main_status"
@@ -18,16 +19,19 @@ mainStatusTopic = "main_status"
 coneIdentifier = 0x00
 bucketIdentifier = 0x01
 
+counter = 0
 
 
 class ImageProcessor:
 
     def __init__(self):
-        self.process = False
-        self.imageOutPub = rospy.Publisher(imageOutTopic,Image)
-        self.mainMessagePub = rospy.Publisher(imageStatusTopic,UInt16MultiArray)
+        self.process = True
+        self.imageOutPub = rospy.Publisher(imageOutTopic,Image, queue_size=5)
+        self.mainMessagePub = rospy.Publisher(imageStatusTopic,UInt16MultiArray,queue_size=5)
         self.mainStatusSub = rospy.Subscriber(mainStatusTopic,Bool,self.StatCB)
-        self.imageSub = rospy.Subscriber(imageInTopic,Image,self.ImageCB)
+        self.imageSub = rospy.Subscriber(imageInTopic,Image,self.ImageCB,queue_size=1)
+        self.bridge = CvBridge()
+        self.counter = 0
 
     def StatCB(self,data):
         if(data.data == 1):
@@ -36,34 +40,43 @@ class ImageProcessor:
             self.process = False
 
     def ImageCB(self,data):
-        if self.process:
-            self.ProcessRosImage(self,data)
+        self.counter+=1
+        if self.process and self.counter%5==0:
+            cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
+            self.ProcessRosImage(cv_image)
+
+            print("here in ImageCB")
 
 
 
 
-    def ProcessRosImage(self,rosImageIn):
-        image = CvBridge.imgmsg_to_cv2(rosImageIn,"bgr8")
+    def ProcessRosImage(self,image):
+        # try:
+        #     image = CvBridge.imgmsg_to_cv2(rosImageIn,"bgr8")
+        # except CvBridgeError as e:
+        #     print(e)
+            
+        
         #obtain hue,thicc,race from image
         hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
         #red, green, blue colour detection tresholds
         lower_red1 = np.array([0,120,30])
-        upper_red1 = np.array([20,255,255])
+        upper_red1 = np.array([5,255,255])
 
-        lg = np.array([50,120,30])
-        ug = np.array([90,255,150])
+        #lg = np.array([50,120,30])
+        #ug = np.array([90,255,150])
 
-        lb = np.array([98,120,30])
-        ub = np.array([139,255,255])
+        #lb = np.array([98,120,30])
+        #ub = np.array([139,255,255])
 
         #create the image with filtered colours
         mask1 = cv2.inRange(hsv, lower_red1, upper_red1)
-        mask2 = cv2.inRange(hsv, lb, ub)
-        mask3 = cv2.inRange(hsv, lg, ug)
-        mask = cv2.bitwise_or(mask1,mask2)
-        mask = cv2.bitwise_or(mask,mask3)
-        mask = cv2.bitwise_not(mask)
+        #mask2 = cv2.inRange(hsv, lb, ub)
+        #mask3 = cv2.inRange(hsv, lg, ug)
+        #mask = cv2.bitwise_or(mask1,mask2)
+        #mask = cv2.bitwise_or(mask,mask3)
+        mask = cv2.bitwise_not(mask1)
         thresh = cv2.threshold(mask, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)[1]
 
         #determine objects and draw boundaries
@@ -83,23 +96,24 @@ class ImageProcessor:
                 shade=shade//255
                 #what percentage of pixelse in box are a specific colour
                 ratio = shade*100//h//w
-                if ratio>40 and ratio<=60:
+                if ratio>40 and ratio<=67:
                     print("Red Cone Detected")
                     cv2.rectangle(image, (x, y), (x + w, y + h), (255,0,255), 2)
                     cv2.putText(image, 'Cone', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (36,12,255), 2)
                     conepos_x=x+w//2
                     conepos_y = y+h//2
                     msgToSend = UInt16MultiArray()
+                    msgToSend.data = [0,0,0,0,0]
                     msgToSend.data[0] = coneIdentifier
                     msgToSend.data[1] = conepos_x
                     msgToSend.data[2] = conepos_y
                     msgToSend.data[3] = w
                     msgToSend.data[4] = h
 
-                    print("x = " + conepos_x + "\n")
-                    print("y = " + conepos_y + "\n")
-                    print("w = " + w + "\n")
-                    print("h = " + h + "\n")
+                    print("x = " + str(conepos_x) + "\n")
+                    print("y = " + str(conepos_y) + "\n")
+                    print("w = " + str(w) + "\n")
+                    print("h = " + str(h) + "\n")
 
                     self.mainMessagePub.publish(msgToSend)
 
@@ -115,6 +129,7 @@ class ImageProcessor:
                     buckpos_y = y+h//2 
 
                     msgToSend = UInt16MultiArray()
+                    msgToSend.data = [0,0,0,0,0]
                     msgToSend.data[0] = coneIdentifier
                     msgToSend.data[1] = buckpos_x
                     msgToSend.data[2] = buckpos_y
@@ -123,12 +138,12 @@ class ImageProcessor:
 
                     self.mainMessagePub.publish(msgToSend)
 
-                    print("x = " + buckpos_x + "\n")
-                    print("y = " + buckpos_y + "\n")
-                    print("w = " + w + "\n")
-                    print("h = " + h + "\n")
+                    print("x = " + str(buckpos_x) + "\n")
+                    print("y = " + str(buckpos_y) + "\n")
+                    print("w = " + str(w) + "\n")
+                    print("h = " + str(h) + "\n")
                     #tell ros/main a bucket has been detected
-        rosImageOut = CvBridge.cv2_to_imgmsg(image,"bgr8")
+        rosImageOut = self.bridge.cv2_to_imgmsg(image,"bgr8")
         self.imageOutPub.publish(rosImageOut)
 
 
@@ -136,8 +151,8 @@ class ImageProcessor:
 
 
 def main(args):
-    rospy.init_node('Image Processing',anonymous=True)
-    rate = rospy.Rate(5)
+    rospy.init_node('img_proc_node',anonymous=True)
+    rate = rospy.Rate(20)
     imgProc = ImageProcessor()
     while not rospy.is_shutdown():
         rospy.spin()

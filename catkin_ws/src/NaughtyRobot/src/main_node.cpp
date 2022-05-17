@@ -356,6 +356,10 @@ int main(int argc, char **argv)
     mainState = MANUAL;
     localiseState = INACTIVE;
 
+    uint8_t sideCount = 0;
+            bool cantFind = false;
+    double relHeading;
+    double heading;
     while (ros::ok())
     {
         switch (mainState)
@@ -411,7 +415,7 @@ int main(int argc, char **argv)
             case GET_HEADING:
                 cmdVelPub.publish(vel);
 
-                double heading = GetHeading(tempPos, currentPos);
+                heading = GetHeading(tempPos, currentPos);
                 ROS_INFO("The heading is: %.9f", heading * 180 / M_PI);
                 localiseState = INACTIVE;
                 mainState = DRIVE_TOW;
@@ -422,7 +426,7 @@ int main(int argc, char **argv)
             }
         case DRIVE_TOW:
             Drive(10,&cmdVelPub,&rate); // just incase other cones are in the vision
-            double relHeading = GetHeading(currentPos,goalPos) - heading; // get the angle between
+            relHeading = GetHeading(currentPos,goalPos) - heading; // get the angle between
             if(relHeading>M_PI)
             {
                 relHeading-=M_PI*2;
@@ -480,8 +484,8 @@ int main(int argc, char **argv)
         case SEARCH_BUCKET:
             
             Rotate(-M_PI_4,&cmdVelPub,&rate);
-            uint8_t sideCount = 0;
-            bool cantFind = false;
+            sideCount = 0;
+            cantFind = false;
             while(!bucketFound && ros::ok() && !cantFind)
             {
                 Drive(1,&cmdVelPub,&rate);
@@ -509,7 +513,7 @@ int main(int argc, char **argv)
             getDistToPoint = true;
             break;
 
-            case IMAGE_BUCKET:
+        case IMAGE_BUCKET:
                 cmdVelPub.publish(stopVel);
                 if(!getDistToPoint && !grabAnImage) // 
                 {
@@ -524,7 +528,7 @@ int main(int argc, char **argv)
                 }
                 break;
 
-            case END_ROUTINE:
+        case END_ROUTINE:
                 /** PRINT SOMETHING OR SOMETHING IDK **/
                 return 1;
 

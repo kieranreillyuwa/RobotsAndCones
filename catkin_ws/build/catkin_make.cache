@@ -1,2 +1,2 @@
-NaughtyRobot
--DCATKIN_DEVEL_PREFIX=/home/kieran/RobotsAndCones/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/kieran/RobotsAndCones/catkin_ws/install -DCATKIN_WHITELIST_PACKAGES=NaughtyRobot -G Unix Makefiles
+NaughtyRobot:joystick_drivers/joy:joystick_drivers/joystick_drivers:joystick_drivers/ps3joy:joystick_drivers/spacenav_node:luxonis/depthai-ros-examples/depthai_examples:luxonis/depthai-ros/depthai_bridge:luxonis/depthai-ros/depthai_ros_msgs:vision_opencv/cv_bridge:vision_opencv/image_geometry:vision_opencv/opencv_tests:vision_opencv/vision_opencv
+-DCATKIN_DEVEL_PREFIX=/home/netipc/RobotsAndCones/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/netipc/RobotsAndCones/catkin_ws/install -G Unix Makefiles

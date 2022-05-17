@@ -64,11 +64,16 @@ NaughtyRobot/CMakeFiles/main_node.dir/src/main_node.cpp.o: /opt/ros/noetic/inclu
 NaughtyRobot/CMakeFiles/main_node.dir/src/main_node.cpp.o: /opt/ros/noetic/include/ros/wall_timer.h
 NaughtyRobot/CMakeFiles/main_node.dir/src/main_node.cpp.o: /opt/ros/noetic/include/ros/wall_timer_options.h
 NaughtyRobot/CMakeFiles/main_node.dir/src/main_node.cpp.o: /opt/ros/noetic/include/rosconsole/macros_generated.h
+NaughtyRobot/CMakeFiles/main_node.dir/src/main_node.cpp.o: /opt/ros/noetic/include/sensor_msgs/Image.h
 NaughtyRobot/CMakeFiles/main_node.dir/src/main_node.cpp.o: /opt/ros/noetic/include/sensor_msgs/Joy.h
 NaughtyRobot/CMakeFiles/main_node.dir/src/main_node.cpp.o: /opt/ros/noetic/include/sensor_msgs/MagneticField.h
 NaughtyRobot/CMakeFiles/main_node.dir/src/main_node.cpp.o: /opt/ros/noetic/include/sensor_msgs/NavSatFix.h
 NaughtyRobot/CMakeFiles/main_node.dir/src/main_node.cpp.o: /opt/ros/noetic/include/sensor_msgs/NavSatStatus.h
+NaughtyRobot/CMakeFiles/main_node.dir/src/main_node.cpp.o: /opt/ros/noetic/include/std_msgs/Bool.h
 NaughtyRobot/CMakeFiles/main_node.dir/src/main_node.cpp.o: /opt/ros/noetic/include/std_msgs/Header.h
+NaughtyRobot/CMakeFiles/main_node.dir/src/main_node.cpp.o: /opt/ros/noetic/include/std_msgs/MultiArrayDimension.h
+NaughtyRobot/CMakeFiles/main_node.dir/src/main_node.cpp.o: /opt/ros/noetic/include/std_msgs/MultiArrayLayout.h
+NaughtyRobot/CMakeFiles/main_node.dir/src/main_node.cpp.o: /opt/ros/noetic/include/std_msgs/UInt16MultiArray.h
 NaughtyRobot/CMakeFiles/main_node.dir/src/main_node.cpp.o: /opt/ros/noetic/include/xmlrpcpp/XmlRpcDecl.h
 NaughtyRobot/CMakeFiles/main_node.dir/src/main_node.cpp.o: /opt/ros/noetic/include/xmlrpcpp/XmlRpcValue.h
 
