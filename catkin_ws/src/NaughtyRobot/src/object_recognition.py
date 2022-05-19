@@ -45,7 +45,7 @@ class ImageProcessor:
             cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
             self.ProcessRosImage(cv_image)
 
-            print("here in ImageCB")
+            # print("here in ImageCB")
 
 
 
@@ -61,8 +61,8 @@ class ImageProcessor:
         hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
         #red, green, blue colour detection tresholds
-        lower_red1 = np.array([0,120,30])
-        upper_red1 = np.array([5,255,255])
+        lower_red1 = np.array([0,120,50])
+        upper_red1 = np.array([15,255,255])
 
         #lg = np.array([50,120,30])
         #ug = np.array([90,255,150])
@@ -96,7 +96,7 @@ class ImageProcessor:
                 shade=shade//255
                 #what percentage of pixelse in box are a specific colour
                 ratio = shade*100//h//w
-                if ratio>40 and ratio<=67:
+                if ratio<=50:
                     print("Red Cone Detected")
                     cv2.rectangle(image, (x, y), (x + w, y + h), (255,0,255), 2)
                     cv2.putText(image, 'Cone', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (36,12,255), 2)
@@ -114,6 +114,7 @@ class ImageProcessor:
                     print("y = " + str(conepos_y) + "\n")
                     print("w = " + str(w) + "\n")
                     print("h = " + str(h) + "\n")
+                    print("ratio: " + str(ratio) + "\n")
 
                     self.mainMessagePub.publish(msgToSend)
 
@@ -142,6 +143,8 @@ class ImageProcessor:
                     print("y = " + str(buckpos_y) + "\n")
                     print("w = " + str(w) + "\n")
                     print("h = " + str(h) + "\n")
+                    print("ratio: " + str(ratio) + "\n")
+                    
                     #tell ros/main a bucket has been detected
         rosImageOut = self.bridge.cv2_to_imgmsg(image,"bgr8")
         self.imageOutPub.publish(rosImageOut)

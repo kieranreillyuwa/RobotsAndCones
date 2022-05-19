@@ -11,11 +11,14 @@
 #define IMG_HEIGHT 720
 #define IMG_WIDTH 1280
 
-uint8_t obstacleImage[IMG_HEIGHT * IMG_WIDTH];
+
+static const int imgSize = IMG_HEIGHT*IMG_WIDTH;
 
 void DepthCB(const sensor_msgs::ImageConstPtr &msg)
 {
-    uint8_t minVal = 0xFF;
+    int count = 0;
+    long long int total = 0;
+    
     for(int i = 0; i < msg->height; i++)
     {
         for(int j = 0; j < msg->width; j++)
@@ -23,14 +26,20 @@ void DepthCB(const sensor_msgs::ImageConstPtr &msg)
             // std::cout << (int)msg->data[i*msg->width + j]<< ","; 
             // std :: cout << msg->height << "  " << msg->width << "\n";
 
-            if(msg->data[i*IMG_WIDTH + j] < minVal && msg->data[i*IMG_WIDTH + j]>2)
+            if(msg->data[i*IMG_WIDTH + j] < 200)
             {
-                minVal = msg->data[i*msg->width + j];
+                count++;
             }
+            total+=msg->data[i*IMG_WIDTH + j];
         }
     }
     // ROS_INFO("Min value is: %d", minVal);
-    std :: cout << "\n";
+    float percentage = (float)count/imgSize;
+    float average  = (float)total/imgSize;
+    printf("Percentage of image too close %.9f\n",percentage);
+    printf("Average depth: %.9f\n",average);
+    
+    // std :: cout << "\n";
 }
 
 
@@ -40,8 +49,8 @@ int main(int argc, char **argv)
     ros::init(argc, argv, "Main_Node");
     ros::NodeHandle nh;
     ros::Publisher cmdVelPub = nh.advertise<geometry_msgs::Twist>("RosAria/cmd_vel", 10);
-    ros::Subscriber depthSub = nh.subscribe<sensor_msgs::Image>("stereo_publisher/stereo/depth",10,DepthCB);
-    ros::Rate rate(1);
+    ros::Subscriber depthSub = nh.subscribe<sensor_msgs::Image>("rgb_stereo_publisher/stereo/depth",1,DepthCB);
+    ros::Rate rate(10);
 
 
     geometry_msgs::Twist vel;

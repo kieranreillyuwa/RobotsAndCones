@@ -8,13 +8,17 @@
 #include <std_msgs/UInt16MultiArray.h>
 #include <sensor_msgs/Image.h>
 
-
 #define WIDTH_IMAGE 1200
 #define HEIGHT_IMAGE 720
 #define OFFSET_IMAGE 200
 
+#define IMG_HEIGHT 720 // for depth
+#define IMG_WIDTH 1280 // for depth
+
+
+
 #define GPS_RES 20
-#define NUM_POINTS 10
+#define NUM_POINTS 2
 
 #define BUT_X 0
 #define BUT_SQ 3
@@ -29,14 +33,25 @@
 #define IMG_W 3
 #define IMG_H 4
 
-#define IMG_SIZE_THRESH_W 60000
+#define IMG_SIZE_THRESH_W 320
 #define IMG_SIZE_THRESH_H 60000
+
+#define BOUND_X_LOW 700
+#define BOUND_X_HIGH 1100
 
 #define CONE 0
 #define BUCKET 1
 
-static const uint16_t lowerThresh = WIDTH_IMAGE/3 + OFFSET_IMAGE;
-static const uint16_t upperThresh = WIDTH_IMAGE - WIDTH_IMAGE/3 - OFFSET_IMAGE;
+#define DEPTH_THRESH 0.90 // Amount of depth image that can be less than 200
+#define DEPTH_MIN_ALLOW 85
+
+#define d2r (M_PI / 180.0)
+
+// static const uint16_t lowerThresh = WIDTH_IMAGE/3 + OFFSET_IMAGE;
+// static const uint16_t upperThresh = WIDTH_IMAGE - WIDTH_IMAGE/3 - OFFSET_IMAGE;
+
+static const int imgSize = IMG_HEIGHT*IMG_WIDTH;
+
 
 enum MainState_t
 {
@@ -47,6 +62,7 @@ enum MainState_t
     IMAGE_CONE,
     SEARCH_BUCKET,
     IMAGE_BUCKET,
+    OBSTACLE,
     END_ROUTINE
 };
 enum LocaliseState_t
@@ -57,15 +73,26 @@ enum LocaliseState_t
     INACTIVE
 };
 
+double haversine_m(float lat1, float long1, float lat2, float long2)
+{
+    double dlong = (long2 - long1) * d2r;
+    double dlat = (lat2 - lat1) * d2r;
+    double a = pow(sin(dlat/2.0), 2) + cos(lat1*d2r) * cos(lat2*d2r) * pow(sin(dlong/2.0), 2);
+    double c = 2 * atan2(sqrt(a), sqrt(1-a));
+    double d = 6367 * c;
+
+    return abs(d * 1000);
+}
+
 float joyForward = 0.0;
-float joySide = 0.0; 
+float joySide = 0.0;
 
 MainState_t mainState;
 MainState_t prevState;
 LocaliseState_t localiseState;
 
-sensor_msgs::NavSatFix goalCoords[NUM_POINTS];
-uint8_t numGpsPoints;
+sensor_msgs::NavSatFix goalCoords[NUM_POINTS + 1];
+uint8_t numGpsPoints = NUM_POINTS;
 bool firstPoint = true;
 
 bool getGpsCoords = false;
@@ -180,8 +207,12 @@ void ImuCallBack(const sensor_msgs::MagneticFieldConstPtr &msg)
     ROS_INFO("Heading: %.9f", heading * 180 / M_PI);
 }
 
+bool obstacle = false;
+
+
 void Rotate(double angle, ros::Publisher *pcmdVelPub, ros::Rate *prate, double speed = 0.5)
 {
+    printf("Rotating...\n");
     double timeToWait = double(abs(angle / speed));
     geometry_msgs::Twist vel;
     vel.linear.x = 0;
@@ -190,8 +221,9 @@ void Rotate(double angle, ros::Publisher *pcmdVelPub, ros::Rate *prate, double s
     pcmdVelPub->publish(vel);
     while (ros::ok() && ros::Time::now() - startTime < ros::Duration(timeToWait))
     {
+    
         pcmdVelPub->publish(vel);
-        if(mainState==MANUAL)
+        if (mainState == MANUAL)
         {
             pcmdVelPub->publish(stopVel);
             return;
@@ -205,6 +237,7 @@ void Rotate(double angle, ros::Publisher *pcmdVelPub, ros::Rate *prate, double s
 
 void Drive(double dist, ros::Publisher *pcmdVelPub, ros::Rate *prate, double speed = 1)
 {
+    printf("Driving...");
     double timeToWait = double(dist / speed);
     geometry_msgs::Twist vel;
     vel.linear.x = speed;
@@ -215,7 +248,7 @@ void Drive(double dist, ros::Publisher *pcmdVelPub, ros::Rate *prate, double spe
     {
         pcmdVelPub->publish(vel);
         pcmdVelPub->publish(vel);
-        if(mainState==MANUAL)
+        if (mainState == MANUAL || obstacle)
         {
             pcmdVelPub->publish(stopVel);
             return;
@@ -239,7 +272,7 @@ void JoyCallBack(const sensor_msgs::JoyConstPtr &msg)
         if (msg->axes[PD_L] > 0 && msg->axes[PD_R] > 0)
         {
             // deadmans switch
-            
+
             throw std::runtime_error("Deadman switch triggered... Ending program.");
             return;
         }
@@ -261,37 +294,32 @@ void JoyCallBack(const sensor_msgs::JoyConstPtr &msg)
         }
         joyForward = msg->axes[PD_LAXES_F];
         joySide = msg->axes[PD_LAXES_S];
-
     }
 }
-
 
 std_msgs::UInt16MultiArray toConeDriving;
 std_msgs::UInt16MultiArray toBucket;
 bool coneFound = false;
 bool bucketFound = false;
 
-
-
 void ImageStatusCallback(const std_msgs::UInt16MultiArrayConstPtr &msg)
 {
-    if(msg->data[IMG_ID] == CONE)
+    if (msg->data[IMG_ID] == CONE)
     {
-        if(mainState == DRIVE_TOW || mainState== DRIVE_CONE || mainState == IMAGE_CONE)
+        if (mainState == DRIVE_TOW || mainState == DRIVE_CONE || mainState == IMAGE_CONE)
         {
-            toConeDriving= *msg;
+            toConeDriving = *msg;
             coneFound = true;
         }
     }
-    else if(msg->data[IMG_ID]==BUCKET)
+    else if (msg->data[IMG_ID] == BUCKET)
     {
-        if(mainState == SEARCH_BUCKET || mainState == IMAGE_BUCKET)
+        if (mainState == SEARCH_BUCKET || mainState == IMAGE_BUCKET)
         {
             toBucket = *msg;
             bucketFound = true;
         }
     }
-
 }
 
 static bool grabAnImage = false;
@@ -299,44 +327,115 @@ uint8_t imageCounter = 0;
 sensor_msgs::Image keyImages[40];
 void GetImageCallback(const sensor_msgs::ImageConstPtr &msg)
 {
-    if(grabAnImage)
+    if (grabAnImage)
     {
         keyImages[imageCounter++] = *msg;
         grabAnImage = false;
     }
 }
 
-static const float driveForwardTime = 1.0;
-enum BucketSearch_t{SIDE_1,SIDE_2,SIDE_3,SIDE_4};
-BucketSearch_t bucketSearch = SIDE_1;
+// static const float driveForwardTime = 1.0;
+// enum BucketSearch_t
+// {
+//     SIDE_1,
+//     SIDE_2,
+//     SIDE_3,
+//     SIDE_4
+// };
+// BucketSearch_t bucketSearch = SIDE_1;
 
 
-bool getDistToPoint = false;
-uint8_t distArr[40];
-uint8_t distArrCount = 0;
+struct DepthData_t
+{
+    float percentage;
+    float avgValue;
+};
 
+DepthData_t left;
+DepthData_t right;
+
+
+bool getLeft = false;
+bool getRight = false;
+bool goingToCone = false;
+bool processingObstacle = false;
 void DepthImageCallback(const sensor_msgs::ImageConstPtr &msg)
 {
-    if(getDistToPoint)
+    int count = 0;
+    long long int total = 0;
+    
+    for(int i = 0; i < msg->height; i++)
     {
-        distArr[distArrCount++] = msg->data[toBucket.data[IMG_X]*WIDTH_IMAGE+toBucket.data[IMG_Y]];
-        getDistToPoint = false;
-    }
-}
+        for(int j = 0; j < msg->width; j++)
+        {
+            // std::cout << (int)msg->data[i*msg->width + j]<< ","; 
+            // std :: cout << msg->height << "  " << msg->width << "\n";
 
+            if(msg->data[i*IMG_WIDTH + j] < 200)
+            {
+                count++;
+            }
+            total+=msg->data[i*IMG_WIDTH + j];
+        }
+    }
+    // ROS_INFO("Min value is: %d", minVal);
+    float percentage = (float)count/imgSize;
+    float average  = (float)total/imgSize;
+    // printf("Percentage of image too close %.9f\n",percentage);
+    // printf("Average depth: %.9f\n",average);
+
+    if(percentage>DEPTH_THRESH && !processingObstacle && mainState!=MANUAL)
+    {
+        if(goingToCone) // at cone
+        {
+            mainState = IMAGE_CONE;
+                grabAnImage = true;
+        }
+        else
+        {
+            obstacle = true;
+            mainState = OBSTACLE;
+        }
+    }
+
+    if(getLeft)
+    {
+        left.percentage = percentage;
+        left.avgValue = average;
+        getLeft = false;
+    }
+
+    if(getRight)
+    {
+        right.percentage = percentage;
+        right.avgValue = average;
+        getRight = false;
+    }
+
+}
 
 int main(int argc, char **argv)
 {
+    printf("Program Starting...");
+
     ros::init(argc, argv, "Main_Node");
     ros::NodeHandle nh;
     ros::Publisher cmdVelPub = nh.advertise<geometry_msgs::Twist>("RosAria/cmd_vel", 10);
     ros::Subscriber gpsSub = nh.subscribe<sensor_msgs::NavSatFix>("fix", 10, GpsCallBack);
     ros::Subscriber imuMagSub = nh.subscribe<sensor_msgs::MagneticField>("imu/mag", 10, ImuCallBack);
     ros::Subscriber joySub = nh.subscribe<sensor_msgs::Joy>("joy", 5, JoyCallBack);
-    ros::Publisher mainStatusPub = nh.advertise<std_msgs::Bool>("main_status",5);
-    ros::Subscriber imageStatusSub = nh.subscribe<std_msgs::UInt16MultiArray>("image_status",10,ImageStatusCallback);
-    ros::Subscriber imageSub = nh.subscribe<sensor_msgs::Image>("vision",5,GetImageCallback);
-    ros::Subscriber depthImageSub = nh.subscribe<sensor_msgs::Image>("**INSERT**",10,DepthImageCallback);
+    ros::Publisher mainStatusPub = nh.advertise<std_msgs::Bool>("main_status", 5);
+    ros::Subscriber imageStatusSub = nh.subscribe<std_msgs::UInt16MultiArray>("image_status", 10, ImageStatusCallback);
+    ros::Subscriber imageSub = nh.subscribe<sensor_msgs::Image>("vision", 5, GetImageCallback);
+    ros::Subscriber depthImageSub = nh.subscribe<sensor_msgs::Image>("rgb_stereo_publisher/stereo/depth", 10, DepthImageCallback);
+
+    goalCoords[0].latitude = -31.98038731577529;
+    goalCoords[0].longitude = 115.8171782781675;
+    
+    goalCoords[1].latitude = -31.98017884452402;
+    goalCoords[1].longitude = 115.8171702857572;
+
+
 
     // ROS_INFO("here 1");
 
@@ -356,15 +455,20 @@ int main(int argc, char **argv)
     mainState = MANUAL;
     localiseState = INACTIVE;
 
+    ros::Time startTime;
+
     uint8_t sideCount = 0;
-            bool cantFind = false;
+    bool cantFind = false;
     double relHeading;
     double heading;
+    double roughHeading;
+    double distToGoal;
     while (ros::ok())
     {
         switch (mainState)
         {
         case MANUAL:
+            printf("Manual mode..\n");
             // ROS_INFO("here 3");
             vel.linear.x = joyForward;
             vel.angular.z = 0.5 * joySide;
@@ -374,10 +478,12 @@ int main(int argc, char **argv)
 
             break;
         case LOCALISE:
+            printf("Localising ");  
             switch (localiseState)
             {
             case GET_POS1:
                 getGpsCoords = true;
+                printf("starting position\n");
 
                 while (getGpsCoords && ros::ok())
                 {
@@ -385,7 +491,7 @@ int main(int argc, char **argv)
                     rate.sleep();
                 }
                 tempPos = GetMedianValue(collectionArr);
-                if(firstPoint)
+                if (firstPoint)
                 {
                     goalCoords[numGpsPoints++] = tempPos;
                     firstPoint = false;
@@ -397,6 +503,7 @@ int main(int argc, char **argv)
                 break;
 
             case GET_POS2:
+                printf("finishing position\n");
                 getGpsCoords = true;
 
                 while (getGpsCoords && ros::ok())
@@ -413,6 +520,8 @@ int main(int argc, char **argv)
 
                 break;
             case GET_HEADING:
+                printf("getting heading\n");
+
                 cmdVelPub.publish(vel);
 
                 heading = GetHeading(tempPos, currentPos);
@@ -424,45 +533,57 @@ int main(int argc, char **argv)
                 mainStatusPub.publish(startImgProcessing);
                 break;
             }
+	    break;
         case DRIVE_TOW:
-            Drive(10,&cmdVelPub,&rate); // just incase other cones are in the vision
-            relHeading = GetHeading(currentPos,goalPos) - heading; // get the angle between
-            if(relHeading>M_PI)
+            printf("Turning towards goal.....\n");
+            // Drive(10, &cmdVelPub, &rate);                           // just incase other cones are in the vision
+            relHeading = GetHeading(currentPos, goalPos) - heading; // get the angle between
+            if (relHeading > M_PI)
             {
-                relHeading-=M_PI*2;
+                relHeading -= M_PI * 2;
             }
-            else if(relHeading<-M_PI)
+            else if (relHeading < -M_PI)
             {
-                relHeading+=M_PI*2;
+                relHeading += M_PI * 2;
             }
-            Rotate(relHeading,&cmdVelPub,&rate); // turn to goal
+            heading+=relHeading;
+            Rotate(relHeading, &cmdVelPub, &rate); // turn to goal
+            distToGoal = haversine_m(currentPos.latitude, currentPos.longitude,goalPos.latitude,goalPos.longitude);
+            printf("Driving to goal..\n");
+            Drive(distToGoal-5,&cmdVelPub,&rate);
             // should be facing goal now
-            vel.linear.x = 1.0;
+            printf("Looking for cone...\n");
+            vel.linear.x = 0.3;
             vel.angular.z = 0;
-            while(!coneFound && ros::ok()) // keep driving forward until cone is found
+            startTime = ros::Time::now();
+            while (!coneFound && ros::ok()) // keep driving forward until cone is found
             {
+                if(ros::Time::now()-startTime>ros::Duration(30)) std::runtime_error("couldn't find goal");
+                if(obstacle) break;
                 cmdVelPub.publish(vel);
                 ros::spinOnce();
                 rate.sleep();
             }
             cmdVelPub.publish(stopVel);
             mainState = DRIVE_CONE;
+            goingToCone = true;
             break;
 
         case DRIVE_CONE:
+            printf("Cone found, driving towards...\n");
             vel.linear.x = 0.5;
-            if(toConeDriving.data[IMG_H] > IMG_SIZE_THRESH_H || toConeDriving.data[IMG_W] > IMG_SIZE_THRESH_W)
-            { // at cone, or at least close enough.
-                cmdVelPub.publish(stopVel);
-                mainState = IMAGE_CONE;
-                grabAnImage = true;
-                continue;
-            }
-            if(toConeDriving.data[IMG_X] < lowerThresh) // cone is to the left of the screen
+            // if (toConeDriving.data[IMG_W] > IMG_SIZE_THRESH_W)
+            // { // at cone, or at least close enough.
+            //     cmdVelPub.publish(stopVel);
+            //     mainState = IMAGE_CONE;
+            //     grabAnImage = true;
+            //     continue;
+            // }
+            if (toConeDriving.data[IMG_X] < BOUND_X_LOW) // cone is to the left of the screen
             {
                 vel.angular.z = 0.2;
             }
-            else if(toConeDriving.data[IMG_X]>upperThresh) // cone is to the right 
+            else if (toConeDriving.data[IMG_X] > BOUND_X_HIGH) // cone is to the right
             {
                 vel.angular.z = -0.2;
             }
@@ -474,67 +595,109 @@ int main(int argc, char **argv)
             break;
 
         case IMAGE_CONE:
+            printf("Close to cone, saving image....\n");
             cmdVelPub.publish(stopVel);
-            if(!grabAnImage)
+            if (!grabAnImage)
             {
                 mainState = SEARCH_BUCKET;
             }
             break;
 
         case SEARCH_BUCKET:
-            
-            Rotate(-M_PI_4,&cmdVelPub,&rate);
+            printf("Searchin for bucket...\n");
+            Rotate(-M_PI_4, &cmdVelPub, &rate);
+            heading-=M_PI_4;
             sideCount = 0;
             cantFind = false;
-            while(!bucketFound && ros::ok() && !cantFind)
+            while (!bucketFound && ros::ok() && !cantFind)
             {
-                Drive(1,&cmdVelPub,&rate);
+                Drive(1, &cmdVelPub, &rate);
                 ros::spinOnce();
-                if(!bucketFound)
+                if (!bucketFound)
                 {
-                    Rotate(M_PI_2,&cmdVelPub,&rate);
+                    Rotate(M_PI_2, &cmdVelPub, &rate);
+                    heading+=M_PI_2;
                 }
                 ros::spinOnce();
-                if(++sideCount>4)
+                if (++sideCount > 4)
                 { // cant find a bucket, so proceed to next weighpoint instead
                     cantFind = true;
-
                 }
             }
 
-            if(cantFind)
+            if (cantFind)
             {
+                printf("Couldn't find bucket, moving to next goal...\n");
                 mainState = LOCALISE;
                 localiseState = GET_POS1;
+                goalPos = goalCoords[c++];
+                roughHeading = GetHeading(livePos,goalPos) - heading;
+                Rotate(roughHeading,&cmdVelPub,&rate);
                 continue;
             }
             mainState = IMAGE_BUCKET;
             grabAnImage = true;
-            getDistToPoint = true;
+            // getDistToPoint = true;
             break;
 
         case IMAGE_BUCKET:
-                cmdVelPub.publish(stopVel);
-                if(!getDistToPoint && !grabAnImage) // 
+            printf("Getting image of bucket...\n");
+            cmdVelPub.publish(stopVel);
+            if (!grabAnImage) //
+            {
+                goalPos = goalCoords[c++];
+                if (!(c < numGpsPoints)) //  last point
                 {
-                    goalPos = goalCoords[c++];
-                    if(!(c < numGpsPoints)) //  last point
-                    {
-                        mainState = END_ROUTINE;
-                        continue;
-                    }
-                    mainState = LOCALISE;
-                    localiseState = GET_POS1;
+                    mainState = END_ROUTINE;
+                    continue;
                 }
-                break;
+                mainState = LOCALISE;
+                localiseState = GET_POS1;
+                roughHeading = GetHeading(livePos,goalPos) - heading;
+                Rotate(roughHeading,&cmdVelPub,&rate);
+            }
+            break;
+        case OBSTACLE:
+            printf("Obstacle detected...\n");
+            cmdVelPub.publish(stopVel);
+            processingObstacle = true;
+            obstacle = false;
+            Rotate(55*M_PI/180,&cmdVelPub,&rate);
+            heading += 55*M_PI/180;
+            getLeft = true;
+            while(getLeft)
+            {
+                ros::spinOnce();
+                rate.sleep();
+            }
+            Rotate(-110 * M_PI/180,&cmdVelPub,&rate);
+            heading-=110 * M_PI/180;
+            getRight = true;
+            while(getRight)
+            {
+                ros::spinOnce();
+                rate.sleep();
+            }
+            if(left.avgValue > right.avgValue && left.avgValue>DEPTH_MIN_ALLOW)
+            {
+                Rotate(110 * M_PI/180,&cmdVelPub,&rate);
+                heading+=110 * M_PI/180;
+            }
+            else if(right.avgValue<DEPTH_MIN_ALLOW)
+            {
+                throw std::runtime_error("Could not find free path");
+            }
+            processingObstacle = false;
+            mainState = LOCALISE;
+            localiseState = GET_POS1;
+
+            break;
 
         case END_ROUTINE:
-                /** PRINT SOMETHING OR SOMETHING IDK **/
-                return 1;
-
+            /** PRINT SOMETHING OR SOMETHING IDK **/
+            printf("Routine complete, exiting...\n");
+            return 1;
         }
-        
-
 
         ros::spinOnce();
         rate.sleep();
