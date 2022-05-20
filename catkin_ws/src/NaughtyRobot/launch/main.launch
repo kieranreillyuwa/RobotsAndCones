@@ -62,4 +62,6 @@
 			<param name="LRchecktresh" value="$(arg LRchecktresh)"/>
 		</node>            
 
+		<node name="object_recognition_node" pkg="NaughtyRobot" type="object_recognition.py" output="screen"/>
+
 </launch>

@@ -22,6 +22,7 @@ bucketIdentifier = 0x01
 counter = 0
 
 
+
 class ImageProcessor:
 
     def __init__(self):
@@ -32,6 +33,7 @@ class ImageProcessor:
         self.imageSub = rospy.Subscriber(imageInTopic,Image,self.ImageCB,queue_size=1)
         self.bridge = CvBridge()
         self.counter = 0
+        self.hb_count = 0
 
     def StatCB(self,data):
         if(data.data == 1):
@@ -42,6 +44,8 @@ class ImageProcessor:
     def ImageCB(self,data):
         self.counter+=1
         if self.process and self.counter%5==0:
+            print("heartbeat " + str(self.hb_count) + "\n")
+            self.hb_count+=1
             cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
             self.ProcessRosImage(cv_image)
 
@@ -61,8 +65,8 @@ class ImageProcessor:
         hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
         #red, green, blue colour detection tresholds
-        lower_red1 = np.array([0,120,50])
-        upper_red1 = np.array([15,255,255])
+        # lower_red1 = np.array([0,100,50])
+        # upper_red1 = np.array([100,255,255])
 
         #lg = np.array([50,120,30])
         #ug = np.array([90,255,150])
@@ -71,31 +75,44 @@ class ImageProcessor:
         #ub = np.array([139,255,255])
 
         #create the image with filtered colours
-        mask1 = cv2.inRange(hsv, lower_red1, upper_red1)
+        # mask1 = cv2.inRange(hsv, lower_red1, upper_red1)
+        mask1 = cv2.inRange(hsv, (0,100,120), (5,255,255))
+        mask2 = cv2.inRange(hsv, (177,100,120), (181,255,255))
+
+
         #mask2 = cv2.inRange(hsv, lb, ub)
         #mask3 = cv2.inRange(hsv, lg, ug)
         #mask = cv2.bitwise_or(mask1,mask2)
         #mask = cv2.bitwise_or(mask,mask3)
-        mask = cv2.bitwise_not(mask1)
-        thresh = cv2.threshold(mask, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)[1]
+        # mask = cv2.bitwise_not(mask1)
+        mask = cv2.bitwise_or(mask1,mask2)
+        # thresh = cv2.threshold(mask, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)[1]
+
+        # rosImageOut = self.bridge.cv2_to_imgmsg(mask,"mono8")
+        # self.imageOutPub.publish(rosImageOut)
 
         #determine objects and draw boundaries
         #\/ obtains boundaries
-        cnts = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE) 
+        # cnts = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE) 
+        cnts = cv2.findContours(mask,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
         cnts = cnts[0] if len(cnts) == 2 else cnts[1]
-        tol=140 #set for boundary
+        w_tol=80 #set for boundary
+        h_tol = 80
 
         for c in cnts:
             #get boundary info
             x,y,w,h = cv2.boundingRect(c)
-            if w>tol and h>tol: #if boundary is large, investigate potential cone/bucket
+            if w>w_tol and h>h_tol: #if boundary is large, investigate potential cone/bucket
                 #determine how many pixels are of the rgb colour in boundary box
                 shade=0
                 for i in range(h):
-                    shade+=sum(thresh[y+i][x:x+w])
+                    # shade+=sum(thresh[y+i][x:x+w])
+                    shade+=sum(mask[y+i][x:x+w])
+
                 shade=shade//255
                 #what percentage of pixelse in box are a specific colour
                 ratio = shade*100//h//w
+                # print("Ratio is "+str(ratio)+"\n")
                 if ratio<=50:
                     print("Red Cone Detected")
                     cv2.rectangle(image, (x, y), (x + w, y + h), (255,0,255), 2)
@@ -103,12 +120,13 @@ class ImageProcessor:
                     conepos_x=x+w//2
                     conepos_y = y+h//2
                     msgToSend = UInt16MultiArray()
-                    msgToSend.data = [0,0,0,0,0]
+                    msgToSend.data = [0,0,0,0,0,0]
                     msgToSend.data[0] = coneIdentifier
                     msgToSend.data[1] = conepos_x
                     msgToSend.data[2] = conepos_y
                     msgToSend.data[3] = w
                     msgToSend.data[4] = h
+                    msgToSend.data[5] = self.hb_count
 
                     print("x = " + str(conepos_x) + "\n")
                     print("y = " + str(conepos_y) + "\n")
@@ -122,6 +140,7 @@ class ImageProcessor:
 
                     #tell ros/main a cone has been detected
                 else:
+                    # if w < 300: continue
                     print("Bucket Detected")
                     cv2.rectangle(image, (x, y), (x + w, y + h), (255,255,0), 2)
                     cv2.putText(image, 'Bucket', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (36,255,12), 2)
@@ -130,12 +149,13 @@ class ImageProcessor:
                     buckpos_y = y+h//2 
 
                     msgToSend = UInt16MultiArray()
-                    msgToSend.data = [0,0,0,0,0]
+                    msgToSend.data = [0,0,0,0,0,0]
                     msgToSend.data[0] = coneIdentifier
                     msgToSend.data[1] = buckpos_x
                     msgToSend.data[2] = buckpos_y
                     msgToSend.data[3] = w
                     msgToSend.data[4] = h
+                    msgToSend.data[5] = self.hb_count
 
                     self.mainMessagePub.publish(msgToSend)
 
