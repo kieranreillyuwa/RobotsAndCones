@@ -10,7 +10,7 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # Preprocessor definitions for this target.
 set(CMAKE_TARGET_DEFINITIONS_CXX
-  "BLOB_NAME=\"mobilenet-ssd_openvino_2021.2_6shave.blob\""
+  "BLOB_PATH=\"/home/netipc/RobotsAndCones/catkin_ws/src/luxonis/depthai-ros-examples/depthai_examples/resources/mobilenet-ssd_openvino_2021.2_6shave.blob\""
   "DEPTHAI_TARGET_CORE"
   "JSON_USE_IMPLICIT_CONVERSIONS=1"
   "ROSCONSOLE_BACKEND_LOG4CXX"

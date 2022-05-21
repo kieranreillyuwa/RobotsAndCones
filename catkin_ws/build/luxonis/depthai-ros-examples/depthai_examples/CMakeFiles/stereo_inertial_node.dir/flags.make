@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_FLAGS =   -g -std=gnu++14
 
-CXX_DEFINES = -DBLOB_NAME=\"yolov4_tiny_coco_416x416_openvino_2021.4_6shave_bgr.blob\" -DDEPTHAI_TARGET_CORE -DJSON_USE_IMPLICIT_CONVERSIONS=1 -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\"depthai_examples\" -DXLINK_USE_MX_ID_NAME=ON -D__PC__
+CXX_DEFINES = -DDEPTHAI_TARGET_CORE -DJSON_USE_IMPLICIT_CONVERSIONS=1 -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\"depthai_examples\" -DXLINK_USE_MX_ID_NAME=ON -D__PC__
 
 CXX_INCLUDES = -I/home/netipc/RobotsAndCones/catkin_ws/src/luxonis/depthai-ros-examples/depthai_examples/include -I/home/netipc/RobotsAndCones/catkin_ws/devel/include -I/home/netipc/RobotsAndCones/catkin_ws/src/vision_opencv/cv_bridge/include -I/home/netipc/RobotsAndCones/catkin_ws/src/luxonis/depthai-ros/depthai_bridge/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -isystem /usr/include/opencv4 -isystem /usr/local/include/depthai-shared/3rdparty -isystem /usr/local/lib/cmake/depthai/dependencies/include 
 

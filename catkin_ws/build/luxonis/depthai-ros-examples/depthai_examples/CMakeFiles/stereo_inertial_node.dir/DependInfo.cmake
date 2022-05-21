@@ -10,7 +10,6 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # Preprocessor definitions for this target.
 set(CMAKE_TARGET_DEFINITIONS_CXX
-  "BLOB_NAME=\"yolov4_tiny_coco_416x416_openvino_2021.4_6shave_bgr.blob\""
   "DEPTHAI_TARGET_CORE"
   "JSON_USE_IMPLICIT_CONVERSIONS=1"
   "ROSCONSOLE_BACKEND_LOG4CXX"

@@ -57,10 +57,9 @@ class ImageProcessor:
 
     # print("here in ImageCB")
     def GetHighlightCB(self ,data):
-        if(data.data==True)
-        {
-            self.saveImage = True;
-        }           
+        if(data.data==1):
+            print("need to save image...\n")
+            self.saveImage=True          
 
 
 
@@ -70,9 +69,10 @@ class ImageProcessor:
         # except CvBridgeError as e:
         #     print(e)
         if(self.saveImage==True):
+            print("Saving image....\n")
             self.saveImage= False
-            cv2.imwrite('Image_' + str(saveImageCounter)+ '.jpeg',cv2_img)
-            ackPub.publish(True)
+            cv2.imwrite('/home/netipc/RobotsAndCones/screenshots/Image_' + str(self.saveImageCounter)+ '.jpeg',image)
+            self.ackPub.publish(True)
         
         #obtain hue,thicc,race from image
         hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -89,7 +89,7 @@ class ImageProcessor:
 
         #create the image with filtered colours
         # mask1 = cv2.inRange(hsv, lower_red1, upper_red1)
-        mask1 = cv2.inRange(hsv, (0,100,120), (5,255,255))
+        mask1 = cv2.inRange(hsv, (0,100,50), (5,255,255))
         mask2 = cv2.inRange(hsv, (177,100,120), (181,255,255))
 
 
@@ -141,10 +141,10 @@ class ImageProcessor:
                     msgToSend.data[4] = h
                     msgToSend.data[5] = self.hb_count
 
-                    print("x = " + str(conepos_x) + "\n")
-                    print("y = " + str(conepos_y) + "\n")
-                    print("w = " + str(w) + "\n")
-                    print("h = " + str(h) + "\n")
+                    # print("x = " + str(conepos_x) + "\n")
+                    # print("y = " + str(conepos_y) + "\n")
+                    # print("w = " + str(w) + "\n")
+                    # print("h = " + str(h) + "\n")
                     print("ratio: " + str(ratio) + "\n")
 
                     self.mainMessagePub.publish(msgToSend)
@@ -172,10 +172,10 @@ class ImageProcessor:
 
                     self.mainMessagePub.publish(msgToSend)
 
-                    print("x = " + str(buckpos_x) + "\n")
-                    print("y = " + str(buckpos_y) + "\n")
-                    print("w = " + str(w) + "\n")
-                    print("h = " + str(h) + "\n")
+                    # print("x = " + str(buckpos_x) + "\n")
+                    # print("y = " + str(buckpos_y) + "\n")
+                    # print("w = " + str(w) + "\n")
+                    # print("h = " + str(h) + "\n")
                     print("ratio: " + str(ratio) + "\n")
                     
                     #tell ros/main a bucket has been detected

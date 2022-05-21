@@ -15,11 +15,14 @@
 #define IMG_HEIGHT 720 // for depth
 #define IMG_WIDTH 1280 // for depth
 
-#define ZERO_OFFSET M_PI/180
+#define ZERO_OFFSET -1*M_PI/180
 
-#define GPS_RES 1
-#define LOCALISE_DIST 1
+#define GPS_RES 20
+#define LOCALISE_DIST 20
 #define NUM_POINTS 2
+
+#define BUCKET_TURN_RES_DEG 5
+#define BUCKET_TURN_RES_RAD BUCKET_TURN_RES_DEG*M_PI/180
 
 #define BASE_SPEED 1
 
@@ -727,7 +730,7 @@ int main(int argc, char **argv)
                 if(toConeDriving.data[IMG_X] > BOUND_X_LOW && toConeDriving.data[IMG_X] < BOUND_X_HIGH)
                 {
                     
-                    Drive(1,&cmdVelPub,&rate);
+                    Drive(0.3,&cmdVelPub,&rate,0.1);
                 }
                 else
                 {
@@ -774,33 +777,50 @@ int main(int argc, char **argv)
             heading-=M_PI_4;
             sideCount = 0;
             cantFind = false;
-            while (!bucketFound && ros::ok() && !cantFind)
+            // while (!bucketFound && ros::ok() && !cantFind)
+            // {
+            //     Drive(2, &cmdVelPub, &rate,0.2);
+            //     ros::spinOnce();
+            //     if (!bucketFound)
+            //     {
+            //         Rotate(M_PI_2, &cmdVelPub, &rate);
+            //         heading+=M_PI_2;
+            //     }
+            //     ros::spinOnce();
+            //     if (++sideCount > 4)
+            //     { // cant find a bucket, so proceed to next weighpoint instead
+
+            //         cantFind = true;
+            //     }
+            // }
+
+            for(int i = 0; i < 360; i+=BUCKET_TURN_RES_DEG)
             {
-                Drive(2, &cmdVelPub, &rate,0.2);
-                ros::spinOnce();
-                if (!bucketFound)
+                if(bucketFound)
                 {
-                    Rotate(M_PI_2, &cmdVelPub, &rate);
-                    heading+=M_PI_2;
+                    printf("bucket has been found...\n");
+                    mainState = IMAGE_BUCKET;
+                    break;
                 }
-                ros::spinOnce();
-                if (++sideCount > 4)
-                { // cant find a bucket, so proceed to next weighpoint instead
-                    cantFind = true;
-                }
+                Rotate(BUCKET_TURN_RES_RAD,&cmdVelPub,&rate);
             }
 
-            if (cantFind)
-            {
-                printf("Couldn't find bucket, moving to next goal...\n");
-                mainState = LOCALISE;
-                localiseState = GET_POS1;
-                goalPos = goalCoords[c++];
-                roughHeading = GetHeading(livePos,goalPos) - heading;
-                Rotate(roughHeading,&cmdVelPub,&rate);
-                continue;
-            }
-            mainState = IMAGE_BUCKET;
+            Rotate(M_PI,&cmdVelPub,&rate,0.5);
+            mainState = LOCALISE;
+            localiseState=GET_POS1;
+
+            // if (cantFind)
+            // {
+            //     printf("Couldn't find bucket, moving to next goal...\n");
+            //     mainState = LOCALISE;
+            //     localiseState = GET_POS1;
+            //     goalPos = goalCoords[c++];
+            //     roughHeading = GetHeading(livePos,goalPos) - heading;
+            //     Rotate(roughHeading,&cmdVelPub,&rate);
+            //     continue;
+            // }
+            // mainState = IMAGE_BUCKET;
+            // sideCount = 0;
         
             // getDistToPoint = true;
             break;
@@ -822,7 +842,7 @@ int main(int argc, char **argv)
                 mainState = LOCALISE;
                 localiseState = GET_POS1;
                 roughHeading = GetHeading(livePos,goalPos) - heading;
-                while(roughHeading >180 || relHeading<-180)
+                while(roughHeading >180 || roughHeading<-180)
                 {
                     if(roughHeading<-180)
                     {
