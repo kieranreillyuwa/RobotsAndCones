@@ -335,17 +335,7 @@ void ImageStatusCallback(const std_msgs::UInt16MultiArrayConstPtr &msg)
     bucketFound = false;
 }
 
-static bool grabAnImage = false;
-uint8_t imageCounter = 0;
-sensor_msgs::Image keyImages[40];
-void GetImageCallback(const sensor_msgs::ImageConstPtr &msg)
-{
-    if (grabAnImage)
-    {
-        keyImages[imageCounter++] = *msg;
-        grabAnImage = false;
-    }
-}
+
 
 // static const float driveForwardTime = 1.0;
 // enum BucketSearch_t
@@ -428,6 +418,16 @@ void DepthImageCallback(const sensor_msgs::ImageConstPtr &msg)
 
 }
 
+bool savedImage = true;
+
+void AckCB(const std_msgs::BoolConstPtr &msg)
+{
+    if(msg->data == 1)
+    {
+        savedImage = true;
+    }
+}
+
 int main(int argc, char **argv)
 {
     printf("Program Starting...");
@@ -440,8 +440,10 @@ int main(int argc, char **argv)
     ros::Subscriber joySub = nh.subscribe<sensor_msgs::Joy>("joy", 5, JoyCallBack);
     ros::Publisher mainStatusPub = nh.advertise<std_msgs::Bool>("main_status", 5);
     ros::Subscriber imageStatusSub = nh.subscribe<std_msgs::UInt16MultiArray>("image_status", 10, ImageStatusCallback);
-    ros::Subscriber imageSub = nh.subscribe<sensor_msgs::Image>("vision", 5, GetImageCallback);
+    // ros::Subscriber imageSub = nh.subscribe<sensor_msgs::Image>("vision", 5, GetImageCallback);
     ros::Subscriber depthImageSub = nh.subscribe<sensor_msgs::Image>("rgb_stereo_publisher/stereo/depth", 10, DepthImageCallback);
+    ros::Publisher saveImagePub = nh.advertise<std_msgs::Bool>("get_highlights",1);
+    ros::Subscriber ackSub = nh.subscribe<std_msgs::Bool>("ack_highlights",1,AckCB);
 
     goalCoords[0].latitude = -31.98038731577529;
     goalCoords[0].longitude = 115.8171782781675;
@@ -478,6 +480,7 @@ int main(int argc, char **argv)
     double roughHeading;
     double distToGoal;
     bool gotTheCone = false;
+    std_msgs::Bool msgOut;
     while (ros::ok())
     {
         switch (mainState)
@@ -652,7 +655,6 @@ int main(int argc, char **argv)
             { // at cone, or at least close enough.
                 cmdVelPub.publish(stopVel);
                 mainState = IMAGE_CONE;
-                grabAnImage = true;
                 continue;
             }
 
@@ -712,7 +714,6 @@ int main(int argc, char **argv)
             { // at cone, or at least close enough.
                 cmdVelPub.publish(stopVel);
                 mainState = IMAGE_CONE;
-                grabAnImage = true;
                 continue;
             }
 
@@ -723,7 +724,7 @@ int main(int argc, char **argv)
             if(toConeDriving.data[IMG_HB] > hbCone)
             {
                 hbCone = toConeDriving.data[IMG_HB];
-                if(toConeDriving.data[IMG_X] > BOUND_X_LOW && toConeDriving.data[IMG_X] > BOUND_X_HIGH)
+                if(toConeDriving.data[IMG_X] > BOUND_X_LOW && toConeDriving.data[IMG_X] < BOUND_X_HIGH)
                 {
                     
                     Drive(1,&cmdVelPub,&rate);
@@ -751,11 +752,20 @@ int main(int argc, char **argv)
 
         case IMAGE_CONE:
             printf("Close to cone, saving image....\n");
+            savedImage = false; 
+            msgOut.data = true;
+            saveImagePub.publish(msgOut);
             cmdVelPub.publish(stopVel);
-            if (!grabAnImage)
+
+            while(!savedImage)
             {
-                mainState = SEARCH_BUCKET;
+                printf("waiting for image to save...\n");
+                ros::spinOnce();
+                rate.sleep();
             }
+            
+            mainState = SEARCH_BUCKET;
+            
             break;
 
         case SEARCH_BUCKET:
@@ -791,21 +801,24 @@ int main(int argc, char **argv)
                 continue;
             }
             mainState = IMAGE_BUCKET;
-            grabAnImage = true;
+        
             // getDistToPoint = true;
             break;
 
         case IMAGE_BUCKET:
             printf("Getting image of bucket...\n");
             cmdVelPub.publish(stopVel);
-            if (!grabAnImage) //
+            savedImage = false; 
+            msgOut.data = true;
+            saveImagePub.publish(msgOut);
+            cmdVelPub.publish(stopVel);
+
+            while(!savedImage)
             {
-                goalPos = goalCoords[c++];
-                if (!(c < numGpsPoints)) //  last point
-                {
-                    mainState = END_ROUTINE;
-                    continue;
-                }
+                printf("waiting for image to save...\n");
+                ros::spinOnce();
+                rate.sleep();
+            }
                 mainState = LOCALISE;
                 localiseState = GET_POS1;
                 roughHeading = GetHeading(livePos,goalPos) - heading;
@@ -821,7 +834,7 @@ int main(int argc, char **argv)
                     }
                 }
                 Rotate(roughHeading,&cmdVelPub,&rate);
-            }
+            
             break;
         case OBSTACLE:
             printf("Obstacle detected...\n");

@@ -56,28 +56,17 @@ CMAKE_BINARY_DIR = /home/netipc/RobotsAndCones/catkin_ws/build
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
 
-# Special rule for the target install/local
-install/local/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local/fast
-
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
-
-# Special rule for the target test
-test/fast: test
-
-.PHONY : test/fast
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
 
 # Special rule for the target list_install_components
 list_install_components:
@@ -112,6 +101,29 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
+
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -122,18 +134,6 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
-
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install
-
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -168,94 +168,19 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
-.PHONY : NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
+NaughtyRobot/CMakeFiles/obstacle_avoidance.dir/rule:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/obstacle_avoidance.dir/rule
+.PHONY : NaughtyRobot/CMakeFiles/obstacle_avoidance.dir/rule
 
 # Convenience name for target.
-actionlib_msgs_generate_messages_eus: NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
+obstacle_avoidance: NaughtyRobot/CMakeFiles/obstacle_avoidance.dir/rule
 
-.PHONY : actionlib_msgs_generate_messages_eus
+.PHONY : obstacle_avoidance
 
 # fast build rule for target.
-actionlib_msgs_generate_messages_eus/fast:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build.make NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build
-.PHONY : actionlib_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule
-.PHONY : NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-tf2_msgs_generate_messages_lisp: NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : tf2_msgs_generate_messages_lisp
-
-# fast build rule for target.
-tf2_msgs_generate_messages_lisp/fast:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build.make NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build
-.PHONY : tf2_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-NaughtyRobot/CMakeFiles/tf_generate_messages_py.dir/rule:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/tf_generate_messages_py.dir/rule
-.PHONY : NaughtyRobot/CMakeFiles/tf_generate_messages_py.dir/rule
-
-# Convenience name for target.
-tf_generate_messages_py: NaughtyRobot/CMakeFiles/tf_generate_messages_py.dir/rule
-
-.PHONY : tf_generate_messages_py
-
-# fast build rule for target.
-tf_generate_messages_py/fast:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/tf_generate_messages_py.dir/build.make NaughtyRobot/CMakeFiles/tf_generate_messages_py.dir/build
-.PHONY : tf_generate_messages_py/fast
-
-# Convenience name for target.
-NaughtyRobot/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
-.PHONY : NaughtyRobot/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-actionlib_generate_messages_nodejs: NaughtyRobot/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
-
-.PHONY : actionlib_generate_messages_nodejs
-
-# fast build rule for target.
-actionlib_generate_messages_nodejs/fast:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/actionlib_generate_messages_nodejs.dir/build.make NaughtyRobot/CMakeFiles/actionlib_generate_messages_nodejs.dir/build
-.PHONY : actionlib_generate_messages_nodejs/fast
-
-# Convenience name for target.
-NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
-.PHONY : NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-actionlib_msgs_generate_messages_cpp: NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : actionlib_msgs_generate_messages_cpp
-
-# fast build rule for target.
-actionlib_msgs_generate_messages_cpp/fast:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build
-.PHONY : actionlib_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-NaughtyRobot/CMakeFiles/actionlib_generate_messages_eus.dir/rule:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/actionlib_generate_messages_eus.dir/rule
-.PHONY : NaughtyRobot/CMakeFiles/actionlib_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-actionlib_generate_messages_eus: NaughtyRobot/CMakeFiles/actionlib_generate_messages_eus.dir/rule
-
-.PHONY : actionlib_generate_messages_eus
-
-# fast build rule for target.
-actionlib_generate_messages_eus/fast:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/actionlib_generate_messages_eus.dir/build.make NaughtyRobot/CMakeFiles/actionlib_generate_messages_eus.dir/build
-.PHONY : actionlib_generate_messages_eus/fast
+obstacle_avoidance/fast:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/obstacle_avoidance.dir/build.make NaughtyRobot/CMakeFiles/obstacle_avoidance.dir/build
+.PHONY : obstacle_avoidance/fast
 
 # Convenience name for target.
 NaughtyRobot/CMakeFiles/gps_testing.dir/rule:
@@ -273,34 +198,94 @@ gps_testing/fast:
 .PHONY : gps_testing/fast
 
 # Convenience name for target.
-NaughtyRobot/CMakeFiles/actionlib_generate_messages_lisp.dir/rule:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
-.PHONY : NaughtyRobot/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
+NaughtyRobot/CMakeFiles/main_node.dir/rule:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/main_node.dir/rule
+.PHONY : NaughtyRobot/CMakeFiles/main_node.dir/rule
 
 # Convenience name for target.
-actionlib_generate_messages_lisp: NaughtyRobot/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
+main_node: NaughtyRobot/CMakeFiles/main_node.dir/rule
 
-.PHONY : actionlib_generate_messages_lisp
+.PHONY : main_node
 
 # fast build rule for target.
-actionlib_generate_messages_lisp/fast:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/actionlib_generate_messages_lisp.dir/build.make NaughtyRobot/CMakeFiles/actionlib_generate_messages_lisp.dir/build
-.PHONY : actionlib_generate_messages_lisp/fast
+main_node/fast:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/main_node.dir/build.make NaughtyRobot/CMakeFiles/main_node.dir/build
+.PHONY : main_node/fast
 
 # Convenience name for target.
-NaughtyRobot/CMakeFiles/tf_generate_messages_nodejs.dir/rule:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/tf_generate_messages_nodejs.dir/rule
-.PHONY : NaughtyRobot/CMakeFiles/tf_generate_messages_nodejs.dir/rule
+NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule
+.PHONY : NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
-tf_generate_messages_nodejs: NaughtyRobot/CMakeFiles/tf_generate_messages_nodejs.dir/rule
+tf2_msgs_generate_messages_py: NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule
 
-.PHONY : tf_generate_messages_nodejs
+.PHONY : tf2_msgs_generate_messages_py
 
 # fast build rule for target.
-tf_generate_messages_nodejs/fast:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/tf_generate_messages_nodejs.dir/build.make NaughtyRobot/CMakeFiles/tf_generate_messages_nodejs.dir/build
-.PHONY : tf_generate_messages_nodejs/fast
+tf2_msgs_generate_messages_py/fast:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_py.dir/build.make NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_py.dir/build
+.PHONY : tf2_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+NaughtyRobot/CMakeFiles/tf_generate_messages_lisp.dir/rule:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/tf_generate_messages_lisp.dir/rule
+.PHONY : NaughtyRobot/CMakeFiles/tf_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+tf_generate_messages_lisp: NaughtyRobot/CMakeFiles/tf_generate_messages_lisp.dir/rule
+
+.PHONY : tf_generate_messages_lisp
+
+# fast build rule for target.
+tf_generate_messages_lisp/fast:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/tf_generate_messages_lisp.dir/build.make NaughtyRobot/CMakeFiles/tf_generate_messages_lisp.dir/build
+.PHONY : tf_generate_messages_lisp/fast
+
+# Convenience name for target.
+NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+.PHONY : NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+rosgraph_msgs_generate_messages_py: NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+
+.PHONY : rosgraph_msgs_generate_messages_py
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_py/fast:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
+.PHONY : rosgraph_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule
+.PHONY : NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+tf2_msgs_generate_messages_lisp: NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : tf2_msgs_generate_messages_lisp
+
+# fast build rule for target.
+tf2_msgs_generate_messages_lisp/fast:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build.make NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build
+.PHONY : tf2_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
+.PHONY : NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+rosgraph_msgs_generate_messages_eus: NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
+
+.PHONY : rosgraph_msgs_generate_messages_eus
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_eus/fast:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
+.PHONY : rosgraph_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 NaughtyRobot/CMakeFiles/tf_generate_messages_cpp.dir/rule:
@@ -316,6 +301,36 @@ tf_generate_messages_cpp: NaughtyRobot/CMakeFiles/tf_generate_messages_cpp.dir/r
 tf_generate_messages_cpp/fast:
 	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/tf_generate_messages_cpp.dir/build.make NaughtyRobot/CMakeFiles/tf_generate_messages_cpp.dir/build
 .PHONY : tf_generate_messages_cpp/fast
+
+# Convenience name for target.
+NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
+.PHONY : NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+actionlib_msgs_generate_messages_eus: NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
+
+.PHONY : actionlib_msgs_generate_messages_eus
+
+# fast build rule for target.
+actionlib_msgs_generate_messages_eus/fast:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build.make NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build
+.PHONY : actionlib_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
+.PHONY : NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+rosgraph_msgs_generate_messages_lisp: NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : rosgraph_msgs_generate_messages_lisp
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_lisp/fast:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
+.PHONY : rosgraph_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 NaughtyRobot/CMakeFiles/actionlib_generate_messages_py.dir/rule:
@@ -346,6 +361,246 @@ actionlib_msgs_generate_messages_nodejs: NaughtyRobot/CMakeFiles/actionlib_msgs_
 actionlib_msgs_generate_messages_nodejs/fast:
 	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build.make NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build
 .PHONY : actionlib_msgs_generate_messages_nodejs/fast
+
+# Convenience name for target.
+NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+.PHONY : NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+rosgraph_msgs_generate_messages_cpp: NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : rosgraph_msgs_generate_messages_cpp
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_cpp/fast:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
+.PHONY : rosgraph_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+NaughtyRobot/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
+.PHONY : NaughtyRobot/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+roscpp_generate_messages_nodejs: NaughtyRobot/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
+
+.PHONY : roscpp_generate_messages_nodejs
+
+# fast build rule for target.
+roscpp_generate_messages_nodejs/fast:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make NaughtyRobot/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
+.PHONY : roscpp_generate_messages_nodejs/fast
+
+# Convenience name for target.
+NaughtyRobot/CMakeFiles/tf_generate_messages_py.dir/rule:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/tf_generate_messages_py.dir/rule
+.PHONY : NaughtyRobot/CMakeFiles/tf_generate_messages_py.dir/rule
+
+# Convenience name for target.
+tf_generate_messages_py: NaughtyRobot/CMakeFiles/tf_generate_messages_py.dir/rule
+
+.PHONY : tf_generate_messages_py
+
+# fast build rule for target.
+tf_generate_messages_py/fast:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/tf_generate_messages_py.dir/build.make NaughtyRobot/CMakeFiles/tf_generate_messages_py.dir/build
+.PHONY : tf_generate_messages_py/fast
+
+# Convenience name for target.
+NaughtyRobot/CMakeFiles/roscpp_generate_messages_py.dir/rule:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/roscpp_generate_messages_py.dir/rule
+.PHONY : NaughtyRobot/CMakeFiles/roscpp_generate_messages_py.dir/rule
+
+# Convenience name for target.
+roscpp_generate_messages_py: NaughtyRobot/CMakeFiles/roscpp_generate_messages_py.dir/rule
+
+.PHONY : roscpp_generate_messages_py
+
+# fast build rule for target.
+roscpp_generate_messages_py/fast:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/roscpp_generate_messages_py.dir/build.make NaughtyRobot/CMakeFiles/roscpp_generate_messages_py.dir/build
+.PHONY : roscpp_generate_messages_py/fast
+
+# Convenience name for target.
+NaughtyRobot/CMakeFiles/roscpp_generate_messages_lisp.dir/rule:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
+.PHONY : NaughtyRobot/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+roscpp_generate_messages_lisp: NaughtyRobot/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
+
+.PHONY : roscpp_generate_messages_lisp
+
+# fast build rule for target.
+roscpp_generate_messages_lisp/fast:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make NaughtyRobot/CMakeFiles/roscpp_generate_messages_lisp.dir/build
+.PHONY : roscpp_generate_messages_lisp/fast
+
+# Convenience name for target.
+NaughtyRobot/CMakeFiles/actionlib_generate_messages_lisp.dir/rule:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
+.PHONY : NaughtyRobot/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+actionlib_generate_messages_lisp: NaughtyRobot/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
+
+.PHONY : actionlib_generate_messages_lisp
+
+# fast build rule for target.
+actionlib_generate_messages_lisp/fast:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/actionlib_generate_messages_lisp.dir/build.make NaughtyRobot/CMakeFiles/actionlib_generate_messages_lisp.dir/build
+.PHONY : actionlib_generate_messages_lisp/fast
+
+# Convenience name for target.
+NaughtyRobot/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+.PHONY : NaughtyRobot/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+roscpp_generate_messages_cpp: NaughtyRobot/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+
+.PHONY : roscpp_generate_messages_cpp
+
+# fast build rule for target.
+roscpp_generate_messages_cpp/fast:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make NaughtyRobot/CMakeFiles/roscpp_generate_messages_cpp.dir/build
+.PHONY : roscpp_generate_messages_cpp/fast
+
+# Convenience name for target.
+NaughtyRobot/CMakeFiles/tf_generate_messages_nodejs.dir/rule:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/tf_generate_messages_nodejs.dir/rule
+.PHONY : NaughtyRobot/CMakeFiles/tf_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+tf_generate_messages_nodejs: NaughtyRobot/CMakeFiles/tf_generate_messages_nodejs.dir/rule
+
+.PHONY : tf_generate_messages_nodejs
+
+# fast build rule for target.
+tf_generate_messages_nodejs/fast:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/tf_generate_messages_nodejs.dir/build.make NaughtyRobot/CMakeFiles/tf_generate_messages_nodejs.dir/build
+.PHONY : tf_generate_messages_nodejs/fast
+
+# Convenience name for target.
+NaughtyRobot/CMakeFiles/roscpp_generate_messages_eus.dir/rule:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+.PHONY : NaughtyRobot/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+roscpp_generate_messages_eus: NaughtyRobot/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+
+.PHONY : roscpp_generate_messages_eus
+
+# fast build rule for target.
+roscpp_generate_messages_eus/fast:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/roscpp_generate_messages_eus.dir/build.make NaughtyRobot/CMakeFiles/roscpp_generate_messages_eus.dir/build
+.PHONY : roscpp_generate_messages_eus/fast
+
+# Convenience name for target.
+NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule
+.PHONY : NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+tf2_msgs_generate_messages_eus: NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule
+
+.PHONY : tf2_msgs_generate_messages_eus
+
+# fast build rule for target.
+tf2_msgs_generate_messages_eus/fast:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build.make NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build
+.PHONY : tf2_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+NaughtyRobot/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
+.PHONY : NaughtyRobot/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+actionlib_generate_messages_nodejs: NaughtyRobot/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
+
+.PHONY : actionlib_generate_messages_nodejs
+
+# fast build rule for target.
+actionlib_generate_messages_nodejs/fast:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/actionlib_generate_messages_nodejs.dir/build.make NaughtyRobot/CMakeFiles/actionlib_generate_messages_nodejs.dir/build
+.PHONY : actionlib_generate_messages_nodejs/fast
+
+# Convenience name for target.
+NaughtyRobot/CMakeFiles/actionlib_generate_messages_eus.dir/rule:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/actionlib_generate_messages_eus.dir/rule
+.PHONY : NaughtyRobot/CMakeFiles/actionlib_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+actionlib_generate_messages_eus: NaughtyRobot/CMakeFiles/actionlib_generate_messages_eus.dir/rule
+
+.PHONY : actionlib_generate_messages_eus
+
+# fast build rule for target.
+actionlib_generate_messages_eus/fast:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/actionlib_generate_messages_eus.dir/build.make NaughtyRobot/CMakeFiles/actionlib_generate_messages_eus.dir/build
+.PHONY : actionlib_generate_messages_eus/fast
+
+# Convenience name for target.
+NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
+.PHONY : NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+actionlib_msgs_generate_messages_cpp: NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : actionlib_msgs_generate_messages_cpp
+
+# fast build rule for target.
+actionlib_msgs_generate_messages_cpp/fast:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build
+.PHONY : actionlib_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+NaughtyRobot/CMakeFiles/gps_heading.dir/rule:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/gps_heading.dir/rule
+.PHONY : NaughtyRobot/CMakeFiles/gps_heading.dir/rule
+
+# Convenience name for target.
+gps_heading: NaughtyRobot/CMakeFiles/gps_heading.dir/rule
+
+.PHONY : gps_heading
+
+# fast build rule for target.
+gps_heading/fast:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/gps_heading.dir/build.make NaughtyRobot/CMakeFiles/gps_heading.dir/build
+.PHONY : gps_heading/fast
+
+# Convenience name for target.
+NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
+.PHONY : NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+actionlib_msgs_generate_messages_lisp: NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : actionlib_msgs_generate_messages_lisp
+
+# fast build rule for target.
+actionlib_msgs_generate_messages_lisp/fast:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build
+.PHONY : actionlib_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
+.PHONY : NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+rosgraph_msgs_generate_messages_nodejs: NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
+
+.PHONY : rosgraph_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_nodejs/fast:
+	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
+.PHONY : rosgraph_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 NaughtyRobot/CMakeFiles/actionlib_generate_messages_cpp.dir/rule:
@@ -421,111 +676,6 @@ tf2_msgs_generate_messages_nodejs: NaughtyRobot/CMakeFiles/tf2_msgs_generate_mes
 tf2_msgs_generate_messages_nodejs/fast:
 	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/build.make NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/build
 .PHONY : tf2_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
-.PHONY : NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-actionlib_msgs_generate_messages_lisp: NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : actionlib_msgs_generate_messages_lisp
-
-# fast build rule for target.
-actionlib_msgs_generate_messages_lisp/fast:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build
-.PHONY : actionlib_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-NaughtyRobot/CMakeFiles/gps_heading.dir/rule:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/gps_heading.dir/rule
-.PHONY : NaughtyRobot/CMakeFiles/gps_heading.dir/rule
-
-# Convenience name for target.
-gps_heading: NaughtyRobot/CMakeFiles/gps_heading.dir/rule
-
-.PHONY : gps_heading
-
-# fast build rule for target.
-gps_heading/fast:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/gps_heading.dir/build.make NaughtyRobot/CMakeFiles/gps_heading.dir/build
-.PHONY : gps_heading/fast
-
-# Convenience name for target.
-NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule
-.PHONY : NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-tf2_msgs_generate_messages_py: NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule
-
-.PHONY : tf2_msgs_generate_messages_py
-
-# fast build rule for target.
-tf2_msgs_generate_messages_py/fast:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_py.dir/build.make NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_py.dir/build
-.PHONY : tf2_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-NaughtyRobot/CMakeFiles/main_node.dir/rule:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/main_node.dir/rule
-.PHONY : NaughtyRobot/CMakeFiles/main_node.dir/rule
-
-# Convenience name for target.
-main_node: NaughtyRobot/CMakeFiles/main_node.dir/rule
-
-.PHONY : main_node
-
-# fast build rule for target.
-main_node/fast:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/main_node.dir/build.make NaughtyRobot/CMakeFiles/main_node.dir/build
-.PHONY : main_node/fast
-
-# Convenience name for target.
-NaughtyRobot/CMakeFiles/obstacle_avoidance.dir/rule:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/obstacle_avoidance.dir/rule
-.PHONY : NaughtyRobot/CMakeFiles/obstacle_avoidance.dir/rule
-
-# Convenience name for target.
-obstacle_avoidance: NaughtyRobot/CMakeFiles/obstacle_avoidance.dir/rule
-
-.PHONY : obstacle_avoidance
-
-# fast build rule for target.
-obstacle_avoidance/fast:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/obstacle_avoidance.dir/build.make NaughtyRobot/CMakeFiles/obstacle_avoidance.dir/build
-.PHONY : obstacle_avoidance/fast
-
-# Convenience name for target.
-NaughtyRobot/CMakeFiles/tf_generate_messages_lisp.dir/rule:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/tf_generate_messages_lisp.dir/rule
-.PHONY : NaughtyRobot/CMakeFiles/tf_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-tf_generate_messages_lisp: NaughtyRobot/CMakeFiles/tf_generate_messages_lisp.dir/rule
-
-.PHONY : tf_generate_messages_lisp
-
-# fast build rule for target.
-tf_generate_messages_lisp/fast:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/tf_generate_messages_lisp.dir/build.make NaughtyRobot/CMakeFiles/tf_generate_messages_lisp.dir/build
-.PHONY : tf_generate_messages_lisp/fast
-
-# Convenience name for target.
-NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule
-.PHONY : NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-tf2_msgs_generate_messages_eus: NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule
-
-.PHONY : tf2_msgs_generate_messages_eus
-
-# fast build rule for target.
-tf2_msgs_generate_messages_eus/fast:
-	cd /home/netipc/RobotsAndCones/catkin_ws/build && $(MAKE) -f NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build.make NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build
-.PHONY : tf2_msgs_generate_messages_eus/fast
 
 src/gps_heading.o: src/gps_heading.cpp.o
 
@@ -641,37 +791,47 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... install/local"
-	@echo "... test"
-	@echo "... actionlib_msgs_generate_messages_eus"
-	@echo "... tf2_msgs_generate_messages_lisp"
+	@echo "... install"
 	@echo "... list_install_components"
-	@echo "... tf_generate_messages_py"
-	@echo "... actionlib_generate_messages_nodejs"
-	@echo "... actionlib_msgs_generate_messages_cpp"
-	@echo "... actionlib_generate_messages_eus"
+	@echo "... obstacle_avoidance"
 	@echo "... install/strip"
 	@echo "... gps_testing"
-	@echo "... actionlib_generate_messages_lisp"
-	@echo "... tf_generate_messages_nodejs"
+	@echo "... main_node"
+	@echo "... tf2_msgs_generate_messages_py"
+	@echo "... edit_cache"
+	@echo "... tf_generate_messages_lisp"
+	@echo "... rosgraph_msgs_generate_messages_py"
+	@echo "... tf2_msgs_generate_messages_lisp"
+	@echo "... install/local"
+	@echo "... rosgraph_msgs_generate_messages_eus"
 	@echo "... tf_generate_messages_cpp"
+	@echo "... actionlib_msgs_generate_messages_eus"
+	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... actionlib_generate_messages_py"
 	@echo "... actionlib_msgs_generate_messages_nodejs"
+	@echo "... test"
+	@echo "... rosgraph_msgs_generate_messages_cpp"
+	@echo "... roscpp_generate_messages_nodejs"
+	@echo "... tf_generate_messages_py"
+	@echo "... roscpp_generate_messages_py"
+	@echo "... roscpp_generate_messages_lisp"
+	@echo "... actionlib_generate_messages_lisp"
+	@echo "... roscpp_generate_messages_cpp"
+	@echo "... tf_generate_messages_nodejs"
+	@echo "... rebuild_cache"
+	@echo "... roscpp_generate_messages_eus"
+	@echo "... tf2_msgs_generate_messages_eus"
+	@echo "... actionlib_generate_messages_nodejs"
+	@echo "... actionlib_generate_messages_eus"
+	@echo "... actionlib_msgs_generate_messages_cpp"
+	@echo "... gps_heading"
+	@echo "... actionlib_msgs_generate_messages_lisp"
+	@echo "... rosgraph_msgs_generate_messages_nodejs"
 	@echo "... actionlib_generate_messages_cpp"
 	@echo "... actionlib_msgs_generate_messages_py"
 	@echo "... tf_generate_messages_eus"
 	@echo "... tf2_msgs_generate_messages_cpp"
 	@echo "... tf2_msgs_generate_messages_nodejs"
-	@echo "... actionlib_msgs_generate_messages_lisp"
-	@echo "... gps_heading"
-	@echo "... tf2_msgs_generate_messages_py"
-	@echo "... main_node"
-	@echo "... obstacle_avoidance"
-	@echo "... tf_generate_messages_lisp"
-	@echo "... edit_cache"
-	@echo "... tf2_msgs_generate_messages_eus"
-	@echo "... rebuild_cache"
-	@echo "... install"
 	@echo "... src/gps_heading.o"
 	@echo "... src/gps_heading.i"
 	@echo "... src/gps_heading.s"

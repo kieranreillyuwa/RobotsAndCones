@@ -6,8 +6,8 @@ luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/mobilenet_node.dir/ros1
  /home/netipc/RobotsAndCones/catkin_ws/src/luxonis/depthai-ros/depthai_bridge/include/depthai_bridge/BridgePublisher.hpp
  /home/netipc/RobotsAndCones/catkin_ws/src/luxonis/depthai-ros/depthai_bridge/include/depthai_bridge/ImageConverter.hpp
  /home/netipc/RobotsAndCones/catkin_ws/src/luxonis/depthai-ros/depthai_bridge/include/depthai_bridge/ImgDetectionConverter.hpp
+ /home/netipc/RobotsAndCones/catkin_ws/src/vision_opencv/cv_bridge/include/cv_bridge/cv_bridge.h
  /opt/ros/noetic/include/camera_info_manager/camera_info_manager.h
- /opt/ros/noetic/include/cv_bridge/cv_bridge.h
  /opt/ros/noetic/include/geometry_msgs/Point.h
  /opt/ros/noetic/include/geometry_msgs/Pose.h
  /opt/ros/noetic/include/geometry_msgs/Pose2D.h

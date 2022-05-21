@@ -5,8 +5,8 @@ luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/mobilenet_node.dir/ros1
 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/mobilenet_node.dir/ros1_src/mobilenet_publisher.cpp.o: /home/netipc/RobotsAndCones/catkin_ws/src/luxonis/depthai-ros/depthai_bridge/include/depthai_bridge/BridgePublisher.hpp
 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/mobilenet_node.dir/ros1_src/mobilenet_publisher.cpp.o: /home/netipc/RobotsAndCones/catkin_ws/src/luxonis/depthai-ros/depthai_bridge/include/depthai_bridge/ImageConverter.hpp
 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/mobilenet_node.dir/ros1_src/mobilenet_publisher.cpp.o: /home/netipc/RobotsAndCones/catkin_ws/src/luxonis/depthai-ros/depthai_bridge/include/depthai_bridge/ImgDetectionConverter.hpp
+luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/mobilenet_node.dir/ros1_src/mobilenet_publisher.cpp.o: /home/netipc/RobotsAndCones/catkin_ws/src/vision_opencv/cv_bridge/include/cv_bridge/cv_bridge.h
 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/mobilenet_node.dir/ros1_src/mobilenet_publisher.cpp.o: /opt/ros/noetic/include/camera_info_manager/camera_info_manager.h
-luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/mobilenet_node.dir/ros1_src/mobilenet_publisher.cpp.o: /opt/ros/noetic/include/cv_bridge/cv_bridge.h
 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/mobilenet_node.dir/ros1_src/mobilenet_publisher.cpp.o: /opt/ros/noetic/include/geometry_msgs/Point.h
 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/mobilenet_node.dir/ros1_src/mobilenet_publisher.cpp.o: /opt/ros/noetic/include/geometry_msgs/Pose.h
 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/mobilenet_node.dir/ros1_src/mobilenet_publisher.cpp.o: /opt/ros/noetic/include/geometry_msgs/Pose2D.h

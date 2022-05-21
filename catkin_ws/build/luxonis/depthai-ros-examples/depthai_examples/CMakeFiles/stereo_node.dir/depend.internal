@@ -6,8 +6,8 @@ luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/stereo_node.dir/ros1_sr
  /home/netipc/RobotsAndCones/catkin_ws/src/luxonis/depthai-ros/depthai_bridge/include/depthai_bridge/BridgePublisher.hpp
  /home/netipc/RobotsAndCones/catkin_ws/src/luxonis/depthai-ros/depthai_bridge/include/depthai_bridge/DisparityConverter.hpp
  /home/netipc/RobotsAndCones/catkin_ws/src/luxonis/depthai-ros/depthai_bridge/include/depthai_bridge/ImageConverter.hpp
+ /home/netipc/RobotsAndCones/catkin_ws/src/vision_opencv/cv_bridge/include/cv_bridge/cv_bridge.h
  /opt/ros/noetic/include/camera_info_manager/camera_info_manager.h
- /opt/ros/noetic/include/cv_bridge/cv_bridge.h
  /opt/ros/noetic/include/image_transport/camera_publisher.h
  /opt/ros/noetic/include/image_transport/camera_subscriber.h
  /opt/ros/noetic/include/image_transport/exception.h

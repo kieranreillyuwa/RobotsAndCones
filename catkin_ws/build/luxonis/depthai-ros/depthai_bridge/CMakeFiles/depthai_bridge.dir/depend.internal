@@ -70,7 +70,7 @@ luxonis/depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/DisparityCo
 luxonis/depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImageConverter.cpp.o
  /home/netipc/RobotsAndCones/catkin_ws/src/luxonis/depthai-ros/depthai_bridge/include/depthai_bridge/ImageConverter.hpp
  /home/netipc/RobotsAndCones/catkin_ws/src/luxonis/depthai-ros/depthai_bridge/src/ImageConverter.cpp
- /opt/ros/noetic/include/cv_bridge/cv_bridge.h
+ /home/netipc/RobotsAndCones/catkin_ws/src/vision_opencv/cv_bridge/include/cv_bridge/cv_bridge.h
  /opt/ros/noetic/include/ros/advertise_options.h
  /opt/ros/noetic/include/ros/advertise_service_options.h
  /opt/ros/noetic/include/ros/assert.h
@@ -540,7 +540,7 @@ luxonis/depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/SpatialDete
  /home/netipc/RobotsAndCones/catkin_ws/src/luxonis/depthai-ros/depthai_bridge/include/depthai_bridge/ImageConverter.hpp
  /home/netipc/RobotsAndCones/catkin_ws/src/luxonis/depthai-ros/depthai_bridge/include/depthai_bridge/SpatialDetectionConverter.hpp
  /home/netipc/RobotsAndCones/catkin_ws/src/luxonis/depthai-ros/depthai_bridge/src/SpatialDetectionConverter.cpp
- /opt/ros/noetic/include/cv_bridge/cv_bridge.h
+ /home/netipc/RobotsAndCones/catkin_ws/src/vision_opencv/cv_bridge/include/cv_bridge/cv_bridge.h
  /opt/ros/noetic/include/geometry_msgs/Point.h
  /opt/ros/noetic/include/geometry_msgs/Pose2D.h
  /opt/ros/noetic/include/ros/advertise_options.h

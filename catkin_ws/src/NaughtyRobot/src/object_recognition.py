@@ -15,6 +15,8 @@ imageInTopic  = "rgb_stereo_publisher/color/image"
 imageOutTopic = "vision"
 imageStatusTopic = "image_status"
 mainStatusTopic = "main_status"
+getImageTopic = "get_highlights"
+ackImageTopic = "ack_highlights"
 
 coneIdentifier = 0x00
 bucketIdentifier = 0x01
@@ -31,9 +33,13 @@ class ImageProcessor:
         self.mainMessagePub = rospy.Publisher(imageStatusTopic,UInt16MultiArray,queue_size=5)
         self.mainStatusSub = rospy.Subscriber(mainStatusTopic,Bool,self.StatCB)
         self.imageSub = rospy.Subscriber(imageInTopic,Image,self.ImageCB,queue_size=1)
+        self.getImage = rospy.Subscriber(getImageTopic,Bool,self.GetHighlightCB, queue_size=1)
+        self.ackPub = rospy.Publisher(ackImageTopic,Bool,queue_size=1)
         self.bridge = CvBridge()
         self.counter = 0
         self.hb_count = 0
+        self.saveImage = False
+        self.saveImageCounter = 0
 
     def StatCB(self,data):
         if(data.data == 1):
@@ -49,8 +55,12 @@ class ImageProcessor:
             cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
             self.ProcessRosImage(cv_image)
 
-            # print("here in ImageCB")
-
+    # print("here in ImageCB")
+    def GetHighlightCB(self ,data):
+        if(data.data==True)
+        {
+            self.saveImage = True;
+        }           
 
 
 
@@ -59,7 +69,10 @@ class ImageProcessor:
         #     image = CvBridge.imgmsg_to_cv2(rosImageIn,"bgr8")
         # except CvBridgeError as e:
         #     print(e)
-            
+        if(self.saveImage==True):
+            self.saveImage= False
+            cv2.imwrite('Image_' + str(saveImageCounter)+ '.jpeg',cv2_img)
+            ackPub.publish(True)
         
         #obtain hue,thicc,race from image
         hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)

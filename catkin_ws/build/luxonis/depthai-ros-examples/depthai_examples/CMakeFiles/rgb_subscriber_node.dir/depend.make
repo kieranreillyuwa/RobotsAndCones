@@ -3,7 +3,7 @@
 
 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/ros1_src/rgb_video_subscriber.cpp.o: /home/netipc/RobotsAndCones/catkin_ws/src/luxonis/depthai-ros-examples/depthai_examples/ros1_src/rgb_video_subscriber.cpp
 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/ros1_src/rgb_video_subscriber.cpp.o: /home/netipc/RobotsAndCones/catkin_ws/src/luxonis/depthai-ros/depthai_bridge/include/depthai_bridge/ImageConverter.hpp
-luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/ros1_src/rgb_video_subscriber.cpp.o: /opt/ros/noetic/include/cv_bridge/cv_bridge.h
+luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/ros1_src/rgb_video_subscriber.cpp.o: /home/netipc/RobotsAndCones/catkin_ws/src/vision_opencv/cv_bridge/include/cv_bridge/cv_bridge.h
 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/ros1_src/rgb_video_subscriber.cpp.o: /opt/ros/noetic/include/ros/advertise_options.h
 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/ros1_src/rgb_video_subscriber.cpp.o: /opt/ros/noetic/include/ros/advertise_service_options.h
 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/ros1_src/rgb_video_subscriber.cpp.o: /opt/ros/noetic/include/ros/assert.h

@@ -4,7 +4,7 @@
 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/ros1_src/rgb_video_subscriber.cpp.o
  /home/netipc/RobotsAndCones/catkin_ws/src/luxonis/depthai-ros-examples/depthai_examples/ros1_src/rgb_video_subscriber.cpp
  /home/netipc/RobotsAndCones/catkin_ws/src/luxonis/depthai-ros/depthai_bridge/include/depthai_bridge/ImageConverter.hpp
- /opt/ros/noetic/include/cv_bridge/cv_bridge.h
+ /home/netipc/RobotsAndCones/catkin_ws/src/vision_opencv/cv_bridge/include/cv_bridge/cv_bridge.h
  /opt/ros/noetic/include/ros/advertise_options.h
  /opt/ros/noetic/include/ros/advertise_service_options.h
  /opt/ros/noetic/include/ros/assert.h

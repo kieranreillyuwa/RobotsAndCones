@@ -69,7 +69,7 @@ luxonis/depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/DisparityCo
 
 luxonis/depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImageConverter.cpp.o: /home/netipc/RobotsAndCones/catkin_ws/src/luxonis/depthai-ros/depthai_bridge/include/depthai_bridge/ImageConverter.hpp
 luxonis/depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImageConverter.cpp.o: /home/netipc/RobotsAndCones/catkin_ws/src/luxonis/depthai-ros/depthai_bridge/src/ImageConverter.cpp
-luxonis/depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImageConverter.cpp.o: /opt/ros/noetic/include/cv_bridge/cv_bridge.h
+luxonis/depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImageConverter.cpp.o: /home/netipc/RobotsAndCones/catkin_ws/src/vision_opencv/cv_bridge/include/cv_bridge/cv_bridge.h
 luxonis/depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImageConverter.cpp.o: /opt/ros/noetic/include/ros/advertise_options.h
 luxonis/depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImageConverter.cpp.o: /opt/ros/noetic/include/ros/advertise_service_options.h
 luxonis/depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/ImageConverter.cpp.o: /opt/ros/noetic/include/ros/assert.h
@@ -539,7 +539,7 @@ luxonis/depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/SpatialDete
 luxonis/depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/SpatialDetectionConverter.cpp.o: /home/netipc/RobotsAndCones/catkin_ws/src/luxonis/depthai-ros/depthai_bridge/include/depthai_bridge/ImageConverter.hpp
 luxonis/depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/SpatialDetectionConverter.cpp.o: /home/netipc/RobotsAndCones/catkin_ws/src/luxonis/depthai-ros/depthai_bridge/include/depthai_bridge/SpatialDetectionConverter.hpp
 luxonis/depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/SpatialDetectionConverter.cpp.o: /home/netipc/RobotsAndCones/catkin_ws/src/luxonis/depthai-ros/depthai_bridge/src/SpatialDetectionConverter.cpp
-luxonis/depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/SpatialDetectionConverter.cpp.o: /opt/ros/noetic/include/cv_bridge/cv_bridge.h
+luxonis/depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/SpatialDetectionConverter.cpp.o: /home/netipc/RobotsAndCones/catkin_ws/src/vision_opencv/cv_bridge/include/cv_bridge/cv_bridge.h
 luxonis/depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/SpatialDetectionConverter.cpp.o: /opt/ros/noetic/include/geometry_msgs/Point.h
 luxonis/depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/SpatialDetectionConverter.cpp.o: /opt/ros/noetic/include/geometry_msgs/Pose2D.h
 luxonis/depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/src/SpatialDetectionConverter.cpp.o: /opt/ros/noetic/include/ros/advertise_options.h
