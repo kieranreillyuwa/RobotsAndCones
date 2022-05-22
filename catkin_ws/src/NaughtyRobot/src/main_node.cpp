@@ -15,7 +15,7 @@
 #define IMG_HEIGHT 720 // for depth
 #define IMG_WIDTH 1280 // for depth
 
-#define ZERO_OFFSET -1*M_PI/180
+#define ZERO_OFFSET 0//-1*M_PI/180
 
 #define GPS_RES 20
 #define LOCALISE_DIST 20

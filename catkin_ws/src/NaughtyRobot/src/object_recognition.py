@@ -51,8 +51,8 @@ class ImageProcessor:
         self.counter+=1
         if self.process and self.counter%5==0:
             print("heartbeat " + str(self.hb_count) + "\n")
-            self.hb_count+=1
             cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
+            self.hb_count+=1
             self.ProcessRosImage(cv_image)
 
     # print("here in ImageCB")
@@ -72,6 +72,7 @@ class ImageProcessor:
             print("Saving image....\n")
             self.saveImage= False
             cv2.imwrite('/home/netipc/RobotsAndCones/screenshots/Image_' + str(self.saveImageCounter)+ '.jpeg',image)
+            self.saveImageCounter+=1
             self.ackPub.publish(True)
         
         #obtain hue,thicc,race from image
@@ -89,7 +90,7 @@ class ImageProcessor:
 
         #create the image with filtered colours
         # mask1 = cv2.inRange(hsv, lower_red1, upper_red1)
-        mask1 = cv2.inRange(hsv, (0,100,50), (5,255,255))
+        mask1 = cv2.inRange(hsv, (0,100,80), (5,255,255))
         mask2 = cv2.inRange(hsv, (177,100,120), (181,255,255))
 
 
