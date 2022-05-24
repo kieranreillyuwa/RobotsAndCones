@@ -14,24 +14,18 @@ from sensor_msgs.msg import Image
 imageInTopic  = "rgb_stereo_publisher/color/image"
 imageOutTopic = "vision"
 imageStatusTopic = "image_status"
-mainStatusTopic = "main_status"
 getImageTopic = "get_highlights"
 ackImageTopic = "ack_highlights"
 
 coneIdentifier = 0x00
 bucketIdentifier = 0x01
 
-counter = 0
-
-
 
 class ImageProcessor:
 
     def __init__(self):
-        self.process = True
         self.imageOutPub = rospy.Publisher(imageOutTopic,Image, queue_size=5)
         self.mainMessagePub = rospy.Publisher(imageStatusTopic,UInt16MultiArray,queue_size=5)
-        self.mainStatusSub = rospy.Subscriber(mainStatusTopic,Bool,self.StatCB)
         self.imageSub = rospy.Subscriber(imageInTopic,Image,self.ImageCB,queue_size=1)
         self.getImage = rospy.Subscriber(getImageTopic,Bool,self.GetHighlightCB, queue_size=1)
         self.ackPub = rospy.Publisher(ackImageTopic,Bool,queue_size=1)
@@ -41,15 +35,10 @@ class ImageProcessor:
         self.saveImage = False
         self.saveImageCounter = 0
 
-    def StatCB(self,data):
-        if(data.data == 1):
-            self.process = True
-        else:
-            self.process = False
 
     def ImageCB(self,data):
         self.counter+=1
-        if self.process and self.counter%5==0:
+        if self.counter%5==0:
             print("heartbeat " + str(self.hb_count) + "\n")
             cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
             self.hb_count+=1
