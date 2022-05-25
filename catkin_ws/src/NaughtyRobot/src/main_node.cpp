@@ -191,7 +191,7 @@ void GpsCallBack(const sensor_msgs::NavSatFixConstPtr &msg)
         {
             collectionArr[glbGpsCounter] = *msg;
 
-            ROS_INFO("CA Latitude: %.9f, Longitude: %.9f", collectionArr[glbGpsCounter].latitude, collectionArr[glbGpsCounter].longitude);
+            ROS_INFO("Localising Latitude: %.9f, Longitude: %.9f", collectionArr[glbGpsCounter].latitude, collectionArr[glbGpsCounter].longitude);
         }
         else
         {
@@ -333,7 +333,7 @@ void ImageStatusCallback(const std_msgs::UInt16MultiArrayConstPtr &msg)
         }
     }
     coneFound = false;
-    bucketFound = false;
+    // bucketFound = false;
 }
 
 struct DepthData_t
@@ -463,6 +463,7 @@ int main(int argc, char **argv)
     double roughHeading;
     double distToGoal;
     bool gotTheCone = false;
+    bool bucketWasFound = false;
     std_msgs::Bool msgOut;
     while (ros::ok())
     {
@@ -760,6 +761,8 @@ int main(int argc, char **argv)
             break;
 
         case SEARCH_BUCKET:
+            bucketFound = false;
+
             printf("Searching for bucket...\n");
             Rotate(-M_PI_4, &cmdVelPub, &rate);
             heading -= M_PI_4;
@@ -788,21 +791,24 @@ int main(int argc, char **argv)
                 {
                     printf("bucket has been found...\n");
                     mainState = IMAGE_BUCKET;
+                    bucketFound = false;
+                    bucketWasFound = true;
                     break;
                 }
                 Rotate(BUCKET_TURN_RES_RAD, &cmdVelPub, &rate);
                 startTime = ros::Time::now();
-                while (ros::Time::now() - startTime < ros::Duration(5.0))
+                while (ros::Time::now() - startTime < ros::Duration(1.0))
                 {
                     ros::spinOnce();
                     rate.sleep();
                 }
             }
 
-            Rotate(M_PI, &cmdVelPub, &rate, 0.5);
+            if(!bucketWasFound){
+            Rotate(M_PI - M_PI_4, &cmdVelPub, &rate, 0.5);
             mainState = LOCALISE;
             localiseState = GET_POS1;
-            goalPos = goalCoords[c++];
+            goalPos = goalCoords[c++];}
 
             // if (cantFind)
             // {

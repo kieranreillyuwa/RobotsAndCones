@@ -79,7 +79,7 @@ class ImageProcessor:
 
         #create the image with filtered colours
         # mask1 = cv2.inRange(hsv, lower_red1, upper_red1)
-        mask1 = cv2.inRange(hsv, (0,100,80), (5,255,255))
+        mask1 = cv2.inRange(hsv, (0,150 ,100), (5,255,255))
         mask2 = cv2.inRange(hsv, (177,100,120), (181,255,255))
 
 
@@ -116,7 +116,7 @@ class ImageProcessor:
                 #what percentage of pixelse in box are a specific colour
                 ratio = shade*100//h//w
                 # print("Ratio is "+str(ratio)+"\n")
-                if ratio<=50:
+                if ratio<=43:
                     print("Red Cone Detected")
                     cv2.rectangle(image, (x, y), (x + w, y + h), (255,0,255), 2)
                     cv2.putText(image, 'Cone', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (36,12,255), 2)
@@ -153,7 +153,7 @@ class ImageProcessor:
 
                     msgToSend = UInt16MultiArray()
                     msgToSend.data = [0,0,0,0,0,0]
-                    msgToSend.data[0] = coneIdentifier
+                    msgToSend.data[0] = bucketIdentifier
                     msgToSend.data[1] = buckpos_x
                     msgToSend.data[2] = buckpos_y
                     msgToSend.data[3] = w

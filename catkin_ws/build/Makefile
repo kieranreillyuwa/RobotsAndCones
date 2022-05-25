@@ -294,7 +294,7 @@ _catkin_empty_exported_target: cmake_check_build_system
 
 # fast build rule for target.
 _catkin_empty_exported_target/fast:
-	$(MAKE) -f vision_opencv/opencv_tests/CMakeFiles/_catkin_empty_exported_target.dir/build.make vision_opencv/opencv_tests/CMakeFiles/_catkin_empty_exported_target.dir/build
+	$(MAKE) -f joystick_drivers/joystick_drivers/CMakeFiles/_catkin_empty_exported_target.dir/build.make joystick_drivers/joystick_drivers/CMakeFiles/_catkin_empty_exported_target.dir/build
 .PHONY : _catkin_empty_exported_target/fast
 
 #=============================================================================
@@ -935,69 +935,17 @@ image_geometry-utest-equi/fast:
 .PHONY : image_geometry-utest-equi/fast
 
 #=============================================================================
-# Target rules for targets named obstacle_avoidance
+# Target rules for targets named diagnostic_msgs_generate_messages_cpp
 
 # Build rule for target.
-obstacle_avoidance: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 obstacle_avoidance
-.PHONY : obstacle_avoidance
+diagnostic_msgs_generate_messages_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 diagnostic_msgs_generate_messages_cpp
+.PHONY : diagnostic_msgs_generate_messages_cpp
 
 # fast build rule for target.
-obstacle_avoidance/fast:
-	$(MAKE) -f NaughtyRobot/CMakeFiles/obstacle_avoidance.dir/build.make NaughtyRobot/CMakeFiles/obstacle_avoidance.dir/build
-.PHONY : obstacle_avoidance/fast
-
-#=============================================================================
-# Target rules for targets named gps_testing
-
-# Build rule for target.
-gps_testing: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 gps_testing
-.PHONY : gps_testing
-
-# fast build rule for target.
-gps_testing/fast:
-	$(MAKE) -f NaughtyRobot/CMakeFiles/gps_testing.dir/build.make NaughtyRobot/CMakeFiles/gps_testing.dir/build
-.PHONY : gps_testing/fast
-
-#=============================================================================
-# Target rules for targets named main_node
-
-# Build rule for target.
-main_node: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 main_node
-.PHONY : main_node
-
-# fast build rule for target.
-main_node/fast:
-	$(MAKE) -f NaughtyRobot/CMakeFiles/main_node.dir/build.make NaughtyRobot/CMakeFiles/main_node.dir/build
-.PHONY : main_node/fast
-
-#=============================================================================
-# Target rules for targets named tf2_msgs_generate_messages_py
-
-# Build rule for target.
-tf2_msgs_generate_messages_py: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 tf2_msgs_generate_messages_py
-.PHONY : tf2_msgs_generate_messages_py
-
-# fast build rule for target.
-tf2_msgs_generate_messages_py/fast:
-	$(MAKE) -f NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_py.dir/build.make NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_py.dir/build
-.PHONY : tf2_msgs_generate_messages_py/fast
-
-#=============================================================================
-# Target rules for targets named tf_generate_messages_lisp
-
-# Build rule for target.
-tf_generate_messages_lisp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 tf_generate_messages_lisp
-.PHONY : tf_generate_messages_lisp
-
-# fast build rule for target.
-tf_generate_messages_lisp/fast:
-	$(MAKE) -f NaughtyRobot/CMakeFiles/tf_generate_messages_lisp.dir/build.make NaughtyRobot/CMakeFiles/tf_generate_messages_lisp.dir/build
-.PHONY : tf_generate_messages_lisp/fast
+diagnostic_msgs_generate_messages_cpp/fast:
+	$(MAKE) -f joystick_drivers/joy/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/build.make joystick_drivers/joy/CMakeFiles/diagnostic_msgs_generate_messages_cpp.dir/build
+.PHONY : diagnostic_msgs_generate_messages_cpp/fast
 
 #=============================================================================
 # Target rules for targets named rosgraph_msgs_generate_messages_py
@@ -1009,21 +957,47 @@ rosgraph_msgs_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_py/fast:
-	$(MAKE) -f NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
+	$(MAKE) -f joystick_drivers/joy/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make joystick_drivers/joy/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
 .PHONY : rosgraph_msgs_generate_messages_py/fast
 
 #=============================================================================
-# Target rules for targets named tf2_msgs_generate_messages_lisp
+# Target rules for targets named roscpp_generate_messages_lisp
 
 # Build rule for target.
-tf2_msgs_generate_messages_lisp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 tf2_msgs_generate_messages_lisp
-.PHONY : tf2_msgs_generate_messages_lisp
+roscpp_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 roscpp_generate_messages_lisp
+.PHONY : roscpp_generate_messages_lisp
 
 # fast build rule for target.
-tf2_msgs_generate_messages_lisp/fast:
-	$(MAKE) -f NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build.make NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build
-.PHONY : tf2_msgs_generate_messages_lisp/fast
+roscpp_generate_messages_lisp/fast:
+	$(MAKE) -f joystick_drivers/joy/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make joystick_drivers/joy/CMakeFiles/roscpp_generate_messages_lisp.dir/build
+.PHONY : roscpp_generate_messages_lisp/fast
+
+#=============================================================================
+# Target rules for targets named diagnostic_msgs_generate_messages_lisp
+
+# Build rule for target.
+diagnostic_msgs_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 diagnostic_msgs_generate_messages_lisp
+.PHONY : diagnostic_msgs_generate_messages_lisp
+
+# fast build rule for target.
+diagnostic_msgs_generate_messages_lisp/fast:
+	$(MAKE) -f joystick_drivers/joy/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/build.make joystick_drivers/joy/CMakeFiles/diagnostic_msgs_generate_messages_lisp.dir/build
+.PHONY : diagnostic_msgs_generate_messages_lisp/fast
+
+#=============================================================================
+# Target rules for targets named rosgraph_msgs_generate_messages_lisp
+
+# Build rule for target.
+rosgraph_msgs_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 rosgraph_msgs_generate_messages_lisp
+.PHONY : rosgraph_msgs_generate_messages_lisp
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_lisp/fast:
+	$(MAKE) -f joystick_drivers/joy/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make joystick_drivers/joy/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
+.PHONY : rosgraph_msgs_generate_messages_lisp/fast
 
 #=============================================================================
 # Target rules for targets named rosgraph_msgs_generate_messages_eus
@@ -1035,21 +1009,372 @@ rosgraph_msgs_generate_messages_eus: cmake_check_build_system
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_eus/fast:
-	$(MAKE) -f NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
+	$(MAKE) -f joystick_drivers/joy/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make joystick_drivers/joy/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
 .PHONY : rosgraph_msgs_generate_messages_eus/fast
 
 #=============================================================================
-# Target rules for targets named tf_generate_messages_cpp
+# Target rules for targets named _run_tests_joy
 
 # Build rule for target.
-tf_generate_messages_cpp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 tf_generate_messages_cpp
-.PHONY : tf_generate_messages_cpp
+_run_tests_joy: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _run_tests_joy
+.PHONY : _run_tests_joy
 
 # fast build rule for target.
-tf_generate_messages_cpp/fast:
-	$(MAKE) -f NaughtyRobot/CMakeFiles/tf_generate_messages_cpp.dir/build.make NaughtyRobot/CMakeFiles/tf_generate_messages_cpp.dir/build
-.PHONY : tf_generate_messages_cpp/fast
+_run_tests_joy/fast:
+	$(MAKE) -f joystick_drivers/joy/CMakeFiles/_run_tests_joy.dir/build.make joystick_drivers/joy/CMakeFiles/_run_tests_joy.dir/build
+.PHONY : _run_tests_joy/fast
+
+#=============================================================================
+# Target rules for targets named roscpp_generate_messages_nodejs
+
+# Build rule for target.
+roscpp_generate_messages_nodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 roscpp_generate_messages_nodejs
+.PHONY : roscpp_generate_messages_nodejs
+
+# fast build rule for target.
+roscpp_generate_messages_nodejs/fast:
+	$(MAKE) -f joystick_drivers/joy/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make joystick_drivers/joy/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
+.PHONY : roscpp_generate_messages_nodejs/fast
+
+#=============================================================================
+# Target rules for targets named diagnostic_msgs_generate_messages_py
+
+# Build rule for target.
+diagnostic_msgs_generate_messages_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 diagnostic_msgs_generate_messages_py
+.PHONY : diagnostic_msgs_generate_messages_py
+
+# fast build rule for target.
+diagnostic_msgs_generate_messages_py/fast:
+	$(MAKE) -f joystick_drivers/joy/CMakeFiles/diagnostic_msgs_generate_messages_py.dir/build.make joystick_drivers/joy/CMakeFiles/diagnostic_msgs_generate_messages_py.dir/build
+.PHONY : diagnostic_msgs_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named roslint_joy
+
+# Build rule for target.
+roslint_joy: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 roslint_joy
+.PHONY : roslint_joy
+
+# fast build rule for target.
+roslint_joy/fast:
+	$(MAKE) -f joystick_drivers/joy/CMakeFiles/roslint_joy.dir/build.make joystick_drivers/joy/CMakeFiles/roslint_joy.dir/build
+.PHONY : roslint_joy/fast
+
+#=============================================================================
+# Target rules for targets named diagnostic_msgs_generate_messages_eus
+
+# Build rule for target.
+diagnostic_msgs_generate_messages_eus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 diagnostic_msgs_generate_messages_eus
+.PHONY : diagnostic_msgs_generate_messages_eus
+
+# fast build rule for target.
+diagnostic_msgs_generate_messages_eus/fast:
+	$(MAKE) -f joystick_drivers/joy/CMakeFiles/diagnostic_msgs_generate_messages_eus.dir/build.make joystick_drivers/joy/CMakeFiles/diagnostic_msgs_generate_messages_eus.dir/build
+.PHONY : diagnostic_msgs_generate_messages_eus/fast
+
+#=============================================================================
+# Target rules for targets named run_tests_joy_roslint
+
+# Build rule for target.
+run_tests_joy_roslint: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 run_tests_joy_roslint
+.PHONY : run_tests_joy_roslint
+
+# fast build rule for target.
+run_tests_joy_roslint/fast:
+	$(MAKE) -f joystick_drivers/joy/CMakeFiles/run_tests_joy_roslint.dir/build.make joystick_drivers/joy/CMakeFiles/run_tests_joy_roslint.dir/build
+.PHONY : run_tests_joy_roslint/fast
+
+#=============================================================================
+# Target rules for targets named roscpp_generate_messages_py
+
+# Build rule for target.
+roscpp_generate_messages_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 roscpp_generate_messages_py
+.PHONY : roscpp_generate_messages_py
+
+# fast build rule for target.
+roscpp_generate_messages_py/fast:
+	$(MAKE) -f joystick_drivers/joy/CMakeFiles/roscpp_generate_messages_py.dir/build.make joystick_drivers/joy/CMakeFiles/roscpp_generate_messages_py.dir/build
+.PHONY : roscpp_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named rosgraph_msgs_generate_messages_nodejs
+
+# Build rule for target.
+rosgraph_msgs_generate_messages_nodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 rosgraph_msgs_generate_messages_nodejs
+.PHONY : rosgraph_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_nodejs/fast:
+	$(MAKE) -f joystick_drivers/joy/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make joystick_drivers/joy/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
+.PHONY : rosgraph_msgs_generate_messages_nodejs/fast
+
+#=============================================================================
+# Target rules for targets named joy_node
+
+# Build rule for target.
+joy_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 joy_node
+.PHONY : joy_node
+
+# fast build rule for target.
+joy_node/fast:
+	$(MAKE) -f joystick_drivers/joy/CMakeFiles/joy_node.dir/build.make joystick_drivers/joy/CMakeFiles/joy_node.dir/build
+.PHONY : joy_node/fast
+
+#=============================================================================
+# Target rules for targets named roscpp_generate_messages_cpp
+
+# Build rule for target.
+roscpp_generate_messages_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 roscpp_generate_messages_cpp
+.PHONY : roscpp_generate_messages_cpp
+
+# fast build rule for target.
+roscpp_generate_messages_cpp/fast:
+	$(MAKE) -f joystick_drivers/joy/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make joystick_drivers/joy/CMakeFiles/roscpp_generate_messages_cpp.dir/build
+.PHONY : roscpp_generate_messages_cpp/fast
+
+#=============================================================================
+# Target rules for targets named diagnostic_msgs_generate_messages_nodejs
+
+# Build rule for target.
+diagnostic_msgs_generate_messages_nodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 diagnostic_msgs_generate_messages_nodejs
+.PHONY : diagnostic_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+diagnostic_msgs_generate_messages_nodejs/fast:
+	$(MAKE) -f joystick_drivers/joy/CMakeFiles/diagnostic_msgs_generate_messages_nodejs.dir/build.make joystick_drivers/joy/CMakeFiles/diagnostic_msgs_generate_messages_nodejs.dir/build
+.PHONY : diagnostic_msgs_generate_messages_nodejs/fast
+
+#=============================================================================
+# Target rules for targets named roslint
+
+# Build rule for target.
+roslint: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 roslint
+.PHONY : roslint
+
+# fast build rule for target.
+roslint/fast:
+	$(MAKE) -f joystick_drivers/joy/CMakeFiles/roslint.dir/build.make joystick_drivers/joy/CMakeFiles/roslint.dir/build
+.PHONY : roslint/fast
+
+#=============================================================================
+# Target rules for targets named run_tests_joy
+
+# Build rule for target.
+run_tests_joy: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 run_tests_joy
+.PHONY : run_tests_joy
+
+# fast build rule for target.
+run_tests_joy/fast:
+	$(MAKE) -f joystick_drivers/joy/CMakeFiles/run_tests_joy.dir/build.make joystick_drivers/joy/CMakeFiles/run_tests_joy.dir/build
+.PHONY : run_tests_joy/fast
+
+#=============================================================================
+# Target rules for targets named _run_tests_joy_roslint
+
+# Build rule for target.
+_run_tests_joy_roslint: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _run_tests_joy_roslint
+.PHONY : _run_tests_joy_roslint
+
+# fast build rule for target.
+_run_tests_joy_roslint/fast:
+	$(MAKE) -f joystick_drivers/joy/CMakeFiles/_run_tests_joy_roslint.dir/build.make joystick_drivers/joy/CMakeFiles/_run_tests_joy_roslint.dir/build
+.PHONY : _run_tests_joy_roslint/fast
+
+#=============================================================================
+# Target rules for targets named run_tests_joy_roslint_package
+
+# Build rule for target.
+run_tests_joy_roslint_package: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 run_tests_joy_roslint_package
+.PHONY : run_tests_joy_roslint_package
+
+# fast build rule for target.
+run_tests_joy_roslint_package/fast:
+	$(MAKE) -f joystick_drivers/joy/CMakeFiles/run_tests_joy_roslint_package.dir/build.make joystick_drivers/joy/CMakeFiles/run_tests_joy_roslint_package.dir/build
+.PHONY : run_tests_joy_roslint_package/fast
+
+#=============================================================================
+# Target rules for targets named _run_tests_joy_roslint_package
+
+# Build rule for target.
+_run_tests_joy_roslint_package: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _run_tests_joy_roslint_package
+.PHONY : _run_tests_joy_roslint_package
+
+# fast build rule for target.
+_run_tests_joy_roslint_package/fast:
+	$(MAKE) -f joystick_drivers/joy/CMakeFiles/_run_tests_joy_roslint_package.dir/build.make joystick_drivers/joy/CMakeFiles/_run_tests_joy_roslint_package.dir/build
+.PHONY : _run_tests_joy_roslint_package/fast
+
+#=============================================================================
+# Target rules for targets named clean_test_results_joy
+
+# Build rule for target.
+clean_test_results_joy: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 clean_test_results_joy
+.PHONY : clean_test_results_joy
+
+# fast build rule for target.
+clean_test_results_joy/fast:
+	$(MAKE) -f joystick_drivers/joy/CMakeFiles/clean_test_results_joy.dir/build.make joystick_drivers/joy/CMakeFiles/clean_test_results_joy.dir/build
+.PHONY : clean_test_results_joy/fast
+
+#=============================================================================
+# Target rules for targets named roscpp_generate_messages_eus
+
+# Build rule for target.
+roscpp_generate_messages_eus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 roscpp_generate_messages_eus
+.PHONY : roscpp_generate_messages_eus
+
+# fast build rule for target.
+roscpp_generate_messages_eus/fast:
+	$(MAKE) -f joystick_drivers/joy/CMakeFiles/roscpp_generate_messages_eus.dir/build.make joystick_drivers/joy/CMakeFiles/roscpp_generate_messages_eus.dir/build
+.PHONY : roscpp_generate_messages_eus/fast
+
+#=============================================================================
+# Target rules for targets named rosgraph_msgs_generate_messages_cpp
+
+# Build rule for target.
+rosgraph_msgs_generate_messages_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 rosgraph_msgs_generate_messages_cpp
+.PHONY : rosgraph_msgs_generate_messages_cpp
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_cpp/fast:
+	$(MAKE) -f joystick_drivers/joy/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make joystick_drivers/joy/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
+.PHONY : rosgraph_msgs_generate_messages_cpp/fast
+
+#=============================================================================
+# Target rules for targets named roslint_spacenav_node
+
+# Build rule for target.
+roslint_spacenav_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 roslint_spacenav_node
+.PHONY : roslint_spacenav_node
+
+# fast build rule for target.
+roslint_spacenav_node/fast:
+	$(MAKE) -f joystick_drivers/spacenav_node/CMakeFiles/roslint_spacenav_node.dir/build.make joystick_drivers/spacenav_node/CMakeFiles/roslint_spacenav_node.dir/build
+.PHONY : roslint_spacenav_node/fast
+
+#=============================================================================
+# Target rules for targets named clean_test_results_spacenav_node
+
+# Build rule for target.
+clean_test_results_spacenav_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 clean_test_results_spacenav_node
+.PHONY : clean_test_results_spacenav_node
+
+# fast build rule for target.
+clean_test_results_spacenav_node/fast:
+	$(MAKE) -f joystick_drivers/spacenav_node/CMakeFiles/clean_test_results_spacenav_node.dir/build.make joystick_drivers/spacenav_node/CMakeFiles/clean_test_results_spacenav_node.dir/build
+.PHONY : clean_test_results_spacenav_node/fast
+
+#=============================================================================
+# Target rules for targets named spacenav_node
+
+# Build rule for target.
+spacenav_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 spacenav_node
+.PHONY : spacenav_node
+
+# fast build rule for target.
+spacenav_node/fast:
+	$(MAKE) -f joystick_drivers/spacenav_node/CMakeFiles/spacenav_node.dir/build.make joystick_drivers/spacenav_node/CMakeFiles/spacenav_node.dir/build
+.PHONY : spacenav_node/fast
+
+#=============================================================================
+# Target rules for targets named run_tests_spacenav_node_roslint_package
+
+# Build rule for target.
+run_tests_spacenav_node_roslint_package: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 run_tests_spacenav_node_roslint_package
+.PHONY : run_tests_spacenav_node_roslint_package
+
+# fast build rule for target.
+run_tests_spacenav_node_roslint_package/fast:
+	$(MAKE) -f joystick_drivers/spacenav_node/CMakeFiles/run_tests_spacenav_node_roslint_package.dir/build.make joystick_drivers/spacenav_node/CMakeFiles/run_tests_spacenav_node_roslint_package.dir/build
+.PHONY : run_tests_spacenav_node_roslint_package/fast
+
+#=============================================================================
+# Target rules for targets named run_tests_spacenav_node
+
+# Build rule for target.
+run_tests_spacenav_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 run_tests_spacenav_node
+.PHONY : run_tests_spacenav_node
+
+# fast build rule for target.
+run_tests_spacenav_node/fast:
+	$(MAKE) -f joystick_drivers/spacenav_node/CMakeFiles/run_tests_spacenav_node.dir/build.make joystick_drivers/spacenav_node/CMakeFiles/run_tests_spacenav_node.dir/build
+.PHONY : run_tests_spacenav_node/fast
+
+#=============================================================================
+# Target rules for targets named run_tests_spacenav_node_roslint
+
+# Build rule for target.
+run_tests_spacenav_node_roslint: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 run_tests_spacenav_node_roslint
+.PHONY : run_tests_spacenav_node_roslint
+
+# fast build rule for target.
+run_tests_spacenav_node_roslint/fast:
+	$(MAKE) -f joystick_drivers/spacenav_node/CMakeFiles/run_tests_spacenav_node_roslint.dir/build.make joystick_drivers/spacenav_node/CMakeFiles/run_tests_spacenav_node_roslint.dir/build
+.PHONY : run_tests_spacenav_node_roslint/fast
+
+#=============================================================================
+# Target rules for targets named _run_tests_spacenav_node_roslint
+
+# Build rule for target.
+_run_tests_spacenav_node_roslint: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _run_tests_spacenav_node_roslint
+.PHONY : _run_tests_spacenav_node_roslint
+
+# fast build rule for target.
+_run_tests_spacenav_node_roslint/fast:
+	$(MAKE) -f joystick_drivers/spacenav_node/CMakeFiles/_run_tests_spacenav_node_roslint.dir/build.make joystick_drivers/spacenav_node/CMakeFiles/_run_tests_spacenav_node_roslint.dir/build
+.PHONY : _run_tests_spacenav_node_roslint/fast
+
+#=============================================================================
+# Target rules for targets named _run_tests_spacenav_node_roslint_package
+
+# Build rule for target.
+_run_tests_spacenav_node_roslint_package: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _run_tests_spacenav_node_roslint_package
+.PHONY : _run_tests_spacenav_node_roslint_package
+
+# fast build rule for target.
+_run_tests_spacenav_node_roslint_package/fast:
+	$(MAKE) -f joystick_drivers/spacenav_node/CMakeFiles/_run_tests_spacenav_node_roslint_package.dir/build.make joystick_drivers/spacenav_node/CMakeFiles/_run_tests_spacenav_node_roslint_package.dir/build
+.PHONY : _run_tests_spacenav_node_roslint_package/fast
+
+#=============================================================================
+# Target rules for targets named _run_tests_spacenav_node
+
+# Build rule for target.
+_run_tests_spacenav_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _run_tests_spacenav_node
+.PHONY : _run_tests_spacenav_node
+
+# fast build rule for target.
+_run_tests_spacenav_node/fast:
+	$(MAKE) -f joystick_drivers/spacenav_node/CMakeFiles/_run_tests_spacenav_node.dir/build.make joystick_drivers/spacenav_node/CMakeFiles/_run_tests_spacenav_node.dir/build
+.PHONY : _run_tests_spacenav_node/fast
 
 #=============================================================================
 # Target rules for targets named actionlib_msgs_generate_messages_eus
@@ -1065,17 +1390,121 @@ actionlib_msgs_generate_messages_eus/fast:
 .PHONY : actionlib_msgs_generate_messages_eus/fast
 
 #=============================================================================
-# Target rules for targets named rosgraph_msgs_generate_messages_lisp
+# Target rules for targets named tf2_msgs_generate_messages_lisp
 
 # Build rule for target.
-rosgraph_msgs_generate_messages_lisp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 rosgraph_msgs_generate_messages_lisp
-.PHONY : rosgraph_msgs_generate_messages_lisp
+tf2_msgs_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tf2_msgs_generate_messages_lisp
+.PHONY : tf2_msgs_generate_messages_lisp
 
 # fast build rule for target.
-rosgraph_msgs_generate_messages_lisp/fast:
-	$(MAKE) -f NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
-.PHONY : rosgraph_msgs_generate_messages_lisp/fast
+tf2_msgs_generate_messages_lisp/fast:
+	$(MAKE) -f NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build.make NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build
+.PHONY : tf2_msgs_generate_messages_lisp/fast
+
+#=============================================================================
+# Target rules for targets named tf_generate_messages_py
+
+# Build rule for target.
+tf_generate_messages_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tf_generate_messages_py
+.PHONY : tf_generate_messages_py
+
+# fast build rule for target.
+tf_generate_messages_py/fast:
+	$(MAKE) -f NaughtyRobot/CMakeFiles/tf_generate_messages_py.dir/build.make NaughtyRobot/CMakeFiles/tf_generate_messages_py.dir/build
+.PHONY : tf_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named actionlib_generate_messages_nodejs
+
+# Build rule for target.
+actionlib_generate_messages_nodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 actionlib_generate_messages_nodejs
+.PHONY : actionlib_generate_messages_nodejs
+
+# fast build rule for target.
+actionlib_generate_messages_nodejs/fast:
+	$(MAKE) -f NaughtyRobot/CMakeFiles/actionlib_generate_messages_nodejs.dir/build.make NaughtyRobot/CMakeFiles/actionlib_generate_messages_nodejs.dir/build
+.PHONY : actionlib_generate_messages_nodejs/fast
+
+#=============================================================================
+# Target rules for targets named actionlib_msgs_generate_messages_cpp
+
+# Build rule for target.
+actionlib_msgs_generate_messages_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 actionlib_msgs_generate_messages_cpp
+.PHONY : actionlib_msgs_generate_messages_cpp
+
+# fast build rule for target.
+actionlib_msgs_generate_messages_cpp/fast:
+	$(MAKE) -f NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build
+.PHONY : actionlib_msgs_generate_messages_cpp/fast
+
+#=============================================================================
+# Target rules for targets named actionlib_generate_messages_eus
+
+# Build rule for target.
+actionlib_generate_messages_eus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 actionlib_generate_messages_eus
+.PHONY : actionlib_generate_messages_eus
+
+# fast build rule for target.
+actionlib_generate_messages_eus/fast:
+	$(MAKE) -f NaughtyRobot/CMakeFiles/actionlib_generate_messages_eus.dir/build.make NaughtyRobot/CMakeFiles/actionlib_generate_messages_eus.dir/build
+.PHONY : actionlib_generate_messages_eus/fast
+
+#=============================================================================
+# Target rules for targets named gps_testing
+
+# Build rule for target.
+gps_testing: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gps_testing
+.PHONY : gps_testing
+
+# fast build rule for target.
+gps_testing/fast:
+	$(MAKE) -f NaughtyRobot/CMakeFiles/gps_testing.dir/build.make NaughtyRobot/CMakeFiles/gps_testing.dir/build
+.PHONY : gps_testing/fast
+
+#=============================================================================
+# Target rules for targets named actionlib_generate_messages_lisp
+
+# Build rule for target.
+actionlib_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 actionlib_generate_messages_lisp
+.PHONY : actionlib_generate_messages_lisp
+
+# fast build rule for target.
+actionlib_generate_messages_lisp/fast:
+	$(MAKE) -f NaughtyRobot/CMakeFiles/actionlib_generate_messages_lisp.dir/build.make NaughtyRobot/CMakeFiles/actionlib_generate_messages_lisp.dir/build
+.PHONY : actionlib_generate_messages_lisp/fast
+
+#=============================================================================
+# Target rules for targets named tf_generate_messages_nodejs
+
+# Build rule for target.
+tf_generate_messages_nodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tf_generate_messages_nodejs
+.PHONY : tf_generate_messages_nodejs
+
+# fast build rule for target.
+tf_generate_messages_nodejs/fast:
+	$(MAKE) -f NaughtyRobot/CMakeFiles/tf_generate_messages_nodejs.dir/build.make NaughtyRobot/CMakeFiles/tf_generate_messages_nodejs.dir/build
+.PHONY : tf_generate_messages_nodejs/fast
+
+#=============================================================================
+# Target rules for targets named tf_generate_messages_cpp
+
+# Build rule for target.
+tf_generate_messages_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tf_generate_messages_cpp
+.PHONY : tf_generate_messages_cpp
+
+# fast build rule for target.
+tf_generate_messages_cpp/fast:
+	$(MAKE) -f NaughtyRobot/CMakeFiles/tf_generate_messages_cpp.dir/build.make NaughtyRobot/CMakeFiles/tf_generate_messages_cpp.dir/build
+.PHONY : tf_generate_messages_cpp/fast
 
 #=============================================================================
 # Target rules for targets named actionlib_generate_messages_py
@@ -1102,214 +1531,6 @@ actionlib_msgs_generate_messages_nodejs: cmake_check_build_system
 actionlib_msgs_generate_messages_nodejs/fast:
 	$(MAKE) -f NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build.make NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build
 .PHONY : actionlib_msgs_generate_messages_nodejs/fast
-
-#=============================================================================
-# Target rules for targets named rosgraph_msgs_generate_messages_cpp
-
-# Build rule for target.
-rosgraph_msgs_generate_messages_cpp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 rosgraph_msgs_generate_messages_cpp
-.PHONY : rosgraph_msgs_generate_messages_cpp
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_cpp/fast:
-	$(MAKE) -f NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
-.PHONY : rosgraph_msgs_generate_messages_cpp/fast
-
-#=============================================================================
-# Target rules for targets named roscpp_generate_messages_nodejs
-
-# Build rule for target.
-roscpp_generate_messages_nodejs: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 roscpp_generate_messages_nodejs
-.PHONY : roscpp_generate_messages_nodejs
-
-# fast build rule for target.
-roscpp_generate_messages_nodejs/fast:
-	$(MAKE) -f NaughtyRobot/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make NaughtyRobot/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
-.PHONY : roscpp_generate_messages_nodejs/fast
-
-#=============================================================================
-# Target rules for targets named tf_generate_messages_py
-
-# Build rule for target.
-tf_generate_messages_py: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 tf_generate_messages_py
-.PHONY : tf_generate_messages_py
-
-# fast build rule for target.
-tf_generate_messages_py/fast:
-	$(MAKE) -f NaughtyRobot/CMakeFiles/tf_generate_messages_py.dir/build.make NaughtyRobot/CMakeFiles/tf_generate_messages_py.dir/build
-.PHONY : tf_generate_messages_py/fast
-
-#=============================================================================
-# Target rules for targets named roscpp_generate_messages_py
-
-# Build rule for target.
-roscpp_generate_messages_py: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 roscpp_generate_messages_py
-.PHONY : roscpp_generate_messages_py
-
-# fast build rule for target.
-roscpp_generate_messages_py/fast:
-	$(MAKE) -f NaughtyRobot/CMakeFiles/roscpp_generate_messages_py.dir/build.make NaughtyRobot/CMakeFiles/roscpp_generate_messages_py.dir/build
-.PHONY : roscpp_generate_messages_py/fast
-
-#=============================================================================
-# Target rules for targets named roscpp_generate_messages_lisp
-
-# Build rule for target.
-roscpp_generate_messages_lisp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 roscpp_generate_messages_lisp
-.PHONY : roscpp_generate_messages_lisp
-
-# fast build rule for target.
-roscpp_generate_messages_lisp/fast:
-	$(MAKE) -f NaughtyRobot/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make NaughtyRobot/CMakeFiles/roscpp_generate_messages_lisp.dir/build
-.PHONY : roscpp_generate_messages_lisp/fast
-
-#=============================================================================
-# Target rules for targets named actionlib_generate_messages_lisp
-
-# Build rule for target.
-actionlib_generate_messages_lisp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 actionlib_generate_messages_lisp
-.PHONY : actionlib_generate_messages_lisp
-
-# fast build rule for target.
-actionlib_generate_messages_lisp/fast:
-	$(MAKE) -f NaughtyRobot/CMakeFiles/actionlib_generate_messages_lisp.dir/build.make NaughtyRobot/CMakeFiles/actionlib_generate_messages_lisp.dir/build
-.PHONY : actionlib_generate_messages_lisp/fast
-
-#=============================================================================
-# Target rules for targets named roscpp_generate_messages_cpp
-
-# Build rule for target.
-roscpp_generate_messages_cpp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 roscpp_generate_messages_cpp
-.PHONY : roscpp_generate_messages_cpp
-
-# fast build rule for target.
-roscpp_generate_messages_cpp/fast:
-	$(MAKE) -f NaughtyRobot/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make NaughtyRobot/CMakeFiles/roscpp_generate_messages_cpp.dir/build
-.PHONY : roscpp_generate_messages_cpp/fast
-
-#=============================================================================
-# Target rules for targets named tf_generate_messages_nodejs
-
-# Build rule for target.
-tf_generate_messages_nodejs: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 tf_generate_messages_nodejs
-.PHONY : tf_generate_messages_nodejs
-
-# fast build rule for target.
-tf_generate_messages_nodejs/fast:
-	$(MAKE) -f NaughtyRobot/CMakeFiles/tf_generate_messages_nodejs.dir/build.make NaughtyRobot/CMakeFiles/tf_generate_messages_nodejs.dir/build
-.PHONY : tf_generate_messages_nodejs/fast
-
-#=============================================================================
-# Target rules for targets named roscpp_generate_messages_eus
-
-# Build rule for target.
-roscpp_generate_messages_eus: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 roscpp_generate_messages_eus
-.PHONY : roscpp_generate_messages_eus
-
-# fast build rule for target.
-roscpp_generate_messages_eus/fast:
-	$(MAKE) -f NaughtyRobot/CMakeFiles/roscpp_generate_messages_eus.dir/build.make NaughtyRobot/CMakeFiles/roscpp_generate_messages_eus.dir/build
-.PHONY : roscpp_generate_messages_eus/fast
-
-#=============================================================================
-# Target rules for targets named tf2_msgs_generate_messages_eus
-
-# Build rule for target.
-tf2_msgs_generate_messages_eus: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 tf2_msgs_generate_messages_eus
-.PHONY : tf2_msgs_generate_messages_eus
-
-# fast build rule for target.
-tf2_msgs_generate_messages_eus/fast:
-	$(MAKE) -f NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build.make NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build
-.PHONY : tf2_msgs_generate_messages_eus/fast
-
-#=============================================================================
-# Target rules for targets named actionlib_generate_messages_nodejs
-
-# Build rule for target.
-actionlib_generate_messages_nodejs: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 actionlib_generate_messages_nodejs
-.PHONY : actionlib_generate_messages_nodejs
-
-# fast build rule for target.
-actionlib_generate_messages_nodejs/fast:
-	$(MAKE) -f NaughtyRobot/CMakeFiles/actionlib_generate_messages_nodejs.dir/build.make NaughtyRobot/CMakeFiles/actionlib_generate_messages_nodejs.dir/build
-.PHONY : actionlib_generate_messages_nodejs/fast
-
-#=============================================================================
-# Target rules for targets named actionlib_generate_messages_eus
-
-# Build rule for target.
-actionlib_generate_messages_eus: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 actionlib_generate_messages_eus
-.PHONY : actionlib_generate_messages_eus
-
-# fast build rule for target.
-actionlib_generate_messages_eus/fast:
-	$(MAKE) -f NaughtyRobot/CMakeFiles/actionlib_generate_messages_eus.dir/build.make NaughtyRobot/CMakeFiles/actionlib_generate_messages_eus.dir/build
-.PHONY : actionlib_generate_messages_eus/fast
-
-#=============================================================================
-# Target rules for targets named actionlib_msgs_generate_messages_cpp
-
-# Build rule for target.
-actionlib_msgs_generate_messages_cpp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 actionlib_msgs_generate_messages_cpp
-.PHONY : actionlib_msgs_generate_messages_cpp
-
-# fast build rule for target.
-actionlib_msgs_generate_messages_cpp/fast:
-	$(MAKE) -f NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build
-.PHONY : actionlib_msgs_generate_messages_cpp/fast
-
-#=============================================================================
-# Target rules for targets named gps_heading
-
-# Build rule for target.
-gps_heading: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 gps_heading
-.PHONY : gps_heading
-
-# fast build rule for target.
-gps_heading/fast:
-	$(MAKE) -f NaughtyRobot/CMakeFiles/gps_heading.dir/build.make NaughtyRobot/CMakeFiles/gps_heading.dir/build
-.PHONY : gps_heading/fast
-
-#=============================================================================
-# Target rules for targets named actionlib_msgs_generate_messages_lisp
-
-# Build rule for target.
-actionlib_msgs_generate_messages_lisp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 actionlib_msgs_generate_messages_lisp
-.PHONY : actionlib_msgs_generate_messages_lisp
-
-# fast build rule for target.
-actionlib_msgs_generate_messages_lisp/fast:
-	$(MAKE) -f NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build
-.PHONY : actionlib_msgs_generate_messages_lisp/fast
-
-#=============================================================================
-# Target rules for targets named rosgraph_msgs_generate_messages_nodejs
-
-# Build rule for target.
-rosgraph_msgs_generate_messages_nodejs: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 rosgraph_msgs_generate_messages_nodejs
-.PHONY : rosgraph_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_nodejs/fast:
-	$(MAKE) -f NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make NaughtyRobot/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
-.PHONY : rosgraph_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
 # Target rules for targets named actionlib_generate_messages_cpp
@@ -1375,6 +1596,97 @@ tf2_msgs_generate_messages_nodejs: cmake_check_build_system
 tf2_msgs_generate_messages_nodejs/fast:
 	$(MAKE) -f NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/build.make NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/build
 .PHONY : tf2_msgs_generate_messages_nodejs/fast
+
+#=============================================================================
+# Target rules for targets named actionlib_msgs_generate_messages_lisp
+
+# Build rule for target.
+actionlib_msgs_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 actionlib_msgs_generate_messages_lisp
+.PHONY : actionlib_msgs_generate_messages_lisp
+
+# fast build rule for target.
+actionlib_msgs_generate_messages_lisp/fast:
+	$(MAKE) -f NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make NaughtyRobot/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build
+.PHONY : actionlib_msgs_generate_messages_lisp/fast
+
+#=============================================================================
+# Target rules for targets named gps_heading
+
+# Build rule for target.
+gps_heading: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gps_heading
+.PHONY : gps_heading
+
+# fast build rule for target.
+gps_heading/fast:
+	$(MAKE) -f NaughtyRobot/CMakeFiles/gps_heading.dir/build.make NaughtyRobot/CMakeFiles/gps_heading.dir/build
+.PHONY : gps_heading/fast
+
+#=============================================================================
+# Target rules for targets named tf2_msgs_generate_messages_py
+
+# Build rule for target.
+tf2_msgs_generate_messages_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tf2_msgs_generate_messages_py
+.PHONY : tf2_msgs_generate_messages_py
+
+# fast build rule for target.
+tf2_msgs_generate_messages_py/fast:
+	$(MAKE) -f NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_py.dir/build.make NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_py.dir/build
+.PHONY : tf2_msgs_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named main_node
+
+# Build rule for target.
+main_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 main_node
+.PHONY : main_node
+
+# fast build rule for target.
+main_node/fast:
+	$(MAKE) -f NaughtyRobot/CMakeFiles/main_node.dir/build.make NaughtyRobot/CMakeFiles/main_node.dir/build
+.PHONY : main_node/fast
+
+#=============================================================================
+# Target rules for targets named obstacle_avoidance
+
+# Build rule for target.
+obstacle_avoidance: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 obstacle_avoidance
+.PHONY : obstacle_avoidance
+
+# fast build rule for target.
+obstacle_avoidance/fast:
+	$(MAKE) -f NaughtyRobot/CMakeFiles/obstacle_avoidance.dir/build.make NaughtyRobot/CMakeFiles/obstacle_avoidance.dir/build
+.PHONY : obstacle_avoidance/fast
+
+#=============================================================================
+# Target rules for targets named tf_generate_messages_lisp
+
+# Build rule for target.
+tf_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tf_generate_messages_lisp
+.PHONY : tf_generate_messages_lisp
+
+# fast build rule for target.
+tf_generate_messages_lisp/fast:
+	$(MAKE) -f NaughtyRobot/CMakeFiles/tf_generate_messages_lisp.dir/build.make NaughtyRobot/CMakeFiles/tf_generate_messages_lisp.dir/build
+.PHONY : tf_generate_messages_lisp/fast
+
+#=============================================================================
+# Target rules for targets named tf2_msgs_generate_messages_eus
+
+# Build rule for target.
+tf2_msgs_generate_messages_eus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tf2_msgs_generate_messages_eus
+.PHONY : tf2_msgs_generate_messages_eus
+
+# fast build rule for target.
+tf2_msgs_generate_messages_eus/fast:
+	$(MAKE) -f NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build.make NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build
+.PHONY : tf2_msgs_generate_messages_eus/fast
 
 #=============================================================================
 # Target rules for targets named _depthai_ros_msgs_generate_messages_check_deps_NormalizedImageCrop
@@ -2072,40 +2384,64 @@ help:
 	@echo "... run_tests_image_geometry_gtest"
 	@echo "... run_tests_image_geometry_gtest_image_geometry-utest"
 	@echo "... image_geometry-utest-equi"
-	@echo "... obstacle_avoidance"
-	@echo "... gps_testing"
-	@echo "... main_node"
-	@echo "... tf2_msgs_generate_messages_py"
-	@echo "... tf_generate_messages_lisp"
+	@echo "... diagnostic_msgs_generate_messages_cpp"
 	@echo "... rosgraph_msgs_generate_messages_py"
-	@echo "... tf2_msgs_generate_messages_lisp"
-	@echo "... rosgraph_msgs_generate_messages_eus"
-	@echo "... tf_generate_messages_cpp"
-	@echo "... actionlib_msgs_generate_messages_eus"
+	@echo "... roscpp_generate_messages_lisp"
+	@echo "... diagnostic_msgs_generate_messages_lisp"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
+	@echo "... rosgraph_msgs_generate_messages_eus"
+	@echo "... _run_tests_joy"
+	@echo "... roscpp_generate_messages_nodejs"
+	@echo "... diagnostic_msgs_generate_messages_py"
+	@echo "... roslint_joy"
+	@echo "... diagnostic_msgs_generate_messages_eus"
+	@echo "... run_tests_joy_roslint"
+	@echo "... roscpp_generate_messages_py"
+	@echo "... rosgraph_msgs_generate_messages_nodejs"
+	@echo "... joy_node"
+	@echo "... roscpp_generate_messages_cpp"
+	@echo "... diagnostic_msgs_generate_messages_nodejs"
+	@echo "... roslint"
+	@echo "... run_tests_joy"
+	@echo "... _run_tests_joy_roslint"
+	@echo "... run_tests_joy_roslint_package"
+	@echo "... _run_tests_joy_roslint_package"
+	@echo "... clean_test_results_joy"
+	@echo "... roscpp_generate_messages_eus"
+	@echo "... rosgraph_msgs_generate_messages_cpp"
+	@echo "... roslint_spacenav_node"
+	@echo "... clean_test_results_spacenav_node"
+	@echo "... spacenav_node"
+	@echo "... run_tests_spacenav_node_roslint_package"
+	@echo "... run_tests_spacenav_node"
+	@echo "... run_tests_spacenav_node_roslint"
+	@echo "... _run_tests_spacenav_node_roslint"
+	@echo "... _run_tests_spacenav_node_roslint_package"
+	@echo "... _run_tests_spacenav_node"
+	@echo "... actionlib_msgs_generate_messages_eus"
+	@echo "... tf2_msgs_generate_messages_lisp"
+	@echo "... tf_generate_messages_py"
+	@echo "... actionlib_generate_messages_nodejs"
+	@echo "... actionlib_msgs_generate_messages_cpp"
+	@echo "... actionlib_generate_messages_eus"
+	@echo "... gps_testing"
+	@echo "... actionlib_generate_messages_lisp"
+	@echo "... tf_generate_messages_nodejs"
+	@echo "... tf_generate_messages_cpp"
 	@echo "... actionlib_generate_messages_py"
 	@echo "... actionlib_msgs_generate_messages_nodejs"
-	@echo "... rosgraph_msgs_generate_messages_cpp"
-	@echo "... roscpp_generate_messages_nodejs"
-	@echo "... tf_generate_messages_py"
-	@echo "... roscpp_generate_messages_py"
-	@echo "... roscpp_generate_messages_lisp"
-	@echo "... actionlib_generate_messages_lisp"
-	@echo "... roscpp_generate_messages_cpp"
-	@echo "... tf_generate_messages_nodejs"
-	@echo "... roscpp_generate_messages_eus"
-	@echo "... tf2_msgs_generate_messages_eus"
-	@echo "... actionlib_generate_messages_nodejs"
-	@echo "... actionlib_generate_messages_eus"
-	@echo "... actionlib_msgs_generate_messages_cpp"
-	@echo "... gps_heading"
-	@echo "... actionlib_msgs_generate_messages_lisp"
-	@echo "... rosgraph_msgs_generate_messages_nodejs"
 	@echo "... actionlib_generate_messages_cpp"
 	@echo "... actionlib_msgs_generate_messages_py"
 	@echo "... tf_generate_messages_eus"
 	@echo "... tf2_msgs_generate_messages_cpp"
 	@echo "... tf2_msgs_generate_messages_nodejs"
+	@echo "... actionlib_msgs_generate_messages_lisp"
+	@echo "... gps_heading"
+	@echo "... tf2_msgs_generate_messages_py"
+	@echo "... main_node"
+	@echo "... obstacle_avoidance"
+	@echo "... tf_generate_messages_lisp"
+	@echo "... tf2_msgs_generate_messages_eus"
 	@echo "... _depthai_ros_msgs_generate_messages_check_deps_NormalizedImageCrop"
 	@echo "... _depthai_ros_msgs_generate_messages_check_deps_SpatialDetection"
 	@echo "... depthai_ros_msgs_generate_messages_nodejs"
