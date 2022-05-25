@@ -60,6 +60,7 @@ all: vision_opencv/vision_opencv/all
 all: vision_opencv/cv_bridge/all
 all: vision_opencv/image_geometry/all
 all: joystick_drivers/joy/all
+all: joystick_drivers/ps3joy/all
 all: joystick_drivers/spacenav_node/all
 all: NaughtyRobot/all
 all: luxonis/depthai-ros/depthai_ros_msgs/all
@@ -76,6 +77,7 @@ preinstall: vision_opencv/vision_opencv/preinstall
 preinstall: vision_opencv/cv_bridge/preinstall
 preinstall: vision_opencv/image_geometry/preinstall
 preinstall: joystick_drivers/joy/preinstall
+preinstall: joystick_drivers/ps3joy/preinstall
 preinstall: joystick_drivers/spacenav_node/preinstall
 preinstall: NaughtyRobot/preinstall
 preinstall: luxonis/depthai-ros/depthai_ros_msgs/preinstall
@@ -97,6 +99,7 @@ clean: vision_opencv/vision_opencv/clean
 clean: vision_opencv/cv_bridge/clean
 clean: vision_opencv/image_geometry/clean
 clean: joystick_drivers/joy/clean
+clean: joystick_drivers/ps3joy/clean
 clean: joystick_drivers/spacenav_node/clean
 clean: NaughtyRobot/clean
 clean: luxonis/depthai-ros/depthai_ros_msgs/clean
@@ -265,6 +268,32 @@ joystick_drivers/joystick_drivers/preinstall:
 joystick_drivers/joystick_drivers/clean: joystick_drivers/joystick_drivers/CMakeFiles/_catkin_empty_exported_target.dir/clean
 
 .PHONY : joystick_drivers/joystick_drivers/clean
+
+#=============================================================================
+# Directory level rules for directory joystick_drivers/ps3joy
+
+# Recursive "all" directory target.
+joystick_drivers/ps3joy/all: joystick_drivers/ps3joy/CMakeFiles/sixpair.dir/all
+
+.PHONY : joystick_drivers/ps3joy/all
+
+# Recursive "preinstall" directory target.
+joystick_drivers/ps3joy/preinstall:
+
+.PHONY : joystick_drivers/ps3joy/preinstall
+
+# Recursive "clean" directory target.
+joystick_drivers/ps3joy/clean: joystick_drivers/ps3joy/CMakeFiles/roslint_ps3joy.dir/clean
+joystick_drivers/ps3joy/clean: joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint_package.dir/clean
+joystick_drivers/ps3joy/clean: joystick_drivers/ps3joy/CMakeFiles/sixpair.dir/clean
+joystick_drivers/ps3joy/clean: joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy.dir/clean
+joystick_drivers/ps3joy/clean: joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint.dir/clean
+joystick_drivers/ps3joy/clean: joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy.dir/clean
+joystick_drivers/ps3joy/clean: joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint.dir/clean
+joystick_drivers/ps3joy/clean: joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint_package.dir/clean
+joystick_drivers/ps3joy/clean: joystick_drivers/ps3joy/CMakeFiles/clean_test_results_ps3joy.dir/clean
+
+.PHONY : joystick_drivers/ps3joy/clean
 
 #=============================================================================
 # Directory level rules for directory joystick_drivers/spacenav_node
@@ -631,6 +660,7 @@ CMakeFiles/doxygen.dir/clean:
 CMakeFiles/run_tests.dir/all: vision_opencv/cv_bridge/test/CMakeFiles/_run_tests_cv_bridge.dir/all
 CMakeFiles/run_tests.dir/all: vision_opencv/image_geometry/test/CMakeFiles/_run_tests_image_geometry.dir/all
 CMakeFiles/run_tests.dir/all: joystick_drivers/joy/CMakeFiles/_run_tests_joy.dir/all
+CMakeFiles/run_tests.dir/all: joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy.dir/all
 CMakeFiles/run_tests.dir/all: joystick_drivers/spacenav_node/CMakeFiles/_run_tests_spacenav_node.dir/all
 	$(MAKE) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/depend
 	$(MAKE) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/build
@@ -745,7 +775,7 @@ gtest/googlemock/CMakeFiles/gmock_main.dir/all: gtest/googlemock/CMakeFiles/gmoc
 gtest/googlemock/CMakeFiles/gmock_main.dir/all: gtest/googletest/CMakeFiles/gtest.dir/all
 	$(MAKE) -f gtest/googlemock/CMakeFiles/gmock_main.dir/build.make gtest/googlemock/CMakeFiles/gmock_main.dir/depend
 	$(MAKE) -f gtest/googlemock/CMakeFiles/gmock_main.dir/build.make gtest/googlemock/CMakeFiles/gmock_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=60,61 "Built target gmock_main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=59,60 "Built target gmock_main"
 .PHONY : gtest/googlemock/CMakeFiles/gmock_main.dir/all
 
 # Build rule for subdir invocation for target.
@@ -772,7 +802,7 @@ gtest/googlemock/CMakeFiles/gmock_main.dir/clean:
 gtest/googlemock/CMakeFiles/gmock.dir/all: gtest/googletest/CMakeFiles/gtest.dir/all
 	$(MAKE) -f gtest/googlemock/CMakeFiles/gmock.dir/build.make gtest/googlemock/CMakeFiles/gmock.dir/depend
 	$(MAKE) -f gtest/googlemock/CMakeFiles/gmock.dir/build.make gtest/googlemock/CMakeFiles/gmock.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=58,59 "Built target gmock"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=57,58 "Built target gmock"
 .PHONY : gtest/googlemock/CMakeFiles/gmock.dir/all
 
 # Build rule for subdir invocation for target.
@@ -799,12 +829,12 @@ gtest/googlemock/CMakeFiles/gmock.dir/clean:
 gtest/googletest/CMakeFiles/gtest_main.dir/all: gtest/googletest/CMakeFiles/gtest.dir/all
 	$(MAKE) -f gtest/googletest/CMakeFiles/gtest_main.dir/build.make gtest/googletest/CMakeFiles/gtest_main.dir/depend
 	$(MAKE) -f gtest/googletest/CMakeFiles/gtest_main.dir/build.make gtest/googletest/CMakeFiles/gtest_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=68,69 "Built target gtest_main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=67 "Built target gtest_main"
 .PHONY : gtest/googletest/CMakeFiles/gtest_main.dir/all
 
 # Build rule for subdir invocation for target.
 gtest/googletest/CMakeFiles/gtest_main.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 gtest/googletest/CMakeFiles/gtest_main.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
 .PHONY : gtest/googletest/CMakeFiles/gtest_main.dir/rule
@@ -826,7 +856,7 @@ gtest/googletest/CMakeFiles/gtest_main.dir/clean:
 gtest/googletest/CMakeFiles/gtest.dir/all:
 	$(MAKE) -f gtest/googletest/CMakeFiles/gtest.dir/build.make gtest/googletest/CMakeFiles/gtest.dir/depend
 	$(MAKE) -f gtest/googletest/CMakeFiles/gtest.dir/build.make gtest/googletest/CMakeFiles/gtest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=66,67 "Built target gtest"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=65,66 "Built target gtest"
 .PHONY : gtest/googletest/CMakeFiles/gtest.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1811,7 +1841,7 @@ vision_opencv/image_geometry/CMakeFiles/image_geometry.dir/all: vision_opencv/cv
 vision_opencv/image_geometry/CMakeFiles/image_geometry.dir/all: vision_opencv/cv_bridge/CMakeFiles/std_msgs_generate_messages_cpp.dir/all
 	$(MAKE) -f vision_opencv/image_geometry/CMakeFiles/image_geometry.dir/build.make vision_opencv/image_geometry/CMakeFiles/image_geometry.dir/depend
 	$(MAKE) -f vision_opencv/image_geometry/CMakeFiles/image_geometry.dir/build.make vision_opencv/image_geometry/CMakeFiles/image_geometry.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=70,71,72 "Built target image_geometry"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=68,69,70 "Built target image_geometry"
 .PHONY : vision_opencv/image_geometry/CMakeFiles/image_geometry.dir/all
 
 # Build rule for subdir invocation for target.
@@ -2089,7 +2119,7 @@ vision_opencv/image_geometry/test/CMakeFiles/image_geometry-utest.dir/all: gtest
 vision_opencv/image_geometry/test/CMakeFiles/image_geometry-utest.dir/all: vision_opencv/image_geometry/CMakeFiles/image_geometry.dir/all
 	$(MAKE) -f vision_opencv/image_geometry/test/CMakeFiles/image_geometry-utest.dir/build.make vision_opencv/image_geometry/test/CMakeFiles/image_geometry-utest.dir/depend
 	$(MAKE) -f vision_opencv/image_geometry/test/CMakeFiles/image_geometry-utest.dir/build.make vision_opencv/image_geometry/test/CMakeFiles/image_geometry-utest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=73,74 "Built target image_geometry-utest"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=71,72 "Built target image_geometry-utest"
 .PHONY : vision_opencv/image_geometry/test/CMakeFiles/image_geometry-utest.dir/all
 
 # Build rule for subdir invocation for target.
@@ -2227,7 +2257,7 @@ vision_opencv/image_geometry/test/CMakeFiles/image_geometry-utest-equi.dir/all: 
 vision_opencv/image_geometry/test/CMakeFiles/image_geometry-utest-equi.dir/all: vision_opencv/image_geometry/CMakeFiles/image_geometry.dir/all
 	$(MAKE) -f vision_opencv/image_geometry/test/CMakeFiles/image_geometry-utest-equi.dir/build.make vision_opencv/image_geometry/test/CMakeFiles/image_geometry-utest-equi.dir/depend
 	$(MAKE) -f vision_opencv/image_geometry/test/CMakeFiles/image_geometry-utest-equi.dir/build.make vision_opencv/image_geometry/test/CMakeFiles/image_geometry-utest-equi.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=75,76 "Built target image_geometry-utest-equi"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=73,74 "Built target image_geometry-utest-equi"
 .PHONY : vision_opencv/image_geometry/test/CMakeFiles/image_geometry-utest-equi.dir/all
 
 # Build rule for subdir invocation for target.
@@ -2632,7 +2662,7 @@ joystick_drivers/joy/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/clean
 joystick_drivers/joy/CMakeFiles/joy_node.dir/all:
 	$(MAKE) -f joystick_drivers/joy/CMakeFiles/joy_node.dir/build.make joystick_drivers/joy/CMakeFiles/joy_node.dir/depend
 	$(MAKE) -f joystick_drivers/joy/CMakeFiles/joy_node.dir/build.make joystick_drivers/joy/CMakeFiles/joy_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=77,78 "Built target joy_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=75,76 "Built target joy_node"
 .PHONY : joystick_drivers/joy/CMakeFiles/joy_node.dir/all
 
 # Build rule for subdir invocation for target.
@@ -2711,6 +2741,7 @@ joystick_drivers/joy/CMakeFiles/diagnostic_msgs_generate_messages_nodejs.dir/cle
 
 # All Build rule for target.
 joystick_drivers/joy/CMakeFiles/roslint.dir/all: joystick_drivers/joy/CMakeFiles/roslint_joy.dir/all
+joystick_drivers/joy/CMakeFiles/roslint.dir/all: joystick_drivers/ps3joy/CMakeFiles/roslint_ps3joy.dir/all
 joystick_drivers/joy/CMakeFiles/roslint.dir/all: joystick_drivers/spacenav_node/CMakeFiles/roslint_spacenav_node.dir/all
 	$(MAKE) -f joystick_drivers/joy/CMakeFiles/roslint.dir/build.make joystick_drivers/joy/CMakeFiles/roslint.dir/depend
 	$(MAKE) -f joystick_drivers/joy/CMakeFiles/roslint.dir/build.make joystick_drivers/joy/CMakeFiles/roslint.dir/build
@@ -2923,6 +2954,250 @@ rosgraph_msgs_generate_messages_cpp: joystick_drivers/joy/CMakeFiles/rosgraph_ms
 joystick_drivers/joy/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/clean:
 	$(MAKE) -f joystick_drivers/joy/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make joystick_drivers/joy/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/clean
 .PHONY : joystick_drivers/joy/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/clean
+
+#=============================================================================
+# Target rules for target joystick_drivers/ps3joy/CMakeFiles/roslint_ps3joy.dir
+
+# All Build rule for target.
+joystick_drivers/ps3joy/CMakeFiles/roslint_ps3joy.dir/all:
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/roslint_ps3joy.dir/build.make joystick_drivers/ps3joy/CMakeFiles/roslint_ps3joy.dir/depend
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/roslint_ps3joy.dir/build.make joystick_drivers/ps3joy/CMakeFiles/roslint_ps3joy.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num= "Built target roslint_ps3joy"
+.PHONY : joystick_drivers/ps3joy/CMakeFiles/roslint_ps3joy.dir/all
+
+# Build rule for subdir invocation for target.
+joystick_drivers/ps3joy/CMakeFiles/roslint_ps3joy.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 joystick_drivers/ps3joy/CMakeFiles/roslint_ps3joy.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
+.PHONY : joystick_drivers/ps3joy/CMakeFiles/roslint_ps3joy.dir/rule
+
+# Convenience name for target.
+roslint_ps3joy: joystick_drivers/ps3joy/CMakeFiles/roslint_ps3joy.dir/rule
+
+.PHONY : roslint_ps3joy
+
+# clean rule for target.
+joystick_drivers/ps3joy/CMakeFiles/roslint_ps3joy.dir/clean:
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/roslint_ps3joy.dir/build.make joystick_drivers/ps3joy/CMakeFiles/roslint_ps3joy.dir/clean
+.PHONY : joystick_drivers/ps3joy/CMakeFiles/roslint_ps3joy.dir/clean
+
+#=============================================================================
+# Target rules for target joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint_package.dir
+
+# All Build rule for target.
+joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint_package.dir/all:
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint_package.dir/build.make joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint_package.dir/depend
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint_package.dir/build.make joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint_package.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num= "Built target run_tests_ps3joy_roslint_package"
+.PHONY : joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint_package.dir/all
+
+# Build rule for subdir invocation for target.
+joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint_package.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint_package.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
+.PHONY : joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint_package.dir/rule
+
+# Convenience name for target.
+run_tests_ps3joy_roslint_package: joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint_package.dir/rule
+
+.PHONY : run_tests_ps3joy_roslint_package
+
+# clean rule for target.
+joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint_package.dir/clean:
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint_package.dir/build.make joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint_package.dir/clean
+.PHONY : joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint_package.dir/clean
+
+#=============================================================================
+# Target rules for target joystick_drivers/ps3joy/CMakeFiles/sixpair.dir
+
+# All Build rule for target.
+joystick_drivers/ps3joy/CMakeFiles/sixpair.dir/all:
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/sixpair.dir/build.make joystick_drivers/ps3joy/CMakeFiles/sixpair.dir/depend
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/sixpair.dir/build.make joystick_drivers/ps3joy/CMakeFiles/sixpair.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=91,92 "Built target sixpair"
+.PHONY : joystick_drivers/ps3joy/CMakeFiles/sixpair.dir/all
+
+# Build rule for subdir invocation for target.
+joystick_drivers/ps3joy/CMakeFiles/sixpair.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 joystick_drivers/ps3joy/CMakeFiles/sixpair.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
+.PHONY : joystick_drivers/ps3joy/CMakeFiles/sixpair.dir/rule
+
+# Convenience name for target.
+sixpair: joystick_drivers/ps3joy/CMakeFiles/sixpair.dir/rule
+
+.PHONY : sixpair
+
+# clean rule for target.
+joystick_drivers/ps3joy/CMakeFiles/sixpair.dir/clean:
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/sixpair.dir/build.make joystick_drivers/ps3joy/CMakeFiles/sixpair.dir/clean
+.PHONY : joystick_drivers/ps3joy/CMakeFiles/sixpair.dir/clean
+
+#=============================================================================
+# Target rules for target joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy.dir
+
+# All Build rule for target.
+joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy.dir/all: joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint.dir/all
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy.dir/build.make joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy.dir/depend
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy.dir/build.make joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num= "Built target _run_tests_ps3joy"
+.PHONY : joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy.dir/all
+
+# Build rule for subdir invocation for target.
+joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 18
+	$(MAKE) -f CMakeFiles/Makefile2 joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
+.PHONY : joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy.dir/rule
+
+# Convenience name for target.
+_run_tests_ps3joy: joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy.dir/rule
+
+.PHONY : _run_tests_ps3joy
+
+# clean rule for target.
+joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy.dir/clean:
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy.dir/build.make joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy.dir/clean
+.PHONY : joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy.dir/clean
+
+#=============================================================================
+# Target rules for target joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint.dir
+
+# All Build rule for target.
+joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint.dir/all: joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint_package.dir/all
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint.dir/build.make joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint.dir/depend
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint.dir/build.make joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num= "Built target run_tests_ps3joy_roslint"
+.PHONY : joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint.dir/all
+
+# Build rule for subdir invocation for target.
+joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
+.PHONY : joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint.dir/rule
+
+# Convenience name for target.
+run_tests_ps3joy_roslint: joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint.dir/rule
+
+.PHONY : run_tests_ps3joy_roslint
+
+# clean rule for target.
+joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint.dir/clean:
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint.dir/build.make joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint.dir/clean
+.PHONY : joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint.dir/clean
+
+#=============================================================================
+# Target rules for target joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy.dir
+
+# All Build rule for target.
+joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy.dir/all: joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint.dir/all
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy.dir/build.make joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy.dir/depend
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy.dir/build.make joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num= "Built target run_tests_ps3joy"
+.PHONY : joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy.dir/all
+
+# Build rule for subdir invocation for target.
+joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
+.PHONY : joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy.dir/rule
+
+# Convenience name for target.
+run_tests_ps3joy: joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy.dir/rule
+
+.PHONY : run_tests_ps3joy
+
+# clean rule for target.
+joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy.dir/clean:
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy.dir/build.make joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy.dir/clean
+.PHONY : joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy.dir/clean
+
+#=============================================================================
+# Target rules for target joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint.dir
+
+# All Build rule for target.
+joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint.dir/all: joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint_package.dir/all
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint.dir/build.make joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint.dir/depend
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint.dir/build.make joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num= "Built target _run_tests_ps3joy_roslint"
+.PHONY : joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint.dir/all
+
+# Build rule for subdir invocation for target.
+joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 18
+	$(MAKE) -f CMakeFiles/Makefile2 joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
+.PHONY : joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint.dir/rule
+
+# Convenience name for target.
+_run_tests_ps3joy_roslint: joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint.dir/rule
+
+.PHONY : _run_tests_ps3joy_roslint
+
+# clean rule for target.
+joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint.dir/clean:
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint.dir/build.make joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint.dir/clean
+.PHONY : joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint.dir/clean
+
+#=============================================================================
+# Target rules for target joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint_package.dir
+
+# All Build rule for target.
+joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint_package.dir/all: CMakeFiles/tests.dir/all
+joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint_package.dir/all: joystick_drivers/ps3joy/CMakeFiles/clean_test_results_ps3joy.dir/all
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint_package.dir/build.make joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint_package.dir/depend
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint_package.dir/build.make joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint_package.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num= "Built target _run_tests_ps3joy_roslint_package"
+.PHONY : joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint_package.dir/all
+
+# Build rule for subdir invocation for target.
+joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint_package.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 18
+	$(MAKE) -f CMakeFiles/Makefile2 joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint_package.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
+.PHONY : joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint_package.dir/rule
+
+# Convenience name for target.
+_run_tests_ps3joy_roslint_package: joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint_package.dir/rule
+
+.PHONY : _run_tests_ps3joy_roslint_package
+
+# clean rule for target.
+joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint_package.dir/clean:
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint_package.dir/build.make joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint_package.dir/clean
+.PHONY : joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint_package.dir/clean
+
+#=============================================================================
+# Target rules for target joystick_drivers/ps3joy/CMakeFiles/clean_test_results_ps3joy.dir
+
+# All Build rule for target.
+joystick_drivers/ps3joy/CMakeFiles/clean_test_results_ps3joy.dir/all:
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/clean_test_results_ps3joy.dir/build.make joystick_drivers/ps3joy/CMakeFiles/clean_test_results_ps3joy.dir/depend
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/clean_test_results_ps3joy.dir/build.make joystick_drivers/ps3joy/CMakeFiles/clean_test_results_ps3joy.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num= "Built target clean_test_results_ps3joy"
+.PHONY : joystick_drivers/ps3joy/CMakeFiles/clean_test_results_ps3joy.dir/all
+
+# Build rule for subdir invocation for target.
+joystick_drivers/ps3joy/CMakeFiles/clean_test_results_ps3joy.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 joystick_drivers/ps3joy/CMakeFiles/clean_test_results_ps3joy.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
+.PHONY : joystick_drivers/ps3joy/CMakeFiles/clean_test_results_ps3joy.dir/rule
+
+# Convenience name for target.
+clean_test_results_ps3joy: joystick_drivers/ps3joy/CMakeFiles/clean_test_results_ps3joy.dir/rule
+
+.PHONY : clean_test_results_ps3joy
+
+# clean rule for target.
+joystick_drivers/ps3joy/CMakeFiles/clean_test_results_ps3joy.dir/clean:
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/clean_test_results_ps3joy.dir/build.make joystick_drivers/ps3joy/CMakeFiles/clean_test_results_ps3joy.dir/clean
+.PHONY : joystick_drivers/ps3joy/CMakeFiles/clean_test_results_ps3joy.dir/clean
 
 #=============================================================================
 # Target rules for target joystick_drivers/spacenav_node/CMakeFiles/roslint_spacenav_node.dir
@@ -3381,7 +3656,7 @@ NaughtyRobot/CMakeFiles/gps_testing.dir/all: NaughtyRobot/CMakeFiles/tf_generate
 NaughtyRobot/CMakeFiles/gps_testing.dir/all: NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
 	$(MAKE) -f NaughtyRobot/CMakeFiles/gps_testing.dir/build.make NaughtyRobot/CMakeFiles/gps_testing.dir/depend
 	$(MAKE) -f NaughtyRobot/CMakeFiles/gps_testing.dir/build.make NaughtyRobot/CMakeFiles/gps_testing.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=64,65 "Built target gps_testing"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=63,64 "Built target gps_testing"
 .PHONY : NaughtyRobot/CMakeFiles/gps_testing.dir/all
 
 # Build rule for subdir invocation for target.
@@ -3749,7 +4024,7 @@ NaughtyRobot/CMakeFiles/gps_heading.dir/all: NaughtyRobot/CMakeFiles/tf_generate
 NaughtyRobot/CMakeFiles/gps_heading.dir/all: NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
 	$(MAKE) -f NaughtyRobot/CMakeFiles/gps_heading.dir/build.make NaughtyRobot/CMakeFiles/gps_heading.dir/depend
 	$(MAKE) -f NaughtyRobot/CMakeFiles/gps_heading.dir/build.make NaughtyRobot/CMakeFiles/gps_heading.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=62,63 "Built target gps_heading"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=61,62 "Built target gps_heading"
 .PHONY : NaughtyRobot/CMakeFiles/gps_heading.dir/all
 
 # Build rule for subdir invocation for target.
@@ -3847,7 +4122,7 @@ NaughtyRobot/CMakeFiles/main_node.dir/all: NaughtyRobot/CMakeFiles/tf_generate_m
 NaughtyRobot/CMakeFiles/main_node.dir/all: NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
 	$(MAKE) -f NaughtyRobot/CMakeFiles/main_node.dir/build.make NaughtyRobot/CMakeFiles/main_node.dir/depend
 	$(MAKE) -f NaughtyRobot/CMakeFiles/main_node.dir/build.make NaughtyRobot/CMakeFiles/main_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=79,80 "Built target main_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=77,78 "Built target main_node"
 .PHONY : NaughtyRobot/CMakeFiles/main_node.dir/all
 
 # Build rule for subdir invocation for target.
@@ -3918,7 +4193,7 @@ NaughtyRobot/CMakeFiles/obstacle_avoidance.dir/all: NaughtyRobot/CMakeFiles/tf_g
 NaughtyRobot/CMakeFiles/obstacle_avoidance.dir/all: NaughtyRobot/CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
 	$(MAKE) -f NaughtyRobot/CMakeFiles/obstacle_avoidance.dir/build.make NaughtyRobot/CMakeFiles/obstacle_avoidance.dir/depend
 	$(MAKE) -f NaughtyRobot/CMakeFiles/obstacle_avoidance.dir/build.make NaughtyRobot/CMakeFiles/obstacle_avoidance.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=85,86 "Built target obstacle_avoidance"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=83,84 "Built target obstacle_avoidance"
 .PHONY : NaughtyRobot/CMakeFiles/obstacle_avoidance.dir/all
 
 # Build rule for subdir invocation for target.
@@ -4063,7 +4338,7 @@ luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messag
 luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_nodejs.dir/all: luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/_depthai_ros_msgs_generate_messages_check_deps_SpatialDetectionArray.dir/all
 	$(MAKE) -f luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_nodejs.dir/build.make luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_nodejs.dir/depend
 	$(MAKE) -f luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_nodejs.dir/build.make luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_nodejs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=42,43,44,45,46,47,48 "Built target depthai_ros_msgs_generate_messages_nodejs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=41,42,43,44,45,46,47 "Built target depthai_ros_msgs_generate_messages_nodejs"
 .PHONY : luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_nodejs.dir/all
 
 # Build rule for subdir invocation for target.
@@ -4127,7 +4402,7 @@ luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messag
 luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_py.dir/all: luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/_depthai_ros_msgs_generate_messages_check_deps_SpatialDetectionArray.dir/all
 	$(MAKE) -f luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_py.dir/build.make luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_py.dir/depend
 	$(MAKE) -f luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_py.dir/build.make luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_py.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=49,50,51,52,53,54,55,56,57 "Built target depthai_ros_msgs_generate_messages_py"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=48,49,50,51,52,53,54,55,56 "Built target depthai_ros_msgs_generate_messages_py"
 .PHONY : luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_py.dir/all
 
 # Build rule for subdir invocation for target.
@@ -4217,7 +4492,7 @@ luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messag
 
 # Build rule for subdir invocation for target.
 luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 38
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 37
 	$(MAKE) -f CMakeFiles/Makefile2 luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
 .PHONY : luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages.dir/rule
@@ -4303,12 +4578,12 @@ luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messag
 luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_eus.dir/all: luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/_depthai_ros_msgs_generate_messages_check_deps_SpatialDetectionArray.dir/all
 	$(MAKE) -f luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_eus.dir/build.make luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_eus.dir/depend
 	$(MAKE) -f luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_eus.dir/build.make luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_eus.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=27,28,29,30,31,32,33,34 "Built target depthai_ros_msgs_generate_messages_eus"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=27,28,29,30,31,32,33 "Built target depthai_ros_msgs_generate_messages_eus"
 .PHONY : luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_eus.dir/all
 
 # Build rule for subdir invocation for target.
 luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_eus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 7
 	$(MAKE) -f CMakeFiles/Makefile2 luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_eus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
 .PHONY : luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_eus.dir/rule
@@ -4507,7 +4782,7 @@ luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_geneus.dir/all:
 
 # Build rule for subdir invocation for target.
 luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_geneus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 7
 	$(MAKE) -f CMakeFiles/Makefile2 luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_geneus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
 .PHONY : luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_geneus.dir/rule
@@ -4566,7 +4841,7 @@ luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messag
 luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp.dir/all: luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/_depthai_ros_msgs_generate_messages_check_deps_SpatialDetectionArray.dir/all
 	$(MAKE) -f luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp.dir/build.make luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp.dir/depend
 	$(MAKE) -f luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp.dir/build.make luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=35,36,37,38,39,40,41 "Built target depthai_ros_msgs_generate_messages_lisp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=34,35,36,37,38,39,40 "Built target depthai_ros_msgs_generate_messages_lisp"
 .PHONY : luxonis/depthai-ros/depthai_ros_msgs/CMakeFiles/depthai_ros_msgs_generate_messages_lisp.dir/all
 
 # Build rule for subdir invocation for target.
@@ -4719,7 +4994,7 @@ luxonis/depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/all: luxonis/de
 
 # Build rule for subdir invocation for target.
 luxonis/depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 47
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 46
 	$(MAKE) -f CMakeFiles/Makefile2 luxonis/depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
 .PHONY : luxonis/depthai-ros/depthai_bridge/CMakeFiles/depthai_bridge.dir/rule
@@ -4932,7 +5207,7 @@ luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/stereo_node.dir/all: lu
 
 # Build rule for subdir invocation for target.
 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/stereo_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 49
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 48
 	$(MAKE) -f CMakeFiles/Makefile2 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/stereo_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
 .PHONY : luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/stereo_node.dir/rule
@@ -5005,12 +5280,12 @@ luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_subscriber_node.dir
 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/all: luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/bond_generate_messages_lisp.dir/all
 	$(MAKE) -f luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/build.make luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/depend
 	$(MAKE) -f luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/build.make luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=91,92 "Built target rgb_subscriber_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=89,90 "Built target rgb_subscriber_node"
 .PHONY : luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/all
 
 # Build rule for subdir invocation for target.
 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 49
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 48
 	$(MAKE) -f CMakeFiles/Makefile2 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
 .PHONY : luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_subscriber_node.dir/rule
@@ -5083,12 +5358,12 @@ luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_stereo_node.dir/all
 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_stereo_node.dir/all: luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/bond_generate_messages_lisp.dir/all
 	$(MAKE) -f luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_stereo_node.dir/build.make luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_stereo_node.dir/depend
 	$(MAKE) -f luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_stereo_node.dir/build.make luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_stereo_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=89,90 "Built target rgb_stereo_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=87,88 "Built target rgb_stereo_node"
 .PHONY : luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_stereo_node.dir/all
 
 # Build rule for subdir invocation for target.
 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_stereo_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 49
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 48
 	$(MAKE) -f CMakeFiles/Makefile2 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_stereo_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
 .PHONY : luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_stereo_node.dir/rule
@@ -5188,12 +5463,12 @@ luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_node.dir/all: luxon
 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_node.dir/all: luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/bond_generate_messages_lisp.dir/all
 	$(MAKE) -f luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_node.dir/build.make luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_node.dir/depend
 	$(MAKE) -f luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_node.dir/build.make luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=87,88 "Built target rgb_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=85,86 "Built target rgb_node"
 .PHONY : luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_node.dir/all
 
 # Build rule for subdir invocation for target.
 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 49
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 48
 	$(MAKE) -f CMakeFiles/Makefile2 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
 .PHONY : luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/rgb_node.dir/rule
@@ -5298,7 +5573,7 @@ luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/yolov4_spatial_node.dir
 
 # Build rule for subdir invocation for target.
 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 49
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 48
 	$(MAKE) -f CMakeFiles/Makefile2 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
 .PHONY : luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/yolov4_spatial_node.dir/rule
@@ -5398,12 +5673,12 @@ luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/nodelet_stereo.dir/all:
 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/nodelet_stereo.dir/all: luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/bond_generate_messages_lisp.dir/all
 	$(MAKE) -f luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/nodelet_stereo.dir/build.make luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/nodelet_stereo.dir/depend
 	$(MAKE) -f luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/nodelet_stereo.dir/build.make luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/nodelet_stereo.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=83,84 "Built target nodelet_stereo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=81,82 "Built target nodelet_stereo"
 .PHONY : luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/nodelet_stereo.dir/all
 
 # Build rule for subdir invocation for target.
 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/nodelet_stereo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 49
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 48
 	$(MAKE) -f CMakeFiles/Makefile2 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/nodelet_stereo.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
 .PHONY : luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/nodelet_stereo.dir/rule
@@ -5481,7 +5756,7 @@ luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/stereo_inertial_node.di
 
 # Build rule for subdir invocation for target.
 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/stereo_inertial_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 49
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 48
 	$(MAKE) -f CMakeFiles/Makefile2 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/stereo_inertial_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
 .PHONY : luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/stereo_inertial_node.dir/rule
@@ -5635,12 +5910,12 @@ luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/mobilenet_node.dir/all:
 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/mobilenet_node.dir/all: luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/bond_generate_messages_lisp.dir/all
 	$(MAKE) -f luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/mobilenet_node.dir/build.make luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/mobilenet_node.dir/depend
 	$(MAKE) -f luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/mobilenet_node.dir/build.make luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/mobilenet_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=81,82 "Built target mobilenet_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles --progress-num=79,80 "Built target mobilenet_node"
 .PHONY : luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/mobilenet_node.dir/all
 
 # Build rule for subdir invocation for target.
 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/mobilenet_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 49
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 48
 	$(MAKE) -f CMakeFiles/Makefile2 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/mobilenet_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
 .PHONY : luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/mobilenet_node.dir/rule
@@ -5826,7 +6101,7 @@ luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/crop_control_service.di
 
 # Build rule for subdir invocation for target.
 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/crop_control_service.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 48
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 47
 	$(MAKE) -f CMakeFiles/Makefile2 luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/crop_control_service.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/netipc/RobotsAndCones/catkin_ws/build/CMakeFiles 0
 .PHONY : luxonis/depthai-ros-examples/depthai_examples/CMakeFiles/crop_control_service.dir/rule

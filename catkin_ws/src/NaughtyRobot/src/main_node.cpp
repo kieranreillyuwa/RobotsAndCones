@@ -15,10 +15,12 @@
 #define IMG_HEIGHT 720 // for depth
 #define IMG_WIDTH 1280 // for depth
 
-#define ZERO_OFFSET 0 //-1*M_PI/180
+#define ZERO_OFFSET M_PI/180
 
 #define GPS_RES 20
 #define LOCALISE_DIST 20
+#define CHECK_RES 5
+#define CHECK_DIST 2
 #define NUM_POINTS 2
 
 #define BUCKET_TURN_RES_DEG 5
@@ -539,6 +541,7 @@ int main(int argc, char **argv)
             break;
         case DRIVE_TOW:
             printf("Turning towards goal.....\n");
+            gotTheCone = false;
             // Drive(10, &cmdVelPub, &rate);                           // just incase other cones are in the vision
             relHeading = GetHeading(currentPos, goalPos) - heading; // get the angle between
             if (relHeading > M_PI)
@@ -551,7 +554,14 @@ int main(int argc, char **argv)
             }
             heading += relHeading;
             Rotate(relHeading, &cmdVelPub, &rate); // turn to goal
-            // distToGoal = haversine_m(currentPos.latitude, currentPos.longitude,goalPos.latitude,goalPos.longitude);
+            distToGoal = haversine_m(currentPos.latitude, currentPos.longitude,goalPos.latitude,goalPos.longitude);
+            printf("Distance to goal is: %.9f",distToGoal);
+            if(distToGoal > LOCALISE_DIST)
+            {
+                mainState = LOCALISE;
+                localiseState = GET_POS1;
+                break;
+            }
             // printf("Driving to goal..\n");
             // // Drive(distToGoal-5,&cmdVelPub,&rate);  /** UNCOMMENT THIS **/
             // // should be facing goal now
@@ -570,9 +580,9 @@ int main(int argc, char **argv)
             // cmdVelPub.publish(stopVel);
             // mainState = DRIVE_CONE;
             // goingToCone = true;
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < CHECK_RES; i++)
             {
-                if (coneFound && toConeDriving.data[IMG_HB] > hbCone)
+                if (coneFound && toConeDriving.data[IMG_HB] != hbCone)
                 {
                     hbCone = toConeDriving.data[IMG_HB];
                     gotTheCone = true;
@@ -593,7 +603,7 @@ int main(int argc, char **argv)
                     gotTheCone = true;
                     break;
                 }
-                Rotate(30 * M_PI / 180, &cmdVelPub, &rate);
+                Rotate(-30 * M_PI / 180, &cmdVelPub, &rate);
                 startTime = ros::Time::now();
 
                 while (ros::Time::now() - startTime < ros::Duration(2.0))
@@ -609,7 +619,7 @@ int main(int argc, char **argv)
                     gotTheCone = true;
                     break;
                 }
-                Rotate(-15 * M_PI / 180, &cmdVelPub, &rate);
+                Rotate(15 * M_PI / 180, &cmdVelPub, &rate);
                 startTime = ros::Time::now();
 
                 while (ros::Time::now() - startTime < ros::Duration(2.0))
@@ -619,7 +629,7 @@ int main(int argc, char **argv)
                     ros::spinOnce();
                     rate.sleep();
                 }
-                Drive(5, &cmdVelPub, &rate);
+                Drive(CHECK_DIST, &cmdVelPub, &rate);
                 startTime = ros::Time::now();
 
                 while (ros::Time::now() - startTime < ros::Duration(2.0))
@@ -658,7 +668,7 @@ int main(int argc, char **argv)
             printf("CONE HB: %d\n", hbCone);
             printf("LIVE HB: %d\n", toConeDriving.data[IMG_HB]);
 
-            if (toConeDriving.data[IMG_HB] > hbCone)
+            if (toConeDriving.data[IMG_HB] != hbCone)
             {
                 hbCone = toConeDriving.data[IMG_HB];
                 if (toConeDriving.data[IMG_X] < BOUND_X_LOW)
@@ -717,7 +727,7 @@ int main(int argc, char **argv)
 
             printf("LIVE HB: %d\n", toConeDriving.data[IMG_HB]);
 
-            if (toConeDriving.data[IMG_HB] > hbCone)
+            if (toConeDriving.data[IMG_HB] != hbCone)
             {
                 hbCone = toConeDriving.data[IMG_HB];
                 if (toConeDriving.data[IMG_X] > BOUND_X_LOW && toConeDriving.data[IMG_X] < BOUND_X_HIGH)
@@ -761,11 +771,10 @@ int main(int argc, char **argv)
             break;
 
         case SEARCH_BUCKET:
-            bucketFound = false;
 
             printf("Searching for bucket...\n");
-            Rotate(-M_PI_4, &cmdVelPub, &rate);
-            heading -= M_PI_4;
+            Rotate(-M_PI_2, &cmdVelPub, &rate);
+            bucketFound = false;
             sideCount = 0;
             cantFind = false;
             // while (!bucketFound && ros::ok() && !cantFind)
@@ -795,7 +804,7 @@ int main(int argc, char **argv)
                     bucketWasFound = true;
                     break;
                 }
-                Rotate(BUCKET_TURN_RES_RAD, &cmdVelPub, &rate);
+                Rotate(-BUCKET_TURN_RES_RAD, &cmdVelPub, &rate);
                 startTime = ros::Time::now();
                 while (ros::Time::now() - startTime < ros::Duration(1.0))
                 {
@@ -805,7 +814,7 @@ int main(int argc, char **argv)
             }
 
             if(!bucketWasFound){
-            Rotate(M_PI - M_PI_4, &cmdVelPub, &rate, 0.5);
+            Rotate(M_PI - M_PI_2, &cmdVelPub, &rate, 0.5);
             mainState = LOCALISE;
             localiseState = GET_POS1;
             goalPos = goalCoords[c++];}
@@ -842,19 +851,19 @@ int main(int argc, char **argv)
             }
             mainState = LOCALISE;
             localiseState = GET_POS1;
-            roughHeading = GetHeading(livePos, goalPos) - heading;
-            while (roughHeading > 180 || roughHeading < -180)
-            {
-                if (roughHeading < -180)
-                {
-                    roughHeading += 360;
-                }
-                else if (roughHeading > 180)
-                {
-                    roughHeading -= 360;
-                }
-            }
-            Rotate(roughHeading, &cmdVelPub, &rate);
+            // roughHeading = GetHeading(livePos, goalPos) - heading;
+            // while (roughHeading > 180 || roughHeading < -180)
+            // {
+            //     if (roughHeading < -180)
+            //     {
+            //         roughHeading += 360;
+            //     }
+            //     else if (roughHeading > 180)
+            //     {
+            //         roughHeading -= 360;
+            //     }
+            // }
+            // Rotate(roughHeading, &cmdVelPub, &rate);
             goalPos = goalCoords[c++];
 
             break;

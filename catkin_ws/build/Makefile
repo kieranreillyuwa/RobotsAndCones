@@ -1260,6 +1260,123 @@ rosgraph_msgs_generate_messages_cpp/fast:
 .PHONY : rosgraph_msgs_generate_messages_cpp/fast
 
 #=============================================================================
+# Target rules for targets named roslint_ps3joy
+
+# Build rule for target.
+roslint_ps3joy: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 roslint_ps3joy
+.PHONY : roslint_ps3joy
+
+# fast build rule for target.
+roslint_ps3joy/fast:
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/roslint_ps3joy.dir/build.make joystick_drivers/ps3joy/CMakeFiles/roslint_ps3joy.dir/build
+.PHONY : roslint_ps3joy/fast
+
+#=============================================================================
+# Target rules for targets named run_tests_ps3joy_roslint_package
+
+# Build rule for target.
+run_tests_ps3joy_roslint_package: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 run_tests_ps3joy_roslint_package
+.PHONY : run_tests_ps3joy_roslint_package
+
+# fast build rule for target.
+run_tests_ps3joy_roslint_package/fast:
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint_package.dir/build.make joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint_package.dir/build
+.PHONY : run_tests_ps3joy_roslint_package/fast
+
+#=============================================================================
+# Target rules for targets named sixpair
+
+# Build rule for target.
+sixpair: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 sixpair
+.PHONY : sixpair
+
+# fast build rule for target.
+sixpair/fast:
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/sixpair.dir/build.make joystick_drivers/ps3joy/CMakeFiles/sixpair.dir/build
+.PHONY : sixpair/fast
+
+#=============================================================================
+# Target rules for targets named _run_tests_ps3joy
+
+# Build rule for target.
+_run_tests_ps3joy: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _run_tests_ps3joy
+.PHONY : _run_tests_ps3joy
+
+# fast build rule for target.
+_run_tests_ps3joy/fast:
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy.dir/build.make joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy.dir/build
+.PHONY : _run_tests_ps3joy/fast
+
+#=============================================================================
+# Target rules for targets named run_tests_ps3joy_roslint
+
+# Build rule for target.
+run_tests_ps3joy_roslint: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 run_tests_ps3joy_roslint
+.PHONY : run_tests_ps3joy_roslint
+
+# fast build rule for target.
+run_tests_ps3joy_roslint/fast:
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint.dir/build.make joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy_roslint.dir/build
+.PHONY : run_tests_ps3joy_roslint/fast
+
+#=============================================================================
+# Target rules for targets named run_tests_ps3joy
+
+# Build rule for target.
+run_tests_ps3joy: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 run_tests_ps3joy
+.PHONY : run_tests_ps3joy
+
+# fast build rule for target.
+run_tests_ps3joy/fast:
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy.dir/build.make joystick_drivers/ps3joy/CMakeFiles/run_tests_ps3joy.dir/build
+.PHONY : run_tests_ps3joy/fast
+
+#=============================================================================
+# Target rules for targets named _run_tests_ps3joy_roslint
+
+# Build rule for target.
+_run_tests_ps3joy_roslint: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _run_tests_ps3joy_roslint
+.PHONY : _run_tests_ps3joy_roslint
+
+# fast build rule for target.
+_run_tests_ps3joy_roslint/fast:
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint.dir/build.make joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint.dir/build
+.PHONY : _run_tests_ps3joy_roslint/fast
+
+#=============================================================================
+# Target rules for targets named _run_tests_ps3joy_roslint_package
+
+# Build rule for target.
+_run_tests_ps3joy_roslint_package: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _run_tests_ps3joy_roslint_package
+.PHONY : _run_tests_ps3joy_roslint_package
+
+# fast build rule for target.
+_run_tests_ps3joy_roslint_package/fast:
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint_package.dir/build.make joystick_drivers/ps3joy/CMakeFiles/_run_tests_ps3joy_roslint_package.dir/build
+.PHONY : _run_tests_ps3joy_roslint_package/fast
+
+#=============================================================================
+# Target rules for targets named clean_test_results_ps3joy
+
+# Build rule for target.
+clean_test_results_ps3joy: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 clean_test_results_ps3joy
+.PHONY : clean_test_results_ps3joy
+
+# fast build rule for target.
+clean_test_results_ps3joy/fast:
+	$(MAKE) -f joystick_drivers/ps3joy/CMakeFiles/clean_test_results_ps3joy.dir/build.make joystick_drivers/ps3joy/CMakeFiles/clean_test_results_ps3joy.dir/build
+.PHONY : clean_test_results_ps3joy/fast
+
+#=============================================================================
 # Target rules for targets named roslint_spacenav_node
 
 # Build rule for target.
@@ -2409,6 +2526,15 @@ help:
 	@echo "... clean_test_results_joy"
 	@echo "... roscpp_generate_messages_eus"
 	@echo "... rosgraph_msgs_generate_messages_cpp"
+	@echo "... roslint_ps3joy"
+	@echo "... run_tests_ps3joy_roslint_package"
+	@echo "... sixpair"
+	@echo "... _run_tests_ps3joy"
+	@echo "... run_tests_ps3joy_roslint"
+	@echo "... run_tests_ps3joy"
+	@echo "... _run_tests_ps3joy_roslint"
+	@echo "... _run_tests_ps3joy_roslint_package"
+	@echo "... clean_test_results_ps3joy"
 	@echo "... roslint_spacenav_node"
 	@echo "... clean_test_results_spacenav_node"
 	@echo "... spacenav_node"

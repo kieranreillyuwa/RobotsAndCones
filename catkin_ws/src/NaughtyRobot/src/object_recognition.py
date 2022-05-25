@@ -79,8 +79,8 @@ class ImageProcessor:
 
         #create the image with filtered colours
         # mask1 = cv2.inRange(hsv, lower_red1, upper_red1)
-        mask1 = cv2.inRange(hsv, (0,150 ,100), (5,255,255))
-        mask2 = cv2.inRange(hsv, (177,100,120), (181,255,255))
+        mask1 = cv2.inRange(hsv, (0,150 ,80), (20,255,255))
+        mask2 = cv2.inRange(hsv, (175,100,80), (185,255,255))
 
 
         #mask2 = cv2.inRange(hsv, lb, ub)
@@ -99,7 +99,7 @@ class ImageProcessor:
         # cnts = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE) 
         cnts = cv2.findContours(mask,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
         cnts = cnts[0] if len(cnts) == 2 else cnts[1]
-        w_tol=80 #set for boundary
+        w_tol=50 #set for boundary
         h_tol = 80
 
         for c in cnts:
@@ -143,7 +143,7 @@ class ImageProcessor:
 
                     #tell ros/main a cone has been detected
                 else:
-                    # if w < 300: continue
+                    if w < 100: continue
                     print("Bucket Detected")
                     cv2.rectangle(image, (x, y), (x + w, y + h), (255,255,0), 2)
                     cv2.putText(image, 'Bucket', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (36,255,12), 2)
