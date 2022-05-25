@@ -419,7 +419,7 @@ int main(int argc, char **argv)
 {
     printf("Program Starting...");
 
-    ros::init(argc, argv, "Main_Node");
+    ros::init(argc, argv, "main_node");
     ros::NodeHandle nh;
     ros::Publisher cmdVelPub = nh.advertise<geometry_msgs::Twist>("RosAria/cmd_vel", 10);
     ros::Subscriber gpsSub = nh.subscribe<sensor_msgs::NavSatFix>("fix", 10, GpsCallBack);
